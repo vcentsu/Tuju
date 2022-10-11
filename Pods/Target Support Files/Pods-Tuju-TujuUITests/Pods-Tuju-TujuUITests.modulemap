@@ -1,0 +1,6 @@
+framework module Pods_Tuju_TujuUITests {
+  umbrella header "Pods-Tuju-TujuUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
