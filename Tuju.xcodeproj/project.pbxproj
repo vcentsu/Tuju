@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		11EFC00DC3F08D518308F4C0 /* Pods_TujuTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B363DEED916E2450FD821293 /* Pods_TujuTests.framework */; };
 		5A31346073FE9E61CCB87476 /* Pods_Tuju_TujuUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0458FB72F178E51258138BB2 /* Pods_Tuju_TujuUITests.framework */; };
+		D36911B828F7FB2100E993E1 /* AsalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36911B728F7FB2100E993E1 /* AsalViewController.swift */; };
+		D36911BA28F7FB3300E993E1 /* TujuanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36911B928F7FB3300E993E1 /* TujuanViewController.swift */; };
 		D388130828F563910062C702 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388130728F563910062C702 /* AppDelegate.swift */; };
 		D388130A28F563910062C702 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388130928F563910062C702 /* SceneDelegate.swift */; };
 		D388130C28F563910062C702 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388130B28F563910062C702 /* ViewController.swift */; };
@@ -46,6 +48,8 @@
 		84CC1FE1945DA02B7C3A8FF4 /* Pods-TujuTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TujuTests.release.xcconfig"; path = "Target Support Files/Pods-TujuTests/Pods-TujuTests.release.xcconfig"; sourceTree = "<group>"; };
 		9578FA6BEF1BEDDA8D39A9EB /* Pods-Tuju-TujuUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tuju-TujuUITests.release.xcconfig"; path = "Target Support Files/Pods-Tuju-TujuUITests/Pods-Tuju-TujuUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B363DEED916E2450FD821293 /* Pods_TujuTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TujuTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D36911B728F7FB2100E993E1 /* AsalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsalViewController.swift; sourceTree = "<group>"; };
+		D36911B928F7FB3300E993E1 /* TujuanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TujuanViewController.swift; sourceTree = "<group>"; };
 		D388130428F563910062C702 /* Tuju.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tuju.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D388130728F563910062C702 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D388130928F563910062C702 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -149,6 +153,8 @@
 				D388131528F563920062C702 /* LaunchScreen.storyboard */,
 				D388131828F563920062C702 /* Info.plist */,
 				D388131028F563910062C702 /* Tuju.xcdatamodeld */,
+				D36911B728F7FB2100E993E1 /* AsalViewController.swift */,
+				D36911B928F7FB3300E993E1 /* TujuanViewController.swift */,
 			);
 			path = Tuju;
 			sourceTree = "<group>";
@@ -410,7 +416,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D388130C28F563910062C702 /* ViewController.swift in Sources */,
+				D36911BA28F7FB3300E993E1 /* TujuanViewController.swift in Sources */,
 				D388131228F563910062C702 /* Tuju.xcdatamodeld in Sources */,
+				D36911B828F7FB2100E993E1 /* AsalViewController.swift in Sources */,
 				D388130828F563910062C702 /* AppDelegate.swift in Sources */,
 				D388130A28F563910062C702 /* SceneDelegate.swift in Sources */,
 			);
