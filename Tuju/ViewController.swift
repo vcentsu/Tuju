@@ -6,10 +6,16 @@
 //
 
 import UIKit
+import MapKit
+import FloatingPanel
 import GoogleMaps
 import CoreLocation
 
-class ViewController: UIViewController, GMSMapViewDelegate {
+class ViewController: UIViewController, GMSMapViewDelegate, SearchViewControllerDelegate {
+    
+    let panel = FloatingPanelController()
+    
+    let mapView2 = MKMapView()
     
     @IBOutlet weak var mapView: GMSMapView!
     let manager = CLLocationManager()
@@ -29,6 +35,42 @@ class ViewController: UIViewController, GMSMapViewDelegate {
         mapView.animate(toLocation: coordinateLive)
         mapView.camera = camera
         mapView.animate(to: camera)
+        
+        title = "TUJU"
+        
+        let searchVC = Tuju.SearchViewController()
+        searchVC.delegate = self
+        
+        panel.set(contentViewController: searchVC)
+        panel.addPanel(toParent: self)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        mapView.frame = view.bounds
+    }
+    
+    func SearchViewController(_ vc: SearchViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?) {
+        
+        guard let coordinates = coordinates else {
+            return
+        }
+
+        panel.move(to: .tip, animated: true)
+        
+//        mapView.removeFromSuperview(mapView.anchorPoint)
+        
+        mapView2.removeAnnotations(mapView2.annotations)
+
+        let pin = MKPointAnnotation()
+        pin.coordinate = coordinates
+        mapView2.addAnnotation(pin)
+
+        mapView2.setRegion(MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan(
+            latitudeDelta: 0.7,
+            longitudeDelta: 0.7
+            )
+        ), animated: true)
     }
 }
 
@@ -47,7 +89,7 @@ extension ViewController: CLLocationManagerDelegate{
         marker.position = coordinateLive
         marker.map = mapView
     
-        print("License: \n\n\(GMSServices.openSourceLicenseInfo())")
+//        print("License: \n\n\(GMSServices.openSourceLicenseInfo())")
     }
 }
 
