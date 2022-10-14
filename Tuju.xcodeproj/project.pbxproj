@@ -11,6 +11,8 @@
 		5A31346073FE9E61CCB87476 /* Pods_Tuju_TujuUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0458FB72F178E51258138BB2 /* Pods_Tuju_TujuUITests.framework */; };
 		D36911B828F7FB2100E993E1 /* AsalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36911B728F7FB2100E993E1 /* AsalViewController.swift */; };
 		D36911BA28F7FB3300E993E1 /* TujuanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36911B928F7FB3300E993E1 /* TujuanViewController.swift */; };
+		D36911BC28F801A800E993E1 /* Asal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D36911BB28F801A700E993E1 /* Asal.storyboard */; };
+		D36911BE28F944F100E993E1 /* RecommendationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36911BD28F944F100E993E1 /* RecommendationTableViewCell.swift */; };
 		D388130828F563910062C702 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388130728F563910062C702 /* AppDelegate.swift */; };
 		D388130A28F563910062C702 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388130928F563910062C702 /* SceneDelegate.swift */; };
 		D388130C28F563910062C702 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388130B28F563910062C702 /* ViewController.swift */; };
@@ -50,6 +52,8 @@
 		B363DEED916E2450FD821293 /* Pods_TujuTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TujuTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D36911B728F7FB2100E993E1 /* AsalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsalViewController.swift; sourceTree = "<group>"; };
 		D36911B928F7FB3300E993E1 /* TujuanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TujuanViewController.swift; sourceTree = "<group>"; };
+		D36911BB28F801A700E993E1 /* Asal.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Asal.storyboard; sourceTree = "<group>"; };
+		D36911BD28F944F100E993E1 /* RecommendationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationTableViewCell.swift; sourceTree = "<group>"; };
 		D388130428F563910062C702 /* Tuju.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tuju.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D388130728F563910062C702 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D388130928F563910062C702 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -155,6 +159,8 @@
 				D388131028F563910062C702 /* Tuju.xcdatamodeld */,
 				D36911B728F7FB2100E993E1 /* AsalViewController.swift */,
 				D36911B928F7FB3300E993E1 /* TujuanViewController.swift */,
+				D36911BB28F801A700E993E1 /* Asal.storyboard */,
+				D36911BD28F944F100E993E1 /* RecommendationTableViewCell.swift */,
 			);
 			path = Tuju;
 			sourceTree = "<group>";
@@ -288,6 +294,7 @@
 				D388131728F563920062C702 /* LaunchScreen.storyboard in Resources */,
 				D388131428F563920062C702 /* Assets.xcassets in Resources */,
 				D388130F28F563910062C702 /* Main.storyboard in Resources */,
+				D36911BC28F801A800E993E1 /* Asal.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,6 +427,7 @@
 				D388131228F563910062C702 /* Tuju.xcdatamodeld in Sources */,
 				D36911B828F7FB2100E993E1 /* AsalViewController.swift in Sources */,
 				D388130828F563910062C702 /* AppDelegate.swift in Sources */,
+				D36911BE28F944F100E993E1 /* RecommendationTableViewCell.swift in Sources */,
 				D388130A28F563910062C702 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
