@@ -8,15 +8,15 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Asal-->
+        <!--Tujuan-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" customClass="AsalViewController" customModule="Tuju" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Y6W-OH-hqX" customClass="TujuanViewController" customModule="Tuju" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="C1l-lA-cw1">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="m9w-fP-hFQ">
                                 <rect key="frame" x="0.0" y="91" width="390" height="753"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
@@ -24,38 +24,38 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="C1l-lA-cw1" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="0Z1-pU-49G"/>
-                            <constraint firstItem="C1l-lA-cw1" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="HlI-Fm-9FD"/>
-                            <constraint firstItem="C1l-lA-cw1" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="PSk-k5-Ud4"/>
-                            <constraint firstAttribute="bottom" secondItem="C1l-lA-cw1" secondAttribute="bottom" id="cG3-Ya-9UA"/>
+                            <constraint firstItem="m9w-fP-hFQ" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="5DK-jP-788"/>
+                            <constraint firstAttribute="bottom" secondItem="m9w-fP-hFQ" secondAttribute="bottom" id="BuM-oM-7Zm"/>
+                            <constraint firstItem="m9w-fP-hFQ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="EjD-Pr-X95"/>
+                            <constraint firstItem="m9w-fP-hFQ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="xgw-NA-ECZ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Asal" id="Bq0-e4-25W"/>
+                    <navigationItem key="navigationItem" title="Tujuan" id="efG-GQ-L1Q"/>
                     <connections>
-                        <outlet property="recommendationTable" destination="C1l-lA-cw1" id="LL0-7F-Yfa"/>
+                        <outlet property="recommendationTable" destination="m9w-fP-hFQ" id="eHj-eG-n7d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="966.15384615384608" y="3.5545023696682461"/>
+            <point key="canvasLocation" x="903.07692307692309" y="3.5545023696682461"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="wnr-Kr-ys2">
+        <scene sceneID="R0V-6v-k0j">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CLd-k8-TCX" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DKG-3e-IjY" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZQf-lv-thQ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uLr-Y1-kyH">
                         <rect key="frame" x="0.0" y="47" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="oq2-wr-Njb"/>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="rgy-dB-FLU"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JzN-0G-8KZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D5J-ws-zLD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="36.92307692307692" y="3.5545023696682461"/>
+            <point key="canvasLocation" x="-26.153846153846153" y="3.5545023696682461"/>
         </scene>
     </scenes>
     <resources>
