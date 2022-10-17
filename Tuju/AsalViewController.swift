@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AsalViewController: ViewController {
+class AsalViewController: MapViewController {
     
     let searchVC = UISearchController()
 

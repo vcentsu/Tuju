@@ -8,13 +8,13 @@
 import UIKit
 import CoreLocation
 
-protocol SearchViewControllerDelegate: AnyObject {
-    func SearchViewController(_ vc: SearchViewController, didSelectLocationWith Coordinate: CLLocationCoordinate2D?)
+protocol PanelViewControllerDelegate: AnyObject {
+    func PanelViewController(_ vc: PanelViewController, didSelectLocationWith Coordinate: CLLocationCoordinate2D?)
 }
 
-class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
+class PanelViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
     
-    weak var delegate: SearchViewControllerDelegate?
+    weak var delegate: PanelViewControllerDelegate?
 
     private let  label: UILabel = {
         let label = UILabel()
@@ -103,7 +103,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDe
         let coordinate = locations[indexPath.row].coordinates
         
         
-        delegate?.SearchViewController(self, didSelectLocationWith: coordinate)
+        delegate?.PanelViewController(self, didSelectLocationWith: coordinate)
         
     }
 }

@@ -11,7 +11,7 @@ import FloatingPanel
 import GoogleMaps
 import CoreLocation
 
-class ViewController: UIViewController, GMSMapViewDelegate, SearchViewControllerDelegate {
+class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControllerDelegate {
     
     let panel = FloatingPanelController()
     
@@ -38,7 +38,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, SearchViewController
         
         title = "TUJU"
         
-        let searchVC = Tuju.SearchViewController()
+        let searchVC = Tuju.PanelViewController()
         searchVC.delegate = self
         
         panel.set(contentViewController: searchVC)
@@ -50,13 +50,13 @@ class ViewController: UIViewController, GMSMapViewDelegate, SearchViewController
         mapView.frame = view.bounds
     }
     
-    func SearchViewController(_ vc: SearchViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?) {
+    func PanelViewController(_ vc: PanelViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?) {
         
         guard let coordinates = coordinates else {
             return
         }
 
-        panel.move(to: .tip, animated: true)
+        panel.move(to: .hidden, animated: true)
         
 //        mapView.removeFromSuperview(mapView.anchorPoint)
         
@@ -74,7 +74,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, SearchViewController
     }
 }
 
-extension ViewController: CLLocationManagerDelegate{
+extension MapViewController: CLLocationManagerDelegate{
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else {

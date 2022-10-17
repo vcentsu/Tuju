@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TujuanViewController: ViewController {
+class TujuanViewController: MapViewController {
 
     let searchVC = UISearchController()
     

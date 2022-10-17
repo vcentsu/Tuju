@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1D38AAB113DA92787F2D230A /* Pods_TujuTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17D0FE817E701BC6DE65C020 /* Pods_TujuTests.framework */; };
-		752FC90628F92F8B00FBA82F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752FC90528F92F8B00FBA82F /* SearchViewController.swift */; };
+		752FC90628F92F8B00FBA82F /* PanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752FC90528F92F8B00FBA82F /* PanelViewController.swift */; };
 		752FC90828F92FC200FBA82F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752FC90728F92FC200FBA82F /* LocationManager.swift */; };
 		919A0873C2627AB8CA083FC4 /* Pods_Tuju.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384D670AF78D1F487AB2E36C /* Pods_Tuju.framework */; };
 		BA4628150B3F114A13243CF8 /* Pods_Tuju_TujuUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBB02709D3DFDB0407B7D0E1 /* Pods_Tuju_TujuUITests.framework */; };
@@ -19,7 +19,7 @@
 		D36911BE28F944F100E993E1 /* RecommendationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36911BD28F944F100E993E1 /* RecommendationTableViewCell.swift */; };
 		D388130828F563910062C702 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388130728F563910062C702 /* AppDelegate.swift */; };
 		D388130A28F563910062C702 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388130928F563910062C702 /* SceneDelegate.swift */; };
-		D388130C28F563910062C702 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388130B28F563910062C702 /* ViewController.swift */; };
+		D388130C28F563910062C702 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388130B28F563910062C702 /* MapViewController.swift */; };
 		D388130F28F563910062C702 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D388130D28F563910062C702 /* Main.storyboard */; };
 		D388131228F563910062C702 /* Tuju.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D388131028F563910062C702 /* Tuju.xcdatamodeld */; };
 		D388131428F563920062C702 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D388131328F563920062C702 /* Assets.xcassets */; };
@@ -65,7 +65,7 @@
 		27FFA1984F9BE89A5680870B /* Pods-Tuju-TujuUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tuju-TujuUITests.debug.xcconfig"; path = "Target Support Files/Pods-Tuju-TujuUITests/Pods-Tuju-TujuUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		384D670AF78D1F487AB2E36C /* Pods_Tuju.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tuju.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		752FC90128F92E8900FBA82F /* FloatingPanel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatingPanel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		752FC90528F92F8B00FBA82F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		752FC90528F92F8B00FBA82F /* PanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelViewController.swift; sourceTree = "<group>"; };
 		752FC90728F92FC200FBA82F /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		752FC90928F931B300FBA82F /* FloatingPanel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatingPanel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		752FC90D28F9333A00FBA82F /* FloatingPanel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatingPanel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,7 +81,7 @@
 		D388130428F563910062C702 /* Tuju.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tuju.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D388130728F563910062C702 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D388130928F563910062C702 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D388130B28F563910062C702 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D388130B28F563910062C702 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		D388130E28F563910062C702 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D388131128F563910062C702 /* Tuju.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tuju.xcdatamodel; sourceTree = "<group>"; };
 		D388131328F563920062C702 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -179,8 +179,8 @@
 				D388130728F563910062C702 /* AppDelegate.swift */,
 				D388130928F563910062C702 /* SceneDelegate.swift */,
 				752FC90728F92FC200FBA82F /* LocationManager.swift */,
-				752FC90528F92F8B00FBA82F /* SearchViewController.swift */,
-				D388130B28F563910062C702 /* ViewController.swift */,
+				752FC90528F92F8B00FBA82F /* PanelViewController.swift */,
+				D388130B28F563910062C702 /* MapViewController.swift */,
 				D388130D28F563910062C702 /* Main.storyboard */,
 				D388131328F563920062C702 /* Assets.xcassets */,
 				D388131528F563920062C702 /* LaunchScreen.storyboard */,
@@ -493,8 +493,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D388130C28F563910062C702 /* ViewController.swift in Sources */,
-				752FC90628F92F8B00FBA82F /* SearchViewController.swift in Sources */,
+				D388130C28F563910062C702 /* MapViewController.swift in Sources */,
+				752FC90628F92F8B00FBA82F /* PanelViewController.swift in Sources */,
 				D36911BA28F7FB3300E993E1 /* TujuanViewController.swift in Sources */,
 				D388131228F563910062C702 /* Tuju.xcdatamodeld in Sources */,
 				752FC90828F92FC200FBA82F /* LocationManager.swift in Sources */,
