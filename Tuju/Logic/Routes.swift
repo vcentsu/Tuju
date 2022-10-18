@@ -10,6 +10,6 @@ import UIKit
 
 var Hijau = ["Pondok Ranji", "Kebayoran", "Palmerah", "Tanah Abang"]
 var BiruKiri = ["Karet", "Sudirman", "Manggarai"]
-var MerahAtas = ["Cikini", "Gondangdia", "Gambir", "Juanda", "Sawah Besar", "Mangga Besar"]
-var BiruKanan = ["Matraman", "Jatinegara"]
-var MerahBawah = ["Tebet", "Cawang", "Duren Kalibata", "Pasar Minggu Baru", "Pasar Minggu", "Tanjung Barat"]
+var MerahAtas = ["Manggarai", "Cikini", "Gondangdia", "Gambir", "Juanda", "Sawah Besar", "Mangga Besar"]
+var BiruKanan = ["Manggarai", "Matraman", "Jatinegara"]
+var MerahBawah = ["Manggarai", "Tebet", "Cawang", "Duren Kalibata", "Pasar Minggu Baru", "Pasar Minggu", "Tanjung Barat"]
