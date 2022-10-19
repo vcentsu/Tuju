@@ -11,7 +11,7 @@ import FloatingPanel
 import GoogleMaps
 import CoreLocation
 
-class ViewController: UIViewController, GMSMapViewDelegate, SearchViewControllerDelegate {
+class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControllerDelegate {
     
     let panel = FloatingPanelController()
     
@@ -29,34 +29,41 @@ class ViewController: UIViewController, GMSMapViewDelegate, SearchViewController
         self.manager.delegate = self
         self.manager.requestWhenInUseAuthorization()
         self.manager.startUpdatingLocation()
-        self.mapView.delegate = self
+//        self.mapView.delegate = self
         
-        let camera = GMSCameraPosition.camera(withLatitude: coordinateLive.latitude, longitude: coordinateLive.longitude, zoom: 16.0)
-        mapView.animate(toLocation: coordinateLive)
-        mapView.camera = camera
-        mapView.animate(to: camera)
+        let camera = GMSCameraPosition.camera(withLatitude: coordinateLive.latitude, longitude: coordinateLive.longitude, zoom: 8.0)
+        
+        guard let map = mapView else {return}
+        
+        map.animate(toLocation: coordinateLive)
+        map.camera = camera
+        map.animate(to: camera)
         
         title = "TUJU"
         
-        let searchVC = Tuju.SearchViewController()
+        let searchVC = Tuju.PanelViewController()
         searchVC.delegate = self
         
         panel.set(contentViewController: searchVC)
         panel.addPanel(toParent: self)
+        
     }
+    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        mapView.frame = view.bounds
+        
+        guard let map = mapView else {return}
+        map.frame = view.bounds
     }
     
-    func SearchViewController(_ vc: SearchViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?) {
+    func PanelViewController(_ vc: PanelViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?) {
         
         guard let coordinates = coordinates else {
             return
         }
 
-        panel.move(to: .tip, animated: true)
+        panel.move(to: .hidden, animated: true)
         
 //        mapView.removeFromSuperview(mapView.anchorPoint)
         
@@ -74,7 +81,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, SearchViewController
     }
 }
 
-extension ViewController: CLLocationManagerDelegate{
+extension MapViewController: CLLocationManagerDelegate{
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else {
@@ -83,11 +90,15 @@ extension ViewController: CLLocationManagerDelegate{
         
         coordinateLive = location.coordinate
         
-        mapView.isMyLocationEnabled = true
-        mapView.settings.myLocationButton = true
+        guard let map = mapView else {
+            return
+        }
+        
+        map.isMyLocationEnabled = true
+        map.settings.myLocationButton = true
         
         marker.position = coordinateLive
-        marker.map = mapView
+        marker.map = map
     
 //        print("License: \n\n\(GMSServices.openSourceLicenseInfo())")
     }

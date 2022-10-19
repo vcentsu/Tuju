@@ -7,23 +7,75 @@
 
 import UIKit
 
-class TujuanViewController: ViewController {
+class TujuanViewController: MapViewController {
 
+    let searchVC = UISearchController()
+    
+    @IBOutlet weak var recommendationTable: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        //nav bar
+        navigationItem.largeTitleDisplayMode = .always
+
+        //search bar
+        searchVC.searchBar.tag = 1
+        searchVC.searchResultsUpdater = self
+        searchVC.searchBar.placeholder = "Destination"
+        searchVC.searchBar.backgroundColor = .clear
+        navigationItem.searchController = searchVC
+        
+        //table
+        recommendationTable.delegate = self
+        recommendationTable.dataSource = self
+        //recommendationTable.register(UINib(nibName: "RecommendationTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        recommendationTable.register(RecommendationTableViewCell.self, forCellReuseIdentifier: "cell")
+    }
+
+}
+
+extension TujuanViewController: UISearchResultsUpdating{
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let query = searchController.searchBar.text,
+              !query.trimmingCharacters(in: .whitespaces).isEmpty
+        else{
+            return
+        }
+    
+//        GooglePlacesManager.shared.findPlaces(query: query) { result in
+//            switch result{
+//            case .success(let places):
+//                print(places)
+//                print("Found Places")
+//
+//                DispatchQueue.main.async {
+//                    self.places = places
+//                    self.update()
+//                }
+//
+//            case .failure(let error):
+//                print(error)
+//
+//            }
+//        }
     }
     
+//    public func update(){
+//        resultTable.isHidden = false
+//        print(places.count)
+//        resultTable.reloadData()
+//    }
+}
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension TujuanViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
     }
-    */
 
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = recommendationTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        return cell
+    }
 }

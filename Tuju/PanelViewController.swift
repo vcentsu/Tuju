@@ -1,0 +1,115 @@
+//
+//  SearchViewController.swift
+//  Searching-Locations-iOS
+//
+//  Created by Ulul I. on 05/10/22.
+//
+
+import UIKit
+import CoreLocation
+
+protocol PanelViewControllerDelegate: AnyObject {
+    func PanelViewController(_ vc: PanelViewController, didSelectLocationWith Coordinate: CLLocationCoordinate2D?)
+}
+
+class PanelViewController: UIViewController, UITextFieldDelegate {
+    
+    weak var delegate: PanelViewControllerDelegate?
+    
+    private let asalField: UITextField = {
+        let field = UITextField()
+        field.placeholder = "Asal: Pilih Stasiun Asal"
+        field.layer.cornerRadius = 9
+        field.backgroundColor = .tertiarySystemBackground
+        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 50))
+        field.leftViewMode = .always
+        
+        return field
+    }()
+    
+    private let tujuanField: UITextField = {
+        let field = UITextField()
+        field.placeholder = "Tujuan: Pilih Stasiun Tujuan"
+        field.layer.cornerRadius = 9
+        field.backgroundColor = .tertiarySystemBackground
+        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 50))
+        field.leftViewMode = .always
+        
+        return field
+    }()
+    
+    private let startBtn: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .systemOrange
+        button.layer.cornerRadius = 20
+        button.setTitle("Mulai Perjalanan", for: .normal)
+        button.addTarget(PanelViewController.self, action: #selector(didTapMulai), for: .touchUpInside)
+
+        return button
+    }()
+    
+    private let label: UILabel = {
+        let label = UILabel()
+        label.text = "Mulai perjalanan saat berada di stasiun awal"
+        label.font = .systemFont(ofSize: 14, weight: .ultraLight)
+        return label
+    }()
+    
+    var locations = [Location]()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .secondarySystemBackground
+        view.addSubview(label)
+        view.addSubview(asalField)
+        view.addSubview(tujuanField)
+        asalField.delegate = self
+        tujuanField.delegate = self
+        view.addSubview(startBtn)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        asalField.frame = CGRect(x: 20, y: 30, width: view.frame.size.width-40, height: 50)
+        tujuanField.frame = CGRect(x: 20, y: 40+asalField.frame.size.height, width: view.frame.size.width-40, height: 50)
+
+        label.sizeToFit()
+        label.frame = CGRect(x: 20, y: 120+tujuanField.frame.size.height, width: label.frame.size.width, height: label.frame.size.height)
+        startBtn.frame = CGRect(x: 20, y: 180+label.frame.size.height, width: view.frame.size.width-40, height: 50)
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        if asalField.isEditing {
+            print("asal clicked")
+            resignFirstResponder()
+            let AsalVC =  UIStoryboard(name: "Asal", bundle: nil).instantiateViewController(withIdentifier: "AsalID")
+            self.present(AsalVC, animated: true, completion: nil)
+        }
+        if tujuanField.isEditing {
+            print("tujuan clicked")
+            resignFirstResponder()
+            let TujuanVC =  UIStoryboard(name: "Tujuan", bundle: nil).instantiateViewController(withIdentifier: "TujuanID")
+            self.present(TujuanVC, animated: true, completion: nil)
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        asalField.resignFirstResponder()
+        if let text = asalField.text, !text.isEmpty {
+            LocationManager.shared.findLocations(with: text) { [weak self] locations in
+                DispatchQueue.main.async {
+                    self?.locations = locations
+                    //self?.tableView.reloadData()
+                }
+            }
+        }
+        return true
+    }
+    
+    @objc func didTapMulai(sender: UIButton!) {
+        print("Button tapped")
+    }
+    
+}
