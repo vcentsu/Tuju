@@ -83,14 +83,22 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
         
         if asalField.isEditing {
             print("asal clicked")
-            resignFirstResponder()
+            //resignFirstResponder()
             let AsalVC =  UIStoryboard(name: "Asal", bundle: nil).instantiateViewController(withIdentifier: "AsalID")
+            if let sheet = AsalVC.sheetPresentationController {
+                sheet.detents = [.medium(), .large()]
+                sheet.preferredCornerRadius = 24
+            }
             self.present(AsalVC, animated: true, completion: nil)
         }
         if tujuanField.isEditing {
             print("tujuan clicked")
-            resignFirstResponder()
+            //resignFirstResponder()
             let TujuanVC =  UIStoryboard(name: "Tujuan", bundle: nil).instantiateViewController(withIdentifier: "TujuanID")
+            if let sheet = TujuanVC.sheetPresentationController {
+                sheet.detents = [.medium(), .large()]
+                sheet.preferredCornerRadius = 24
+            }
             self.present(TujuanVC, animated: true, completion: nil)
         }
     }
