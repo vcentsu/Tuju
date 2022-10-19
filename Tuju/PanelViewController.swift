@@ -12,20 +12,13 @@ protocol PanelViewControllerDelegate: AnyObject {
     func PanelViewController(_ vc: PanelViewController, didSelectLocationWith Coordinate: CLLocationCoordinate2D?)
 }
 
-class PanelViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
+class PanelViewController: UIViewController, UITextFieldDelegate {
     
     weak var delegate: PanelViewControllerDelegate?
-
-    private let  label: UILabel = {
-        let label = UILabel()
-        label.text = "Where To?"
-        label.font = .systemFont(ofSize: 24, weight: .semibold)
-        return label
-    }()
     
-    private let field: UITextField = {
+    private let asalField: UITextField = {
         let field = UITextField()
-        field.placeholder = "Enter destination"
+        field.placeholder = "Asal: Pilih Stasiun Asal"
         field.layer.cornerRadius = 9
         field.backgroundColor = .tertiarySystemBackground
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 50))
@@ -34,13 +27,32 @@ class PanelViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         return field
     }()
     
-    private let tableView: UITableView = {
-        let table = UITableView()
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+    private let tujuanField: UITextField = {
+        let field = UITextField()
+        field.placeholder = "Tujuan: Pilih Stasiun Tujuan"
+        field.layer.cornerRadius = 9
+        field.backgroundColor = .tertiarySystemBackground
+        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 50))
+        field.leftViewMode = .always
         
-        
-        return table
-        
+        return field
+    }()
+    
+    private let startBtn: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .systemOrange
+        button.layer.cornerRadius = 20
+        button.setTitle("Mulai Perjalanan", for: .normal)
+        button.addTarget(PanelViewController.self, action: #selector(didTapMulai), for: .touchUpInside)
+
+        return button
+    }()
+    
+    private let label: UILabel = {
+        let label = UILabel()
+        label.text = "Mulai perjalanan saat berada di stasiun awal"
+        label.font = .systemFont(ofSize: 14, weight: .ultraLight)
+        return label
     }()
     
     var locations = [Location]()
@@ -49,61 +61,55 @@ class PanelViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         super.viewDidLoad()
         view.backgroundColor = .secondarySystemBackground
         view.addSubview(label)
-        view.addSubview(field)
-        view.addSubview(tableView)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.backgroundColor = .secondarySystemBackground
-        field.delegate = self
+        view.addSubview(asalField)
+        view.addSubview(tujuanField)
+        asalField.delegate = self
+        tujuanField.delegate = self
+        view.addSubview(startBtn)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        asalField.frame = CGRect(x: 20, y: 30, width: view.frame.size.width-40, height: 50)
+        tujuanField.frame = CGRect(x: 20, y: 40+asalField.frame.size.height, width: view.frame.size.width-40, height: 50)
+
         label.sizeToFit()
-        label.frame = CGRect(x: 10, y: 10, width: label.frame.size.width, height: label.frame.size.height)
-        field.frame = CGRect(x: 10, y: 20+label.frame.size.height, width: view.frame.size.width-20, height: 50)
-        let tableY: CGFloat = field.frame.origin.y+field.frame.size.height+5
-        tableView.frame = CGRect(x: 0,
-                                 y: tableY,
-                                 width: view.frame.size.width,
-                                 height: view.frame.size.height-tableY)
+        label.frame = CGRect(x: 20, y: 120+tujuanField.frame.size.height, width: label.frame.size.width, height: label.frame.size.height)
+        startBtn.frame = CGRect(x: 20, y: 180+label.frame.size.height, width: view.frame.size.width-40, height: 50)
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        if asalField.isEditing {
+            print("asal clicked")
+            resignFirstResponder()
+            let AsalVC =  UIStoryboard(name: "Asal", bundle: nil).instantiateViewController(withIdentifier: "AsalID")
+            self.present(AsalVC, animated: true, completion: nil)
+        }
+        if tujuanField.isEditing {
+            print("tujuan clicked")
+            resignFirstResponder()
+            let TujuanVC =  UIStoryboard(name: "Tujuan", bundle: nil).instantiateViewController(withIdentifier: "TujuanID")
+            self.present(TujuanVC, animated: true, completion: nil)
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        field.resignFirstResponder()
-        if let text = field.text, !text.isEmpty {
+        asalField.resignFirstResponder()
+        if let text = asalField.text, !text.isEmpty {
             LocationManager.shared.findLocations(with: text) { [weak self] locations in
                 DispatchQueue.main.async {
                     self?.locations = locations
-                    self?.tableView.reloadData()
+                    //self?.tableView.reloadData()
                 }
             }
         }
         return true
     }
     
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return locations.count
+    @objc func didTapMulai(sender: UIButton!) {
+        print("Button tapped")
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
-        cell.textLabel?.text = locations[indexPath.row].title
-        cell.textLabel?.numberOfLines = 0
-        cell.contentView.backgroundColor = .secondarySystemBackground
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        // Notify  map controller to show pin at selected place
-        let coordinate = locations[indexPath.row].coordinates
-        
-        
-        delegate?.PanelViewController(self, didSelectLocationWith: coordinate)
-        
-    }
 }

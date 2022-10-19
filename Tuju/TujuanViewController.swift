@@ -29,7 +29,8 @@ class TujuanViewController: MapViewController {
         //table
         recommendationTable.delegate = self
         recommendationTable.dataSource = self
-        recommendationTable.register(UINib(nibName: "RecommendationTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        //recommendationTable.register(UINib(nibName: "RecommendationTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        recommendationTable.register(RecommendationTableViewCell.self, forCellReuseIdentifier: "cell")
     }
 
 }

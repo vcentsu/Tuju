@@ -29,12 +29,15 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         self.manager.delegate = self
         self.manager.requestWhenInUseAuthorization()
         self.manager.startUpdatingLocation()
-        self.mapView.delegate = self
+//        self.mapView.delegate = self
         
         let camera = GMSCameraPosition.camera(withLatitude: coordinateLive.latitude, longitude: coordinateLive.longitude, zoom: 8.0)
-        mapView.animate(toLocation: coordinateLive)
-        mapView.camera = camera
-        mapView.animate(to: camera)
+        
+        guard let map = mapView else {return}
+        
+        map.animate(toLocation: coordinateLive)
+        map.camera = camera
+        map.animate(to: camera)
         
         title = "TUJU"
         
@@ -43,11 +46,15 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         
         panel.set(contentViewController: searchVC)
         panel.addPanel(toParent: self)
+        
     }
+    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        mapView.frame = view.bounds
+        
+        guard let map = mapView else {return}
+        map.frame = view.bounds
     }
     
     func PanelViewController(_ vc: PanelViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?) {
@@ -83,11 +90,15 @@ extension MapViewController: CLLocationManagerDelegate{
         
         coordinateLive = location.coordinate
         
-        mapView.isMyLocationEnabled = true
-        mapView.settings.myLocationButton = true
+        guard let map = mapView else {
+            return
+        }
+        
+        map.isMyLocationEnabled = true
+        map.settings.myLocationButton = true
         
         marker.position = coordinateLive
-        marker.map = mapView
+        marker.map = map
     
 //        print("License: \n\n\(GMSServices.openSourceLicenseInfo())")
     }

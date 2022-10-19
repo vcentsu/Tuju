@@ -42,7 +42,7 @@
         <!--Navigation Controller-->
         <scene sceneID="R0V-6v-k0j">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DKG-3e-IjY" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="TujuanID" automaticallyAdjustsScrollViewInsets="NO" id="DKG-3e-IjY" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="uLr-Y1-kyH">
                         <rect key="frame" x="0.0" y="47" width="390" height="44"/>
