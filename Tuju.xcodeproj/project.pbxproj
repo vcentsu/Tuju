@@ -8,19 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		1D38AAB113DA92787F2D230A /* Pods_TujuTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17D0FE817E701BC6DE65C020 /* Pods_TujuTests.framework */; };
-
+		5C06A0D529004A530003CBEE /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = 5CB26C2528FD5AA10057CC3E /* FloatingPanel */; };
 		5CB26BF528FD49EB0057CC3E /* LogicSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB26BF428FD49EB0057CC3E /* LogicSwift.swift */; };
 		5CB26BF728FD4A290057CC3E /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB26BF628FD4A290057CC3E /* Routes.swift */; };
 		5CB26BFA28FD4A750057CC3E /* TestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CB26BF828FD4A750057CC3E /* TestTableViewCell.xib */; };
 		5CB26BFB28FD4A750057CC3E /* TestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB26BF928FD4A750057CC3E /* TestTableViewCell.swift */; };
 		5CB26BFD28FD4A8C0057CC3E /* TestLogic.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CB26BFC28FD4A8C0057CC3E /* TestLogic.storyboard */; };
-		5CB26C2628FD5AA10057CC3E /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = 5CB26C2528FD5AA10057CC3E /* FloatingPanel */; };
-		5CB26C2828FD5AAA0057CC3E /* Pods_Tuju.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB26C2728FD5AAA0057CC3E /* Pods_Tuju.framework */; };
-		752FC90628F92F8B00FBA82F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752FC90528F92F8B00FBA82F /* SearchViewController.swift */; };
-		752FC90828F92FC200FBA82F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752FC90728F92FC200FBA82F /* LocationManager.swift */; };
-
 		752FC90628F92F8B00FBA82F /* PanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752FC90528F92F8B00FBA82F /* PanelViewController.swift */; };
-		
+		752FC90828F92FC200FBA82F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752FC90728F92FC200FBA82F /* LocationManager.swift */; };
 		BA4628150B3F114A13243CF8 /* Pods_Tuju_TujuUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBB02709D3DFDB0407B7D0E1 /* Pods_Tuju_TujuUITests.framework */; };
 		D3567B2128FD22A300D84AB9 /* Tujuan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3567B2028FD22A300D84AB9 /* Tujuan.storyboard */; };
 		D36911B828F7FB2100E993E1 /* AsalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36911B728F7FB2100E993E1 /* AsalViewController.swift */; };
@@ -105,8 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
-				919A0873C2627AB8CA083FC4 /* Pods_Tuju.framework in Frameworks */,
+				5C06A0D529004A530003CBEE /* FloatingPanel in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,11 +136,111 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		5C06A0D629004A970003CBEE /* Feature */ = {
+			isa = PBXGroup;
+			children = (
+				5C06A0E129004BC40003CBEE /* Panel */,
+				5C06A0E029004BBC0003CBEE /* Map */,
+				5C06A0DF29004B5A0003CBEE /* PilihTujuan */,
+				5C06A0DE29004B3B0003CBEE /* PilihAsal */,
+			);
+			path = Feature;
+			sourceTree = "<group>";
+		};
+		5C06A0D729004A9E0003CBEE /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		5C06A0D829004AA30003CBEE /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		5C06A0D929004AAE0003CBEE /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				752FC90728F92FC200FBA82F /* LocationManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		5C06A0DA29004AB50003CBEE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D388131328F563920062C702 /* Assets.xcassets */,
+				D388131528F563920062C702 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		5C06A0DB29004ABB0003CBEE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D388131028F563910062C702 /* Tuju.xcdatamodeld */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5C06A0DC29004AC30003CBEE /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				D388130728F563910062C702 /* AppDelegate.swift */,
+				D388130928F563910062C702 /* SceneDelegate.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		5C06A0DE29004B3B0003CBEE /* PilihAsal */ = {
+			isa = PBXGroup;
+			children = (
+				D36911BB28F801A700E993E1 /* Asal.storyboard */,
+				D36911B728F7FB2100E993E1 /* AsalViewController.swift */,
+			);
+			path = PilihAsal;
+			sourceTree = "<group>";
+		};
+		5C06A0DF29004B5A0003CBEE /* PilihTujuan */ = {
+			isa = PBXGroup;
+			children = (
+				D36911B928F7FB3300E993E1 /* TujuanViewController.swift */,
+				D3567B2028FD22A300D84AB9 /* Tujuan.storyboard */,
+			);
+			path = PilihTujuan;
+			sourceTree = "<group>";
+		};
+		5C06A0E029004BBC0003CBEE /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				D388130B28F563910062C702 /* MapViewController.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		5C06A0E129004BC40003CBEE /* Panel */ = {
+			isa = PBXGroup;
+			children = (
+				752FC90528F92F8B00FBA82F /* PanelViewController.swift */,
+			);
+			path = Panel;
+			sourceTree = "<group>";
+		};
+		5C06A0E229004C7E0003CBEE /* ViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewComponents;
+			sourceTree = "<group>";
+		};
 		5CB26BF328FD49490057CC3E /* Logic */ = {
 			isa = PBXGroup;
 			children = (
-				5CB26BF428FD49EB0057CC3E /* LogicSwift.swift */,
 				5CB26BF628FD4A290057CC3E /* Routes.swift */,
+				5CB26BF428FD49EB0057CC3E /* LogicSwift.swift */,
 				5CB26BF928FD4A750057CC3E /* TestTableViewCell.swift */,
 				5CB26BF828FD4A750057CC3E /* TestTableViewCell.xib */,
 				5CB26BFC28FD4A8C0057CC3E /* TestLogic.storyboard */,
@@ -195,22 +289,18 @@
 		D388130628F563910062C702 /* Tuju */ = {
 			isa = PBXGroup;
 			children = (
+				5C06A0E229004C7E0003CBEE /* ViewComponents */,
+				5C06A0DC29004AC30003CBEE /* Core */,
+				5C06A0DB29004ABB0003CBEE /* Models */,
+				5C06A0DA29004AB50003CBEE /* Resources */,
+				5C06A0D929004AAE0003CBEE /* Services */,
+				5C06A0D829004AA30003CBEE /* Utilities */,
+				5C06A0D729004A9E0003CBEE /* Helper */,
+				5C06A0D629004A970003CBEE /* Feature */,
 				5CB26BF328FD49490057CC3E /* Logic */,
-				D388130728F563910062C702 /* AppDelegate.swift */,
-				D388130928F563910062C702 /* SceneDelegate.swift */,
-				752FC90728F92FC200FBA82F /* LocationManager.swift */,
-				752FC90528F92F8B00FBA82F /* PanelViewController.swift */,
-				D388130B28F563910062C702 /* MapViewController.swift */,
 				D388130D28F563910062C702 /* Main.storyboard */,
-				D388131328F563920062C702 /* Assets.xcassets */,
-				D388131528F563920062C702 /* LaunchScreen.storyboard */,
 				D388131828F563920062C702 /* Info.plist */,
-				D388131028F563910062C702 /* Tuju.xcdatamodeld */,
-				D36911B728F7FB2100E993E1 /* AsalViewController.swift */,
-				D36911B928F7FB3300E993E1 /* TujuanViewController.swift */,
-				D36911BB28F801A700E993E1 /* Asal.storyboard */,
 				D36911BD28F944F100E993E1 /* RecommendationTableViewCell.swift */,
-				D3567B2028FD22A300D84AB9 /* Tujuan.storyboard */,
 			);
 			path = Tuju;
 			sourceTree = "<group>";
@@ -251,11 +341,9 @@
 			dependencies = (
 			);
 			name = Tuju;
-
 			packageProductDependencies = (
 				5CB26C2528FD5AA10057CC3E /* FloatingPanel */,
 			);
-
 			productName = Tuju;
 			productReference = D388130428F563910062C702 /* Tuju.app */;
 			productType = "com.apple.product-type.application";
@@ -354,11 +442,8 @@
 				D388131728F563920062C702 /* LaunchScreen.storyboard in Resources */,
 				D388131428F563920062C702 /* Assets.xcassets in Resources */,
 				D388130F28F563910062C702 /* Main.storyboard in Resources */,
-
 				5CB26BFA28FD4A750057CC3E /* TestTableViewCell.xib in Resources */,
-
 				D3567B2128FD22A300D84AB9 /* Tujuan.storyboard in Resources */,
-
 				D36911BC28F801A800E993E1 /* Asal.storyboard in Resources */,
 				5CB26BFD28FD4A8C0057CC3E /* TestLogic.storyboard in Resources */,
 			);
@@ -903,7 +988,6 @@
 		};
 /* End XCRemoteSwiftPackageReference section */
 
-
 /* Begin XCSwiftPackageProductDependency section */
 		5CB26C2528FD5AA10057CC3E /* FloatingPanel */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -911,7 +995,6 @@
 			productName = FloatingPanel;
 		};
 /* End XCSwiftPackageProductDependency section */
-
 
 /* Begin XCVersionGroup section */
 		D388131028F563910062C702 /* Tuju.xcdatamodeld */ = {
