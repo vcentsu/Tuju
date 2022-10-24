@@ -12,6 +12,12 @@ class LogicSwift: UIViewController, UITableViewDataSource, UITableViewDelegate{
     @IBOutlet weak var numberOfTransitLbl: UILabel!
     @IBOutlet weak var transitStationLbl: UILabel!
     @IBOutlet var tableView: UITableView!
+
+    var hijauData = Hijau
+    var birukananData = BiruKanan
+    var birukiriData = BiruKiri
+    var merahatasData = MerahAtas
+    var merahbawahData = MerahBawah
     
     var Departure = "Departure"
     var Destination = "Destination"
@@ -30,7 +36,6 @@ class LogicSwift: UIViewController, UITableViewDataSource, UITableViewDelegate{
         
         let nib = UINib(nibName: "TestTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "TestTableViewCell")
-        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -85,783 +90,868 @@ class LogicSwift: UIViewController, UITableViewDataSource, UITableViewDelegate{
         Destination = DestinationTF.text!
         
         //Jalur Hijau (1 arah bolak balik)
-        if (Hijau.contains(Departure) && Hijau.contains(Destination)){
-            
-            let checkArr = Hijau.firstIndex(where:{ $0 == "\(Departure)"})
+        if (hijauData.contains(where: {$0.namaStasiun == Departure}) && hijauData.contains(where: {$0.namaStasiun == Destination})){
+
+            let checkArr = hijauData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
             
             print(checkArr!)
             
-            let checkDes = Hijau.firstIndex(where:{ $0 == "\(Destination)"})
+            let checkDes = hijauData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
             
             print(checkDes!)
             
             if (checkArr! < checkDes!){
-                let route = Hijau[checkArr!...checkDes!]
-                Routes.append(contentsOf: route)
-                print(Routes)
+                let route = hijauData[checkArr!...checkDes!]
+                print(route.count)
+                for i in checkArr!...checkDes! {
+                    Routes.append(route[i].namaStasiun!)
+                }
+                
             }
             else{
-                Hijau.reverse()
-                let checkArr = Hijau.firstIndex(where:{ $0 == "\(Departure)"})
-                let checkDes = Hijau.firstIndex(where:{ $0 == "\(Destination)"})
-                let route = Hijau[checkArr!...checkDes!]
-                Routes.append(contentsOf: route)
+                hijauData.reverse()
+                let checkArr = hijauData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
+                let checkDes = hijauData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
+                let route = hijauData[checkArr!...checkDes!]
+                print(route)
+                for i in checkArr!...checkDes! {
+                    Routes.append(route[i].namaStasiun!)
+                }
                 
-                Hijau.reverse()
+                hijauData.reverse()
             }
         }
         
         //Jalur Biru Kanan (1 arah bolak balik)
-        else if (BiruKanan.contains(Departure) && BiruKanan.contains(Destination)){
+        else if (birukananData.contains(where: {$0.namaStasiun == Departure}) && birukananData.contains(where: {$0.namaStasiun == Destination})){
             
-            let checkArr = BiruKanan.firstIndex(where:{ $0 == "\(Departure)"})
+            let checkArr = birukananData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
             
             print(checkArr!)
             
-            let checkDes = BiruKanan.firstIndex(where:{ $0 == "\(Destination)"})
+            let checkDes = birukananData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
             
             print(checkDes!)
             
             if (checkArr! < checkDes!){
-                let route = BiruKanan[checkArr!...checkDes!]
-                Routes.append(contentsOf: route)
-                print(Routes)
+                let route = birukananData[checkArr!...checkDes!]
+                for i in checkArr!...checkDes! {
+                    Routes.append(route[i].namaStasiun!)
+                }
             }
             else{
-                BiruKanan.reverse()
-                let checkArr = BiruKanan.firstIndex(where:{ $0 == "\(Departure)"})
-                let checkDes = BiruKanan.firstIndex(where:{ $0 == "\(Destination)"})
-                let route = BiruKanan[checkArr!...checkDes!]
-                Routes.append(contentsOf: route)
-                print(Routes)
-                BiruKanan.reverse()
+                birukananData.reverse()
+                let checkArr = birukananData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
+                let checkDes = birukananData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
+                let route = birukananData[checkArr!...checkDes!]
+                
+                for i in checkArr!...checkDes! {
+                    Routes.append(route[i].namaStasiun!)
+                }
+                
+                birukananData.reverse()
             }
         }
         
+       
         //Jalur Biru Kiri (1 arah bolak balik)
-        else if(BiruKiri.contains(Departure) && BiruKiri.contains(Destination)){
+        else if (birukiriData.contains(where: {$0.namaStasiun == Departure}) && birukiriData.contains(where: {$0.namaStasiun == Destination})){
             
-            let checkArr = BiruKiri.firstIndex(where:{ $0 == "\(Departure)"})
+            let checkArr = birukiriData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
             
             print(checkArr!)
             
-            let checkDes = BiruKiri.firstIndex(where:{ $0 == "\(Destination)"})
+            let checkDes = birukiriData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
             
             print(checkDes!)
             
             if (checkArr! < checkDes!){
-                let route = BiruKiri[checkArr!...checkDes!]
+                let route = birukiriData[checkArr!...checkDes!]
                 print(Routes)
-                Routes.append(contentsOf: route)
+                for i in checkArr!...checkDes! {
+                    Routes.append(route[i].namaStasiun!)
+                }
             }
             else{
-                BiruKiri.reverse()
-                let checkArr = BiruKiri.firstIndex(where:{ $0 == "\(Departure)"})
-                let checkDes = BiruKiri.firstIndex(where:{ $0 == "\(Destination)"})
-                let route = BiruKiri[checkArr!...checkDes!]
-                Routes.append(contentsOf: route)
-                print(Routes)
+                birukiriData.reverse()
+                let checkArr = birukiriData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
+                let checkDes = birukiriData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
+                let route = birukiriData[checkArr!...checkDes!]
+                for i in checkArr!...checkDes! {
+                    Routes.append(route[i].namaStasiun!)
+                }
                 
-                BiruKiri.reverse()
+                birukiriData.reverse()
             }
         }
         
         //Jalur Merah Atas(1 arah bolak balik)
-        else if(MerahAtas.contains(Departure) && MerahAtas.contains(Destination)){
+        else if (merahatasData.contains(where: {$0.namaStasiun == Departure}) && merahatasData.contains(where: {$0.namaStasiun == Destination})){
             
-            let checkArr = MerahAtas.firstIndex(where:{ $0 == "\(Departure)"})
+            let checkArr = merahatasData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
             
             print(checkArr!)
             
-            let checkDes = MerahAtas.firstIndex(where:{ $0 == "\(Destination)"})
+            let checkDes = merahatasData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
             
             print(checkDes!)
             
             if (checkArr! < checkDes!){
-                let route = MerahAtas[checkArr!...checkDes!]
+                let route = merahatasData[checkArr!...checkDes!]
                 print(Routes)
-                Routes.append(contentsOf: route)
+                for i in checkArr!...checkDes! {
+                    Routes.append(route[i].namaStasiun!)
+                }
             }
             else{
-                MerahAtas.reverse()
-                let checkArr = MerahAtas.firstIndex(where:{ $0 == "\(Departure)"})
-                let checkDes = MerahAtas.firstIndex(where:{ $0 == "\(Destination)"})
-                let route = MerahAtas[checkArr!...checkDes!]
-                Routes.append(contentsOf: route)
-                print(Routes)
+                merahatasData.reverse()
+                let checkArr = merahatasData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
+                let checkDes = merahatasData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
+                let route = merahatasData[checkArr!...checkDes!]
+                
+                for i in checkArr!...checkDes! {
+                    Routes.append(route[i].namaStasiun!)
+                }
                 
                 MerahAtas.reverse()
             }
         }
         
         //Jalur Merah Bawah (1 arah bolak balik)
-        else if(MerahBawah.contains(Departure) && MerahBawah.contains(Destination)){
+        else if (merahbawahData.contains(where: {$0.namaStasiun == Departure}) && merahbawahData.contains(where: {$0.namaStasiun == Destination})){
             
-            let checkArr = MerahBawah.firstIndex(where:{ $0 == "\(Departure)"})
+            let checkArr = merahbawahData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
             
             print(checkArr!)
             
-            let checkDes = MerahBawah.firstIndex(where:{ $0 == "\(Destination)"})
+            let checkDes = merahbawahData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
             
             print(checkDes!)
             
             if (checkArr! < checkDes!){
-                let route = MerahBawah[checkArr!...checkDes!]
-                print(Routes)
-                Routes.append(contentsOf: route)
+                let route = merahbawahData[checkArr!...checkDes!]
+                for i in checkArr!...checkDes! {
+                    Routes.append(route[i].namaStasiun!)
+                }
             }
             else{
-                MerahBawah.reverse()
-                let checkArr = MerahBawah.firstIndex(where:{ $0 == "\(Departure)"})
-                let checkDes = MerahBawah.firstIndex(where:{ $0 == "\(Destination)"})
-                let route = MerahBawah[checkArr!...checkDes!]
-                Routes.append(contentsOf: route)
-                print(Routes)
+                merahbawahData.reverse()
+                let checkArr = merahbawahData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
+                let checkDes = merahbawahData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
+                let route = merahbawahData[checkArr!...checkDes!]
                 
-                MerahBawah.reverse()
+                for i in checkArr!...checkDes! {
+                    Routes.append(route[i].namaStasiun!)
+                }
+                
+                merahbawahData.reverse()
             }
         }
         
         
         //Jalur Biru Kiri ke Biru Kanan
-        else if(BiruKiri.contains(Departure) && BiruKanan.contains(Destination)){
+        else if (birukiriData.contains(where: {$0.namaStasiun == Departure}) && birukananData.contains(where: {$0.namaStasiun == Destination})){
 
             //cek index array
-            let checkArr = BiruKiri.firstIndex(where:{ $0 == "\(Departure)"})
+            let checkArr = birukiriData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
             print(checkArr!)
             
             //cek index array
-            let checkDes = BiruKanan.firstIndex(where:{ $0 == "\(Destination)"})
+            let checkDes = birukananData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
             print(checkDes!)
             
             //define route
-            let route1 = BiruKiri[checkArr!...2]
-            Routes.append(contentsOf: route1)
+            let route1 = birukiriData[checkArr!...2]
+            for i in checkArr!...2 {
+                Routes.append(route1[i].namaStasiun!)
+            }
             
-            let route2 = BiruKanan[1...checkDes!]
-            Routes.append(contentsOf: route2)
+            let route2 = birukananData[1...checkDes!]
+            for i in 1...checkDes! {
+                Routes.append(route2[i].namaStasiun!)
+            }
             
-            print(Routes)
         }
         
         
         //Jalur Biru Kiri ke merah atas
-        else if(BiruKiri.contains(Departure) && MerahAtas.contains(Destination)){
+        else if (birukiriData.contains(where: {$0.namaStasiun == Departure}) && merahatasData.contains(where: {$0.namaStasiun == Destination})){
 
             //cek index array
-            let checkArr = BiruKiri.firstIndex(where:{ $0 == "\(Departure)"})
+            let checkArr = birukiriData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
             print(checkArr!)
             
             //cek index array
-            let checkDes = MerahAtas.firstIndex(where:{ $0 == "\(Destination)"})
+            let checkDes = merahatasData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
             print(checkDes!)
             
             //define number of transit
             numberOfTransit = 1
             
             //Transit Station
-            TransitStation.append(BiruKiri[2])
+            TransitStation.append(birukiriData[2].namaStasiun!)
             
             //define route
-            let route1 = BiruKiri[checkArr!...2]
-            Routes.append(contentsOf: route1)
+            let route1 = birukiriData[checkArr!...2]
+            for i in checkArr!...2 {
+                Routes.append(route1[i].namaStasiun!)
+            }
             
-            let route2 = MerahAtas[1...checkDes!]
-            Routes.append(contentsOf: route2)
-            
-            print(Routes)
+            let route2 = merahatasData[1...checkDes!]
+            for i in 1...checkDes! {
+                Routes.append(route2[i].namaStasiun!)
+            }
         }
         
+        
         //Jalur Biru Kiri ke merah bawah
-        else if(BiruKiri.contains(Departure) && MerahBawah.contains(Destination)){
+        else if (birukiriData.contains(where: {$0.namaStasiun == Departure}) && merahbawahData.contains(where: {$0.namaStasiun == Destination})){
 
             //cek index array
-            let checkArr = BiruKiri.firstIndex(where:{ $0 == "\(Departure)"})
+            let checkArr = birukiriData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
             print(checkArr!)
             
             //cek index array
-            let checkDes = MerahBawah.firstIndex(where:{ $0 == "\(Destination)"})
+            let checkDes = merahbawahData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
             print(checkDes!)
             
             //define number of transit
             numberOfTransit = 1
             
             //Transit Station
-            TransitStation.append(BiruKiri[2])
+            TransitStation.append(birukiriData[2].namaStasiun!)
             
             //define route
-            let route1 = BiruKiri[checkArr!...2]
-            Routes.append(contentsOf: route1)
+            let route1 = birukiriData[checkArr!...2]
+            for i in checkArr!...2 {
+                Routes.append(route1[i].namaStasiun!)
+            }
             
-            let route2 = MerahBawah[1...checkDes!]
-            Routes.append(contentsOf: route2)
-            
-            print(Routes)
+            let route2 = merahbawahData[1...checkDes!]
+            for i in 1...checkDes! {
+                Routes.append(route2[i].namaStasiun!)
+            }
         }
         
         //Jalur Biru Kanan ke Biru Kiri
-        else if(BiruKanan.contains(Departure) && BiruKiri.contains(Destination)){
+        else if (birukananData.contains(where: {$0.namaStasiun == Departure}) && birukiriData.contains(where: {$0.namaStasiun == Destination})){
 
-            BiruKanan.reverse()
-            BiruKiri.reverse()
+            birukananData.reverse()
+            birukiriData.reverse()
             
             //cek index array
-            let checkArr = BiruKanan.firstIndex(where:{ $0 == "\(Departure)"})
+            let checkArr = birukananData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
             print(checkArr!)
             
             //cek index array
-            let checkDes = BiruKiri.firstIndex(where:{ $0 == "\(Destination)"})
+            let checkDes = birukiriData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
             print(checkDes!)
             
             //define route
-            let route1 = BiruKanan[checkArr!...1]
-            Routes.append(contentsOf: route1)
+            let route1 = birukananData[checkArr!...1]
+            for i in checkArr!...1 {
+                Routes.append(route1[i].namaStasiun!)
+            }
     
-            let route2 = BiruKiri[0...checkDes!]
-            Routes.append(contentsOf: route2)
+            let route2 = birukiriData[0...checkDes!]
+            for i in 0...checkDes! {
+                Routes.append(route2[i].namaStasiun!)
+            }
             
-            print(Routes)
             
-            BiruKanan.reverse()
-            BiruKiri.reverse()
+            birukananData.reverse()
+            birukiriData.reverse()
         }
         
         //Jalur merah atas ke Biru Kiri
-        else if(MerahAtas.contains(Departure) && BiruKiri.contains(Destination)){
+        else if (merahatasData.contains(where: {$0.namaStasiun == Departure}) && birukiriData.contains(where: {$0.namaStasiun == Destination})){
 
-            MerahAtas.reverse()
-            BiruKiri.reverse()
+            merahatasData.reverse()
+            birukiriData.reverse()
             
             //cek index array
-            let checkArr = MerahAtas.firstIndex(where:{ $0 == "\(Departure)"})
+            let checkArr = merahatasData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
             print(checkArr!)
             
             //cek index array
-            let checkDes = BiruKiri.firstIndex(where:{ $0 == "\(Destination)"})
+            let checkDes = birukiriData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
             print(checkDes!)
             
             //define number of transit
             numberOfTransit = 1
             
             //Transit Station
-            TransitStation.append(MerahAtas[6])
+            TransitStation.append(merahatasData[6].namaStasiun!)
             
             //define route
             let route1 = MerahAtas[checkArr!...6]
-            Routes.append(contentsOf: route1)
+            for i in checkArr!...6 {
+                Routes.append(route1[i].namaStasiun!)
+            }
     
             let route2 = BiruKiri[1...checkDes!]
-            Routes.append(contentsOf: route2)
+            for i in 1...checkDes! {
+                Routes.append(route2[i].namaStasiun!)
+            }
             
-            print(Routes)
-            
-            MerahAtas.reverse()
-            BiruKiri.reverse()
+            merahatasData.reverse()
+            birukiriData.reverse()
         }
         
         //merah bawah ke biru kiri
-        else if(MerahBawah.contains(Departure) && BiruKiri.contains(Destination)){
+        else if (merahbawahData.contains(where: {$0.namaStasiun == Departure}) && birukiriData.contains(where: {$0.namaStasiun == Destination})){
 
-            MerahBawah.reverse()
-            BiruKiri.reverse()
+
+            merahbawahData.reverse()
+            birukiriData.reverse()
             
             //cek index array
-            let checkArr = MerahBawah.firstIndex(where:{ $0 == "\(Departure)"})
+            let checkArr = merahbawahData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
             print(checkArr!)
             
             //cek index array
-            let checkDes = BiruKiri.firstIndex(where:{ $0 == "\(Destination)"})
+            let checkDes = birukiriData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
             print(checkDes!)
             
             //define number of transit
             numberOfTransit = 1
             
             //Transit Station
-            TransitStation.append(MerahBawah[6])
+            TransitStation.append(merahbawahData[6].namaStasiun!)
             
             //define route
-            let route1 = MerahBawah[checkArr!...6]
-            Routes.append(contentsOf: route1)
+            let route1 = merahbawahData[checkArr!...6]
+            for i in checkArr!...6 {
+                Routes.append(route1[i].namaStasiun!)
+            }
     
-            let route2 = BiruKiri[1...checkDes!]
-            Routes.append(contentsOf: route2)
+            let route2 = birukiriData[1...checkDes!]
+            for i in 1...checkDes! {
+                Routes.append(route2[i].namaStasiun!)
+            }
             
-            print(Routes)
-            
-            MerahBawah.reverse()
-            BiruKiri.reverse()
+            merahbawahData.reverse()
+            birukiriData.reverse()
         }
         
         //Jalur merah atas ke merah bawah
-        else if(MerahAtas.contains(Departure) && MerahBawah.contains(Destination)){
-
-            MerahAtas.reverse()
+        else if (merahatasData.contains(where: {$0.namaStasiun == Departure}) && merahbawahData.contains(where: {$0.namaStasiun == Destination})){
+            
+            merahatasData.reverse()
             
             //cek index array
-            let checkArr = MerahAtas.firstIndex(where:{ $0 == "\(Departure)"})
+            let checkArr = merahatasData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
             print(checkArr!)
             
             //cek index array
-            let checkDes = MerahBawah.firstIndex(where:{ $0 == "\(Destination)"})
+            let checkDes = merahbawahData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
             print(checkDes!)
             
             //define route
-            let route1 = MerahAtas[checkArr!...6]
-            Routes.append(contentsOf: route1)
+            let route1 = merahatasData[checkArr!...6]
+            for i in checkArr!...6 {
+                Routes.append(route1[i].namaStasiun!)
+            }
     
-            let route2 = MerahBawah[1...checkDes!]
-            Routes.append(contentsOf: route2)
+            let route2 = merahbawahData[1...checkDes!]
+            for i in 1...checkDes! {
+                Routes.append(route2[i].namaStasiun!)
+            }
             
             print(Routes)
             
-            MerahAtas.reverse()
+            merahatasData.reverse()
         }
         
         //Jalur merah bawah ke merah atas
-        else if(MerahBawah.contains(Departure) && MerahAtas.contains(Destination)){
+        else if (merahbawahData.contains(where: {$0.namaStasiun == Departure}) && merahatasData.contains(where: {$0.namaStasiun == Destination})){
 
-            MerahBawah.reverse()
+            merahbawahData.reverse()
             
             //cek index array
-            let checkArr = MerahBawah.firstIndex(where:{ $0 == "\(Departure)"})
+            let checkArr = merahbawahData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
             print(checkArr!)
             
             //cek index array
-            let checkDes = MerahAtas.firstIndex(where:{ $0 == "\(Destination)"})
+            let checkDes = merahatasData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
             print(checkDes!)
             
             //define route
-            let route1 = MerahBawah[checkArr!...6]
-            Routes.append(contentsOf: route1)
+            let route1 = merahbawahData[checkArr!...6]
+            for i in checkArr!...6 {
+                Routes.append(route1[i].namaStasiun!)
+            }
     
-            let route2 = MerahAtas[1...checkDes!]
-            Routes.append(contentsOf: route2)
+            let route2 = merahatasData[1...checkDes!]
+            for i in 1...checkDes! {
+                Routes.append(route2[i].namaStasiun!)
+            }
             
-            print(Routes)
-            
-            MerahBawah.reverse()
+            merahbawahData.reverse()
         }
         
         //Jalur merah atas ke biru kanan
-        else if(MerahAtas.contains(Departure) && BiruKanan.contains(Destination)){
+        else if (merahatasData.contains(where: {$0.namaStasiun == Departure}) && birukananData.contains(where: {$0.namaStasiun == Destination})){
 
-            MerahAtas.reverse()
+            merahatasData.reverse()
             
             //cek index array
-            let checkArr = MerahAtas.firstIndex(where:{ $0 == "\(Departure)"})
+            let checkArr = merahatasData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
             print(checkArr!)
             
             //cek index array
-            let checkDes = BiruKanan.firstIndex(where:{ $0 == "\(Destination)"})
+            let checkDes = birukananData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
             print(checkDes!)
             
             //define number of transit
             numberOfTransit = 1
             
             //Transit Station
-            TransitStation.append(MerahAtas[6])
+            TransitStation.append(merahatasData[6].namaStasiun!)
             
             //define route
-            let route1 = MerahAtas[checkArr!...6]
-            Routes.append(contentsOf: route1)
+            let route1 = merahatasData[checkArr!...6]
+            for i in checkArr!...6 {
+                Routes.append(route1[i].namaStasiun!)
+            }
     
-            let route2 = BiruKanan[1...checkDes!]
-            Routes.append(contentsOf: route2)
-            
-            print(Routes)
+            let route2 = birukananData[1...checkDes!]
+            for i in 1...checkDes! {
+                Routes.append(route2[i].namaStasiun!)
+            }
             
             MerahAtas.reverse()
         }
         
         //Jalur biru kanan ke merah atas
-        else if(BiruKanan.contains(Departure) && MerahAtas.contains(Destination)){
+        else if (birukananData.contains(where: {$0.namaStasiun == Departure}) && merahatasData.contains(where: {$0.namaStasiun == Destination})){
 
-            BiruKanan.reverse()
+            birukananData.reverse()
             
             //cek index array
-            let checkArr = BiruKanan.firstIndex(where:{ $0 == "\(Departure)"})
+            let checkArr = birukananData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
             print(checkArr!)
             
             //cek index array
-            let checkDes = MerahAtas.firstIndex(where:{ $0 == "\(Destination)"})
+            let checkDes = merahatasData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
             print(checkDes!)
             
             //define number of transit
             numberOfTransit = 1
             
             //Transit Station
-            TransitStation.append(BiruKanan[2])
+            TransitStation.append(birukananData[2].namaStasiun!)
             
             //define route
-            let route1 = BiruKanan[checkArr!...2]
-            Routes.append(contentsOf: route1)
+            let route1 = birukananData[checkArr!...2]
+            for i in checkArr!...2 {
+                Routes.append(route1[i].namaStasiun!)
+            }
     
-            let route2 = MerahAtas[1...checkDes!]
-            Routes.append(contentsOf: route2)
+            let route2 = merahatasData[1...checkDes!]
+            for i in 1...checkDes! {
+                Routes.append(route2[i].namaStasiun!)
+            }
             
-            print(Routes)
-            
-            BiruKanan.reverse()
+            birukananData.reverse()
         }
         
         //Jalur biru kanan ke merah bawah
-        else if(BiruKanan.contains(Departure) && MerahBawah.contains(Destination)){
+        else if (birukananData.contains(where: {$0.namaStasiun == Departure}) && merahbawahData.contains(where: {$0.namaStasiun == Destination})){
 
-            BiruKanan.reverse()
+
+            birukananData.reverse()
             
             //cek index array
-            let checkArr = BiruKanan.firstIndex(where:{ $0 == "\(Departure)"})
+            let checkArr = birukananData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
             print(checkArr!)
             
             //cek index array
-            let checkDes = MerahBawah.firstIndex(where:{ $0 == "\(Destination)"})
+            let checkDes = merahbawahData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
             print(checkDes!)
             
             //define number of transit
             numberOfTransit = 1
             
             //Transit Station
-            TransitStation.append(BiruKanan[2])
+            TransitStation.append(birukananData[2].namaStasiun!)
             
             //define route
             let route1 = BiruKanan[checkArr!...2]
-            Routes.append(contentsOf: route1)
+            for i in checkArr!...2 {
+                Routes.append(route1[i].namaStasiun!)
+            }
     
             let route2 = MerahBawah[1...checkDes!]
-            Routes.append(contentsOf: route2)
+            for i in 1...checkDes! {
+                Routes.append(route2[i].namaStasiun!)
+            }
             
-            print(Routes)
-            
-            BiruKanan.reverse()
+            birukananData.reverse()
         }
         
         
         //Jalur merah bawah ke biru kanan
-        else if(MerahBawah.contains(Departure) && BiruKanan.contains(Destination)){
+        else if (merahbawahData.contains(where: {$0.namaStasiun == Departure}) && birukananData.contains(where: {$0.namaStasiun == Destination})){
 
-            MerahBawah.reverse()
+            merahbawahData.reverse()
             
             //cek index array
-            let checkArr = MerahBawah.firstIndex(where:{ $0 == "\(Departure)"})
+            let checkArr = merahbawahData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
             print(checkArr!)
             
             //cek index array
-            let checkDes = BiruKanan.firstIndex(where:{ $0 == "\(Destination)"})
+            let checkDes = birukananData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
             print(checkDes!)
             
             //define number of transit
             numberOfTransit = 1
             
             //Transit Station
-            TransitStation.append(MerahBawah[6])
+            TransitStation.append(merahbawahData[6].namaStasiun!)
             
             //define route
             let route1 = MerahBawah[checkArr!...6]
-            Routes.append(contentsOf: route1)
+            for i in checkArr!...6 {
+                Routes.append(route1[i].namaStasiun!)
+            }
     
             let route2 = BiruKanan[1...checkDes!]
-            Routes.append(contentsOf: route2)
-            
-            print(Routes)
-            
-            MerahBawah.reverse()
+            for i in 1...checkDes! {
+                Routes.append(route2[i].namaStasiun!)
+            }
+
+            merahbawahData.reverse()
         }
         
         //Jalur Hijau transit ke Biru Kiri
-        else if(Hijau.contains(Departure) && BiruKiri.contains(Destination)){
+        else if (hijauData.contains(where: {$0.namaStasiun == Departure}) && birukiriData.contains(where: {$0.namaStasiun == Destination})){
             
             //cek index array
-            let checkArr = Hijau.firstIndex(where:{ $0 == "\(Departure)"})
+            let checkArr = hijauData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
             print(checkArr!)
             
             //cek index array
-            let checkDes = BiruKiri.firstIndex(where:{ $0 == "\(Destination)"})
+            let checkDes = birukiriData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
             print(checkDes!)
             
             //define number of transit
             if(checkArr! < 3){
                 numberOfTransit = 1
                 //Transit Station
-                TransitStation.append(Hijau[3])
+                TransitStation.append(hijauData[3].namaStasiun!)
             }
         
             //define route
-            let route1 = Hijau[checkArr!...3]
-            Routes.append(contentsOf: route1)
+            let route1 = hijauData[checkArr!...3]
+            for i in checkArr!...3 {
+                Routes.append(route1[i].namaStasiun!)
+            }
             
-            let route2 = BiruKiri[0...checkDes!]
-            Routes.append(contentsOf: route2)
-            
-            print(Routes)
-            
+            let route2 = birukiriData[0...checkDes!]
+            for i in 0...checkDes! {
+                Routes.append(route2[i].namaStasiun!)
+            }
             
         }
         
         //Jalur Biru Kiri ke Hijau transit
-        else if(BiruKiri.contains(Departure) && Hijau.contains(Destination)){
+        else if (birukiriData.contains(where: {$0.namaStasiun == Departure}) && hijauData.contains(where: {$0.namaStasiun == Destination})){
             
-            Hijau.reverse()
-            BiruKiri.reverse()
+            hijauData.reverse()
+            birukiriData.reverse()
             
             //cek index array
-            let checkArr = BiruKiri.firstIndex(where:{ $0 == "\(Departure)"})
+            let checkArr = birukiriData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
             print(checkArr!)
             
             //cek index array
-            let checkDes = Hijau.firstIndex(where:{ $0 == "\(Destination)"})
+            let checkDes = hijauData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
             print(checkDes!)
             
             //define number of transit
             if(checkDes! > 0){
                 numberOfTransit = 1
                 //Transit Station
-                TransitStation.append(Hijau[0])
+                TransitStation.append(hijauData[0].namaStasiun!)
             }
             
             //define route
-            let route1 = BiruKiri[checkArr!...2]
-            Routes.append(contentsOf: route1)
+            let route1 = birukiriData[checkArr!...2]
+            for i in checkArr!...2 {
+                Routes.append(route1[i].namaStasiun!)
+            }
     
-            let route2 = Hijau[0...checkDes!]
-            Routes.append(contentsOf: route2)
+            let route2 = hijauData[0...checkDes!]
+            for i in 0...checkDes! {
+                Routes.append(route2[i].namaStasiun!)
+            }
             
-            print(Routes)
-            
-            Hijau.reverse()
-            BiruKiri.reverse()
+            hijauData.reverse()
+            birukiriData.reverse()
             
         }
         
         //Hijau - Biru Kiri - Merah Atas
-        else if(Hijau.contains(Departure) && MerahAtas.contains(Destination)){
+        else if (hijauData.contains(where: {$0.namaStasiun == Departure}) && merahatasData.contains(where: {$0.namaStasiun == Destination})){
 
             //cek index Array
-            let checkArr = Hijau.firstIndex(where:{ $0 == "\(Departure)"})
+            let checkArr = hijauData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
             print(checkArr!)
             
             //cek index array
-            let checkDes = MerahAtas.firstIndex(where:{ $0 == "\(Destination)"})
+            let checkDes = merahatasData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
             print(checkDes!)
             
             //define number of transit
             numberOfTransit = 2
             
             //Transit Station
-            TransitStation.append(Hijau[3])
-            TransitStation.append(BiruKiri[2])
+            TransitStation.append(hijauData[3].namaStasiun!)
+            TransitStation.append(birukiriData[2].namaStasiun!)
             
             //define route
-            let route1 = Hijau[checkArr!...3]
-            Routes.append(contentsOf: route1)
+            let route1 = hijauData[checkArr!...3]
+            for i in checkArr!...3 {
+                Routes.append(route1[i].namaStasiun!)
+            }
             
-            let route2 = BiruKiri[0...1]
-            Routes.append(contentsOf: route2)
+            let route2 = birukiriData[0...1]
+            for i in 0...1 {
+                Routes.append(route2[i].namaStasiun!)
+            }
             
-            let route3 = MerahAtas[0...checkDes!]
-            Routes.append(contentsOf: route3)
-            
-            print(Routes)
+            let route3 = merahatasData[0...checkDes!]
+            for i in 0...checkDes! {
+                Routes.append(route3[i].namaStasiun!)
+            }
             
         }
         
         //Merah Atas - Biru Kiri - Hijau
-        else if(MerahAtas.contains(Departure) && Hijau.contains(Destination)){
+        else if (merahatasData.contains(where: {$0.namaStasiun == Departure}) && hijauData.contains(where: {$0.namaStasiun == Destination})){
             
-            Hijau.reverse()
-            BiruKiri.reverse()
-            MerahAtas.reverse()
+            hijauData.reverse()
+            birukiriData.reverse()
+            merahatasData.reverse()
             
             //cek index array
-            let checkArr = MerahAtas.firstIndex(where:{ $0 == "\(Departure)"})
+            let checkArr = merahatasData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
             print(checkArr!)
             
             //cek index array
-            let checkDes = Hijau.firstIndex(where:{ $0 == "\(Destination)"})
+            let checkDes = hijauData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
             print(checkDes!)
             
             
             //define number of transit
             //Transit Station
             if(checkDes! > 0){
-                TransitStation.append(Hijau[0])
-                TransitStation.append(BiruKiri[0])
+                TransitStation.append(hijauData[0].namaStasiun!)
+                TransitStation.append(birukiriData[0].namaStasiun!)
                 numberOfTransit = 2
             }
             else{
-                TransitStation.append(BiruKiri[0])
+                TransitStation.append(birukiriData[0].namaStasiun!)
                 numberOfTransit = 1
             }
             
             //define route
-            let route1 = MerahAtas[checkArr!...6]
-            Routes.append(contentsOf: route1)
+            let route1 = merahatasData[checkArr!...6]
+            for i in checkArr!...6 {
+                Routes.append(route1[i].namaStasiun!)
+            }
     
-            let route2 = BiruKiri[1...2]
-            Routes.append(contentsOf: route2)
+            let route2 = birukiriData[1...2]
+            for i in 1...2 {
+                Routes.append(route2[i].namaStasiun!)
+            }
             
-            let route3 = Hijau[0...checkDes!]
-            Routes.append(contentsOf: route3)
-            print(Routes)
-            
-            Hijau.reverse()
-            BiruKiri.reverse()
-            MerahAtas.reverse()
+            let route3 = hijauData[0...checkDes!]
+            for i in 0...checkDes! {
+                Routes.append(route3[i].namaStasiun!)
+            }
+
+            hijauData.reverse()
+            birukiriData.reverse()
+            merahatasData.reverse()
             
         }
         
         //Hijau - Biru Kiri - Biru Kanan
-        else if(Hijau.contains(Departure) && BiruKanan.contains(Destination)){
+        else if (hijauData.contains(where: {$0.namaStasiun == Departure}) && birukananData.contains(where: {$0.namaStasiun == Destination})){
 
             //cek index Array
-            let checkArr = Hijau.firstIndex(where:{ $0 == "\(Departure)"})
+            let checkArr = hijauData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
             print(checkArr!)
             
             //cek index array
-            let checkDes =  BiruKanan.firstIndex(where:{ $0 == "\(Destination)"})
+            let checkDes =  birukananData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
             print(checkDes!)
             
             //define number of transit
             numberOfTransit = 2
             
             //Transit Station
-            TransitStation.append(Hijau[3])
-            TransitStation.append(BiruKiri[2])
+            TransitStation.append(hijauData[3].namaStasiun!)
+            TransitStation.append(birukiriData[2].namaStasiun!)
             
             //define route
-            let route1 = Hijau[checkArr!...3]
-            Routes.append(contentsOf: route1)
+            let route1 = hijauData[checkArr!...3]
+            for i in checkArr!...3 {
+                Routes.append(route1[i].namaStasiun!)
+            }
             
-            let route2 = BiruKiri[0...2]
-            Routes.append(contentsOf: route2)
+            let route2 = birukiriData[0...2]
+            for i in 0...2 {
+                Routes.append(route2[i].namaStasiun!)
+            }
             
-            let route3 = BiruKanan[1...checkDes!]
-            Routes.append(contentsOf: route3)
+            let route3 = birukananData[1...checkDes!]
+            for i in 1...checkDes! {
+                Routes.append(route3[i].namaStasiun!)
+            }
             
-            print(Routes)
-            
+
         }
         
         //Biru Kanan - Biru Kiri - Hijau
-        else if(BiruKanan.contains(Departure) && Hijau.contains(Destination)){
+        else if (birukananData.contains(where: {$0.namaStasiun == Departure}) && hijauData.contains(where: {$0.namaStasiun == Destination})){
             
-            Hijau.reverse()
-            BiruKiri.reverse()
-            BiruKanan.reverse()
+            hijauData.reverse()
+            birukiriData.reverse()
+            birukananData.reverse()
             
             //cek index array
-            let checkArr = BiruKanan.firstIndex(where:{ $0 == "\(Departure)"})
+            let checkArr = birukananData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
             print(checkArr!)
             
             //cek index array
-            let checkDes = Hijau.firstIndex(where:{ $0 == "\(Destination)"})
+            let checkDes = hijauData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
             print(checkDes!)
             
             
             //define number of transit
             //Transit Station
             if(checkDes! > 0){
-                TransitStation.append(Hijau[0])
-                TransitStation.append(BiruKiri[0])
+                TransitStation.append(hijauData[0].namaStasiun!)
+                TransitStation.append(birukiriData[0].namaStasiun!)
                 numberOfTransit = 2
             }
             else{
-                TransitStation.append(BiruKiri[0])
+                TransitStation.append(birukiriData[0].namaStasiun!)
                 numberOfTransit = 1
             }
             
             //define route
-            let route1 = BiruKanan[checkArr!...2]
-            Routes.append(contentsOf: route1)
+            let route1 = birukananData[checkArr!...2]
+            for i in checkArr!...2 {
+                Routes.append(route1[i].namaStasiun!)
+            }
     
-            let route2 = BiruKiri[1...2]
-            Routes.append(contentsOf: route2)
+            let route2 = birukiriData[1...2]
+            for i in 1...2 {
+                Routes.append(route2[i].namaStasiun!)
+            }
             
-            let route3 = Hijau[0...checkDes!]
-            Routes.append(contentsOf: route3)
-            print(Routes)
-            
-            Hijau.reverse()
-            BiruKiri.reverse()
-            BiruKanan.reverse()
+            let route3 = hijauData[0...checkDes!]
+            for i in 0...checkDes! {
+                Routes.append(route3[i].namaStasiun!)
+            }
+
+            hijauData.reverse()
+            birukiriData.reverse()
+            birukananData.reverse()
             
         }
         
         //Hijau - Biru Kiri - Merah Bawah
-        else if(Hijau.contains(Departure) && MerahBawah.contains(Destination)){
+        else if (hijauData.contains(where: {$0.namaStasiun == Departure}) && merahbawahData.contains(where: {$0.namaStasiun == Destination})){
 
             //cek index Array
-            let checkArr = Hijau.firstIndex(where:{ $0 == "\(Departure)"})
+            let checkArr = hijauData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
             print(checkArr!)
             
             //cek index array
-            let checkDes =  MerahBawah.firstIndex(where:{ $0 == "\(Destination)"})
+            let checkDes =  merahbawahData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
             print(checkDes!)
             
             //define number of transit
             numberOfTransit = 2
             
             //Transit Station
-            TransitStation.append(Hijau[3])
-            TransitStation.append(BiruKiri[2])
+            TransitStation.append(hijauData[3].namaStasiun!)
+            TransitStation.append(birukiriData[2].namaStasiun!)
             
             //define route
-            let route1 = Hijau[checkArr!...2]
-            Routes.append(contentsOf: route1)
+            let route1 = hijauData[checkArr!...2]
+            for i in checkArr!...2 {
+                Routes.append(route1[i].namaStasiun!)
+            }
             
-            let route2 = BiruKiri[0...2]
-            Routes.append(contentsOf: route2)
+            let route2 = birukiriData[0...2]
+            for i in 0...2 {
+                Routes.append(route2[i].namaStasiun!)
+            }
             
-            let route3 = MerahBawah[1...checkDes!]
-            Routes.append(contentsOf: route3)
+            let route3 = merahbawahData[1...checkDes!]
+            for i in 1...checkDes! {
+                Routes.append(route3[i].namaStasiun!)
+            }
             
-            print(Routes)
-            
+
         }
         
         //Merah Bawah - Biru Kiri - Hijau
-        else if(MerahBawah.contains(Departure) && Hijau.contains(Destination)){
+        else if (merahbawahData.contains(where: {$0.namaStasiun == Departure}) && hijauData.contains(where: {$0.namaStasiun == Destination})){
             
-            Hijau.reverse()
-            BiruKiri.reverse()
-            MerahBawah.reverse()
+            hijauData.reverse()
+            birukiriData.reverse()
+            merahbawahData.reverse()
             
             //cek index array
-            let checkArr = MerahBawah.firstIndex(where:{ $0 == "\(Departure)"})
+            let checkArr = merahbawahData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
             print(checkArr!)
             
             //cek index array
-            let checkDes = Hijau.firstIndex(where:{ $0 == "\(Destination)"})
+            let checkDes = hijauData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
             print(checkDes!)
             
             
             //define number of transit
             //Transit Station
             if(checkDes! > 0){
-                TransitStation.append(Hijau[0])
-                TransitStation.append(BiruKiri[0])
+                TransitStation.append(hijauData[0].namaStasiun!)
+                TransitStation.append(birukiriData[0].namaStasiun!)
                 numberOfTransit = 2
             }
             else{
-                TransitStation.append(BiruKiri[0])
+                TransitStation.append(birukiriData[0].namaStasiun!)
                 numberOfTransit = 1
             }
             
             //define route
             let route1 = MerahBawah[checkArr!...6]
-            Routes.append(contentsOf: route1)
+            for i in checkArr!...6 {
+                Routes.append(route1[i].namaStasiun!)
+            }
     
             let route2 = BiruKiri[1...2]
-            Routes.append(contentsOf: route2)
+            for i in 1...2 {
+                Routes.append(route2[i].namaStasiun!)
+            }
             
             let route3 = Hijau[0...checkDes!]
-            Routes.append(contentsOf: route3)
-            print(Routes)
-            
-            Hijau.reverse()
-            BiruKiri.reverse()
-            MerahBawah.reverse()
+            for i in 0...checkDes! {
+                Routes.append(route3[i].namaStasiun!)
+            }
+
+            hijauData.reverse()
+            birukiriData.reverse()
+            merahbawahData.reverse()
             
         }
+        
         
         //print label
         numberOfTransitLbl.text = ("Anda Harus Transit \(numberOfTransit) Kali")
