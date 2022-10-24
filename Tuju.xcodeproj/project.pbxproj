@@ -16,6 +16,7 @@
 		5CB26BFA28FD4A750057CC3E /* TestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CB26BF828FD4A750057CC3E /* TestTableViewCell.xib */; };
 		5CB26BFB28FD4A750057CC3E /* TestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB26BF928FD4A750057CC3E /* TestTableViewCell.swift */; };
 		5CB26BFD28FD4A8C0057CC3E /* TestLogic.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CB26BFC28FD4A8C0057CC3E /* TestLogic.storyboard */; };
+		5CB982A62906F81F00933DCF /* RoutesLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB982A52906F81F00933DCF /* RoutesLogic.swift */; };
 		752FC90628F92F8B00FBA82F /* PanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752FC90528F92F8B00FBA82F /* PanelViewController.swift */; };
 		752FC90828F92FC200FBA82F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752FC90728F92FC200FBA82F /* LocationManager.swift */; };
 		BA4628150B3F114A13243CF8 /* Pods_Tuju_TujuUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBB02709D3DFDB0407B7D0E1 /* Pods_Tuju_TujuUITests.framework */; };
@@ -67,6 +68,7 @@
 		5CB26BFC28FD4A8C0057CC3E /* TestLogic.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TestLogic.storyboard; sourceTree = "<group>"; };
 		5CB26C2228FD5A2B0057CC3E /* FloatingPanel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatingPanel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CB26C2728FD5AAA0057CC3E /* Pods_Tuju.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Tuju.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5CB982A52906F81F00933DCF /* RoutesLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesLogic.swift; sourceTree = "<group>"; };
 		752FC90128F92E8900FBA82F /* FloatingPanel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatingPanel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		752FC90528F92F8B00FBA82F /* PanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelViewController.swift; sourceTree = "<group>"; };
 		752FC90728F92FC200FBA82F /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 				5CB26BF928FD4A750057CC3E /* TestTableViewCell.swift */,
 				5CB26BF828FD4A750057CC3E /* TestTableViewCell.xib */,
 				5CB26BFC28FD4A8C0057CC3E /* TestLogic.storyboard */,
+				5CB982A52906F81F00933DCF /* RoutesLogic.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -621,6 +624,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CB982A62906F81F00933DCF /* RoutesLogic.swift in Sources */,
 				D388130C28F563910062C702 /* MapViewController.swift in Sources */,
 				752FC90628F92F8B00FBA82F /* PanelViewController.swift in Sources */,
 				D36911BA28F7FB3300E993E1 /* TujuanViewController.swift in Sources */,
