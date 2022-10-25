@@ -15,6 +15,8 @@ class AsalViewController: MapViewController {
     
     var recommend : [Stasiun] = [Stasiun]()
     
+    public var completion: ((String?) -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

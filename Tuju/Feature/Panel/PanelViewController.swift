@@ -24,6 +24,8 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 50))
         field.leftViewMode = .always
         
+        // field.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        
         return field
     }()
     
@@ -44,7 +46,8 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
         button.layer.cornerRadius = 20
         button.setTitle("Mulai Perjalanan", for: .normal)
         button.addTarget(PanelViewController.self, action: #selector(didTapMulai), for: .touchUpInside)
-
+        
+        
         return button
     }()
     
@@ -61,6 +64,8 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
     }()
     
     var locations = [Location]()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,6 +88,18 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
         label.frame = CGRect(x: 25, y: 120+tujuanField.frame.size.height, width: label.frame.size.width, height: label.frame.size.height)
         startBtn.frame = CGRect(x: 20, y: 180+label.frame.size.height, width: view.frame.size.width-40, height: 50)
     }
+    
+//    @objc private func didTapButton() {
+//
+//        let textEntry = AsalViewController()
+//        textEntry.completion = { [weak self] text in
+//            DispatchQueue.main.async {
+//                self?.label.text = text
+//            }
+//        }
+//        let vc = UINavigationController(rootViewController: textEntry)
+//        present(vc, animated: true)
+//    }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
