@@ -39,7 +39,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         map.camera = camera
         map.animate(to: camera)
         
-        title = "TUJU"
+        //title = "TUJU"
         
         let searchVC = Tuju.PanelViewController()
         searchVC.delegate = self

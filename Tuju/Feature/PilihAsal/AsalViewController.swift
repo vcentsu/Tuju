@@ -13,25 +13,41 @@ class AsalViewController: MapViewController {
 
     @IBOutlet weak var recommendationTable: UITableView!
     
+    var recommend : [Stasiun] = [Stasiun]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //nav bar
-        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped))
 
         //search bar
         searchVC.searchBar.tag = 1
         searchVC.searchResultsUpdater = self
-        searchVC.searchBar.placeholder = "Destination"
+        searchVC.searchBar.placeholder = "Departure Station"
         searchVC.searchBar.backgroundColor = .clear
         navigationItem.searchController = searchVC
         
         //table
         recommendationTable.delegate = self
         recommendationTable.dataSource = self
-        //recommendationTable.register(UINib(nibName: "RecommendationTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         recommendationTable.register(RecommendationTableViewCell.self, forCellReuseIdentifier: "cell")
         
+        //recommendation
+        createRecommendArray()
+        
+    }
+    
+    @objc func cancelTapped(){
+        dismiss(animated: true)
+    }
+    
+    func createRecommendArray() {
+        recommend.append(Stasiun(stasiunName: "Manggarai", stasiunDesc: "23km", lang: "", long: ""))
+        recommend.append(Stasiun(stasiunName: "Palmerah", stasiunDesc: "1km", lang: "", long: ""))
+        recommend.append(Stasiun(stasiunName: "Tanah Abang", stasiunDesc: "2km", lang: "", long: ""))
+        recommend.append(Stasiun(stasiunName: "Duri", stasiunDesc: "10km", lang: "", long: ""))
     }
 }
 
@@ -70,13 +86,37 @@ extension AsalViewController: UISearchResultsUpdating{
 }
 
 extension AsalViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let sectionName: String
+        switch section {
+        case 0:
+            sectionName = NSLocalizedString("Favorite", comment: "Favorite")
+        case 1:
+            sectionName = NSLocalizedString("Recent", comment: "Recent")
+            // ...
+        default:
+            sectionName = "Recent"
+        }
+        return sectionName
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return recommend.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = recommendationTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = recommendationTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! RecommendationTableViewCell
+        let currentLastItem = recommend[indexPath.row]
+        cell.stasiun = currentLastItem
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
     }
 }
 
