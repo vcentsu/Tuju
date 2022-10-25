@@ -21,7 +21,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
     let manager = CLLocationManager()
     let marker = GMSMarker()
         
-    var coordinateLive: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+    // Setting manggarai as default station
+    var coordinateLive: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: -6.209675277806892, longitude: 106.85025771231817)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +32,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         self.manager.startUpdatingLocation()
 //        self.mapView.delegate = self
         
-        let camera = GMSCameraPosition.camera(withLatitude: coordinateLive.latitude, longitude: coordinateLive.longitude, zoom: 8.0)
+        let camera = GMSCameraPosition.camera(withLatitude: coordinateLive.latitude, longitude: coordinateLive.longitude, zoom: 13.0)
         
         guard let map = mapView else {return}
         
@@ -39,7 +40,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         map.camera = camera
         map.animate(to: camera)
         
-        title = "TUJU"
+        //title = "TUJU"
         
         let searchVC = Tuju.PanelViewController()
         searchVC.delegate = self

@@ -35,6 +35,8 @@
 		D388132228F563920062C702 /* TujuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388132128F563920062C702 /* TujuTests.swift */; };
 		D388132C28F563920062C702 /* TujuUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388132B28F563920062C702 /* TujuUITests.swift */; };
 		D388132E28F563920062C702 /* TujuUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388132D28F563920062C702 /* TujuUITestsLaunchTests.swift */; };
+		D3E387B82902865500AFE101 /* Stasiun.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E387B72902865500AFE101 /* Stasiun.swift */; };
+		D3E387BB290653E900AFE101 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E387BA290653E900AFE101 /* Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +99,8 @@
 		D388132728F563920062C702 /* TujuUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TujuUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D388132B28F563920062C702 /* TujuUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TujuUITests.swift; sourceTree = "<group>"; };
 		D388132D28F563920062C702 /* TujuUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TujuUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D3E387B72902865500AFE101 /* Stasiun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stasiun.swift; sourceTree = "<group>"; };
+		D3E387BA290653E900AFE101 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		D79D269B0906DCA3E6582594 /* Pods-TujuTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TujuTests.release.xcconfig"; path = "Target Support Files/Pods-TujuTests/Pods-TujuTests.release.xcconfig"; sourceTree = "<group>"; };
 		EBB02709D3DFDB0407B7D0E1 /* Pods_Tuju_TujuUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tuju_TujuUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -149,6 +153,9 @@
 				5C06A0E029004BBC0003CBEE /* Map */,
 				5C06A0DF29004B5A0003CBEE /* PilihTujuan */,
 				5C06A0DE29004B3B0003CBEE /* PilihAsal */,
+				D3E387BE2906A25D00AFE101 /* Perjalanan */,
+				D3E387BD2906A25700AFE101 /* Help */,
+				D3E387BC2906A23F00AFE101 /* History */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
@@ -205,8 +212,8 @@
 		5C06A0DE29004B3B0003CBEE /* PilihAsal */ = {
 			isa = PBXGroup;
 			children = (
-				D36911BB28F801A700E993E1 /* Asal.storyboard */,
 				D36911B728F7FB2100E993E1 /* AsalViewController.swift */,
+				D36911BB28F801A700E993E1 /* Asal.storyboard */,
 			);
 			path = PilihAsal;
 			sourceTree = "<group>";
@@ -318,6 +325,8 @@
 				5CB26BF328FD49490057CC3E /* Logic */,
 				D388131828F563920062C702 /* Info.plist */,
 				D36911BD28F944F100E993E1 /* RecommendationTableViewCell.swift */,
+				D3E387B72902865500AFE101 /* Stasiun.swift */,
+				D3E387BA290653E900AFE101 /* Extension.swift */,
 			);
 			path = Tuju;
 			sourceTree = "<group>";
@@ -337,6 +346,27 @@
 				D388132D28F563920062C702 /* TujuUITestsLaunchTests.swift */,
 			);
 			path = TujuUITests;
+			sourceTree = "<group>";
+		};
+		D3E387BC2906A23F00AFE101 /* History */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		D3E387BD2906A25700AFE101 /* Help */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Help;
+			sourceTree = "<group>";
+		};
+		D3E387BE2906A25D00AFE101 /* Perjalanan */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Perjalanan;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -636,9 +666,11 @@
 				5CB26BF528FD49EB0057CC3E /* LogicSwift.swift in Sources */,
 				5C06E05E290294E1001BA971 /* StationDataDetails.swift in Sources */,
 				D388130828F563910062C702 /* AppDelegate.swift in Sources */,
+				D3E387BB290653E900AFE101 /* Extension.swift in Sources */,
 				5CB26BF728FD4A290057CC3E /* Routes.swift in Sources */,
 				D36911BE28F944F100E993E1 /* RecommendationTableViewCell.swift in Sources */,
 				D388130A28F563910062C702 /* SceneDelegate.swift in Sources */,
+				D3E387B82902865500AFE101 /* Stasiun.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

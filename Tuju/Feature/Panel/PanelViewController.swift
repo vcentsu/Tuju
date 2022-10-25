@@ -49,8 +49,13 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
     }()
     
     private let label: UILabel = {
+        let attachment = NSTextAttachment()
+        attachment.image = UIImage(systemName: "info.circle.fill")
+        let imageString = NSMutableAttributedString(attachment: attachment)
+        let textString = NSAttributedString(string: " Mulai perjalanan saat berada di stasiun awal")
+        imageString.append(textString)
         let label = UILabel()
-        label.text = "Mulai perjalanan saat berada di stasiun awal"
+        label.attributedText = imageString
         label.font = .systemFont(ofSize: 14, weight: .ultraLight)
         return label
     }()
@@ -75,7 +80,7 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
         tujuanField.frame = CGRect(x: 20, y: 40+asalField.frame.size.height, width: view.frame.size.width-40, height: 50)
 
         label.sizeToFit()
-        label.frame = CGRect(x: 20, y: 120+tujuanField.frame.size.height, width: label.frame.size.width, height: label.frame.size.height)
+        label.frame = CGRect(x: 25, y: 120+tujuanField.frame.size.height, width: label.frame.size.width, height: label.frame.size.height)
         startBtn.frame = CGRect(x: 20, y: 180+label.frame.size.height, width: view.frame.size.width-40, height: 50)
     }
     
@@ -91,6 +96,7 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
             }
             self.present(AsalVC, animated: true, completion: nil)
         }
+        
         if tujuanField.isEditing {
             print("tujuan clicked")
             //resignFirstResponder()
