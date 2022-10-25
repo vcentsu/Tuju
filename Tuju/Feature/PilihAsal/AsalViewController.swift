@@ -39,11 +39,15 @@ class AsalViewController: MapViewController {
         //recommendation
         createRecommendArray()
         
+        
+        
     }
     
     @objc func cancelTapped(){
-        dismiss(animated: true)
+        
+        dismiss(animated: true, completion: nil)
     }
+    
     
     func createRecommendArray() {
         recommend.append(Stasiun(stasiunName: "Manggarai", stasiunDesc: "23km", lang: "", long: ""))
@@ -119,6 +123,18 @@ extension AsalViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let items = recommend[indexPath.section]
+        
+        // Passing Data
+        completion?(items.stasiunName)
+        
+        
+        dismiss(animated: true, completion: nil)
     }
 }
 

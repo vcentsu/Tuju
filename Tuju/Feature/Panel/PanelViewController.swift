@@ -89,6 +89,7 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
         startBtn.frame = CGRect(x: 20, y: 180+label.frame.size.height, width: view.frame.size.width-40, height: 50)
     }
     
+
 //    @objc private func didTapButton() {
 //
 //        let textEntry = AsalViewController()
@@ -100,29 +101,32 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
 //        let vc = UINavigationController(rootViewController: textEntry)
 //        present(vc, animated: true)
 //    }
+
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
         if asalField.isEditing {
             print("asal clicked")
-            //resignFirstResponder()
+            
             let AsalVC =  UIStoryboard(name: "Asal", bundle: nil).instantiateViewController(withIdentifier: "AsalID")
             if let sheet = AsalVC.sheetPresentationController {
                 sheet.detents = [.medium(), .large()]
                 sheet.preferredCornerRadius = 24
             }
             self.present(AsalVC, animated: true, completion: nil)
+            asalField.resignFirstResponder()
         }
         
         if tujuanField.isEditing {
             print("tujuan clicked")
-            //resignFirstResponder()
+            
             let TujuanVC =  UIStoryboard(name: "Tujuan", bundle: nil).instantiateViewController(withIdentifier: "TujuanID")
             if let sheet = TujuanVC.sheetPresentationController {
                 sheet.detents = [.medium(), .large()]
                 sheet.preferredCornerRadius = 24
             }
             self.present(TujuanVC, animated: true, completion: nil)
+            tujuanField.resignFirstResponder()
         }
     }
     
