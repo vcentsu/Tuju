@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 var favoriteData = Favorite
+var recentData = Recent
 
 func FavAndRecentLogic(){
     if (hijauData.contains(where: {$0.namaStasiun == Departure})){
@@ -19,23 +20,31 @@ func FavAndRecentLogic(){
         let tempNamaStasiun = hijauData[checkArrFavorite!].namaStasiun
         let tempLatitude = hijauData[checkArrFavorite!].latitude
         let templongitude = hijauData[checkArrFavorite!].longitude
-        
+        hijauData[checkArrFavorite!].isFavorite! += 1
         
         //kalo uda ada di favorite data maka +isfavoritenya aja 1
         if favoriteData.contains(where: {$0.namaStasiun == tempNamaStasiun}){
-            let checkDuplicate = favoriteData.firstIndex(where: {$0.namaStasiun == tempNamaStasiun})
-            favoriteData[checkDuplicate!].isFavorite! += 1
-            hijauData[checkArrFavorite!].isFavorite! += 1
+            let checkDuplicateFav = favoriteData.firstIndex(where: {$0.namaStasiun == tempNamaStasiun})
+            favoriteData[checkDuplicateFav!].isFavorite! += 1
         }
         //kalo ga maka dia append dari yg temp
         else{
-            hijauData[checkArrFavorite!].isFavorite! += 1
             let tempisFavorite = hijauData[checkArrFavorite!].isFavorite
             favoriteData.append(FavoriteContent(namaStasiun: tempNamaStasiun, latitude: tempLatitude, longitude: templongitude, isFavorite: tempisFavorite))
         }
-        
+        // kalo uda ada di recent data maka +isfavoritenya aja 1
+        if recentData.contains(where: {$0.namaStasiun == tempNamaStasiun}){
+            let checkDuplicateRec = recentData.firstIndex(where: {$0.namaStasiun == tempNamaStasiun})
+            recentData[checkDuplicateRec!].isFavorite! += 1
+        }
+        // kalo ga maka dia append ke recentdata dari temp
+        else{
+            let tempisFavorite = hijauData[checkArrFavorite!].isFavorite
+            recentData.append(RecentContent(namaStasiun: tempNamaStasiun, latitude: tempLatitude, longitude: templongitude, isFavorite: tempisFavorite))
+        }
 
         print(favoriteData)
+        print(recentData)
         print(hijauData)
     }
 
