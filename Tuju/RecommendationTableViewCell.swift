@@ -22,7 +22,6 @@ class RecommendationTableViewCell: UITableViewCell {
     
     private let namaStasiun: UILabel = {
         let label = UILabel()
-//        label.text = "Stasiun Manggarai"
         label.textColor = .black
         label.font = .systemFont(ofSize: 14, weight: .medium)
         label.textAlignment = .left
@@ -31,7 +30,6 @@ class RecommendationTableViewCell: UITableViewCell {
     
     private let jarakStasiun: UILabel = {
         let label = UILabel()
-//        label.text = "5.19 Km"
         label.textColor = .purple
         label.font = .systemFont(ofSize: 12, weight: .light)
         label.textAlignment = .left
