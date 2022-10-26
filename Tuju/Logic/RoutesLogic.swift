@@ -23,6 +23,8 @@ var Routes = [String]()
 var numberOfTransit = 0
 
 func RoutesLogic(){
+    
+    
     Routes.removeAll()
     TransitStation.removeAll()
     numberOfTransit = 0
