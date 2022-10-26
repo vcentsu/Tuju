@@ -12,6 +12,7 @@
 		5C06E05C290292CE001BA971 /* StationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C06E05B290292CE001BA971 /* StationDataModel.swift */; };
 		5C06E05E290294E1001BA971 /* StationDataDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C06E05D290294E1001BA971 /* StationDataDetails.swift */; };
 		5C2C60BA29092BCD00BE6C00 /* RecentDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2C60B929092BCD00BE6C00 /* RecentDataModel.swift */; };
+		5C2C60BC29093C2300BE6C00 /* FavoriteDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2C60BB29093C2300BE6C00 /* FavoriteDataModel.swift */; };
 		5CB26BF528FD49EB0057CC3E /* LogicSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB26BF428FD49EB0057CC3E /* LogicSwift.swift */; };
 		5CB26BF728FD4A290057CC3E /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB26BF628FD4A290057CC3E /* Routes.swift */; };
 		5CB26BFA28FD4A750057CC3E /* TestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CB26BF828FD4A750057CC3E /* TestTableViewCell.xib */; };
@@ -65,6 +66,7 @@
 		5C06E05B290292CE001BA971 /* StationDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDataModel.swift; sourceTree = "<group>"; };
 		5C06E05D290294E1001BA971 /* StationDataDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDataDetails.swift; sourceTree = "<group>"; };
 		5C2C60B929092BCD00BE6C00 /* RecentDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentDataModel.swift; sourceTree = "<group>"; };
+		5C2C60BB29093C2300BE6C00 /* FavoriteDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDataModel.swift; sourceTree = "<group>"; };
 		5CB26BF428FD49EB0057CC3E /* LogicSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicSwift.swift; sourceTree = "<group>"; };
 		5CB26BF628FD4A290057CC3E /* Routes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
 		5CB26BF828FD4A750057CC3E /* TestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestTableViewCell.xib; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 				5C06E05B290292CE001BA971 /* StationDataModel.swift */,
 				5C06E05D290294E1001BA971 /* StationDataDetails.swift */,
 				5C2C60B929092BCD00BE6C00 /* RecentDataModel.swift */,
+				5C2C60BB29093C2300BE6C00 /* FavoriteDataModel.swift */,
 			);
 			path = StationData;
 			sourceTree = "<group>";
@@ -664,6 +667,7 @@
 				5C06E05C290292CE001BA971 /* StationDataModel.swift in Sources */,
 				D388131228F563910062C702 /* Tuju.xcdatamodeld in Sources */,
 				752FC90828F92FC200FBA82F /* LocationManager.swift in Sources */,
+				5C2C60BC29093C2300BE6C00 /* FavoriteDataModel.swift in Sources */,
 				5CB26BFB28FD4A750057CC3E /* TestTableViewCell.swift in Sources */,
 				D36911B828F7FB2100E993E1 /* AsalViewController.swift in Sources */,
 				5CB26BF528FD49EB0057CC3E /* LogicSwift.swift in Sources */,
