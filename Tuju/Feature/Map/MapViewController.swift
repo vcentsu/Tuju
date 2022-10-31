@@ -13,76 +13,103 @@ import CoreLocation
 
 class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControllerDelegate {
     
+    let mapView = GMSMapView(frame: .zero)
+    
+    let notificationCenter = UNUserNotificationCenter.current()
+    
+    let manager = CLLocationManager()
+    
     let panel = FloatingPanelController()
     
-    // MapKit
-    let mapView2 = MKMapView()
+    var locations = [Location]()
     
-    @IBOutlet weak var mapView: GMSMapView!
-    let manager = CLLocationManager()
     let marker = GMSMarker()
-        
-    // Setting manggarai as default station
+    
+    
+    // Deafault Coordinates View
     var coordinateLive: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: -6.209675277806892, longitude: 106.85025771231817)
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        //view.addSubview(mapView)
+        
         // Do any additional setup after loading the view.
         self.manager.delegate = self
         self.manager.requestWhenInUseAuthorization()
         self.manager.startUpdatingLocation()
-//        self.mapView.delegate = self
+        self.mapView.delegate = self
         
-        let camera = GMSCameraPosition.camera(withLatitude: coordinateLive.latitude, longitude: coordinateLive.longitude, zoom: 13.0)
+
+        // Set Initial Camera Position
+        let camera = GMSCameraPosition.camera(
+            withLatitude: coordinateLive.latitude,
+            longitude: coordinateLive.longitude,
+            zoom: 14.0
+        )
+
+        let mapView = GMSMapView.map(withFrame: .zero, camera: camera)
+
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: coordinateLive.latitude, longitude: coordinateLive.longitude)
+        marker.title = "Stasiun Manggarai"
+        marker.map = mapView
+
+        mapView.delegate = self
+        self.view = mapView
         
-        // Testing
-//            let mapView = GMSMapView.map(withFrame: self.view.frame, camera: camera)
-//            self.view.addSubview(mapView)
-//
-            
-        // Section
-              guard let map = mapView else {return}
-              map.animate(toLocation: coordinateLive)
-              map.camera = camera
-              map.animate(to: camera)
-              
-              let searchVC = Tuju.PanelViewController()
-              searchVC.delegate = self
-              
-              panel.set(contentViewController: searchVC)
-              panel.addPanel(toParent: self)
+        print(GMSServices.openSourceLicenseInfo())
+        
+        manager.requestWhenInUseAuthorization()
+//        self.mapView.travelMode = .cycling
+
+        let panelVC = Tuju.PanelViewController()
+        panelVC.delegate = self
+        
+        panel.set(contentViewController: panelVC)
+        panel.addPanel(toParent: self)
+
+//        self.view = mapView
         
     }
-    
+   
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        guard let map = mapView else {return}
-        map.frame = view.bounds
+        mapView.frame = view.bounds
     }
+    
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//
+//        guard let map = mapView else {return}
+//        map.frame = view.bounds
+//    }
     
     func PanelViewController(_ vc: PanelViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?) {
         
         guard let coordinates = coordinates else {
             return
         }
-
-        panel.move(to: .hidden, animated: true)
         
-//        mapView.removeFromSuperview(mapView.anchorPoint)
+        panel.move(to: .half, animated: true)
         
-        mapView2.removeAnnotations(mapView2.annotations)
-
-        let pin = MKPointAnnotation()
-        pin.coordinate = coordinates
-        mapView2.addAnnotation(pin)
-
-        mapView2.setRegion(MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan(
-            latitudeDelta: 0.7,
-            longitudeDelta: 0.7
-            )
-        ), animated: true)
+        print("UTAMA! \(coordinates)")
+        
+        let camera = GMSCameraPosition.camera(
+                    withLatitude: coordinates.latitude,
+                    longitude: coordinates.longitude,
+                    zoom: 14.0
+        )
+        
+        let mapView = GMSMapView.map(withFrame: .zero, camera: camera)
+        
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: coordinates.latitude, longitude: coordinates.longitude)
+        marker.title = locations.description
+        marker.snippet = "Australia"
+        marker.map = mapView
+        
+        self.view = mapView
     }
 }
 
@@ -93,19 +120,15 @@ extension MapViewController: CLLocationManagerDelegate{
             return
         }
         
-        coordinateLive = location.coordinate
+        let coordinateLive = location.coordinate
         
-        guard let map = mapView else {
-            return
-        }
-        
-        map.isMyLocationEnabled = true
-        map.settings.myLocationButton = true
+        mapView.isMyLocationEnabled = true
+        mapView.settings.myLocationButton = true
         
         marker.position = coordinateLive
-        marker.map = map
+        marker.map = mapView
     
-//        print("License: \n\n\(GMSServices.openSourceLicenseInfo())")
+        print("License: \n\n\(GMSServices.openSourceLicenseInfo())")
     }
 }
 
