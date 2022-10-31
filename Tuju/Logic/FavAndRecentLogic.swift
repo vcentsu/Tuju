@@ -46,7 +46,7 @@ func FavAndRecentLogic(){
     }
     
     //biru kiri
-    if (birukiriData.contains(where: {$0.namaStasiun == Departure})){
+    else if (birukiriData.contains(where: {$0.namaStasiun == Departure})){
         //cek index dari yg di departure sesuaiin sama yg di struct
         let checkArrFavorite = birukiriData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
         
@@ -79,7 +79,7 @@ func FavAndRecentLogic(){
     }
     
     //merah atas
-    if (merahatasData.contains(where: {$0.namaStasiun == Departure})){
+    else if (merahatasData.contains(where: {$0.namaStasiun == Departure})){
         //cek index dari yg di departure sesuaiin sama yg di struct
         let checkArrFavorite = merahatasData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
         
@@ -112,7 +112,7 @@ func FavAndRecentLogic(){
     }
     
     //biru kanan
-    if (birukananData.contains(where: {$0.namaStasiun == Departure})){
+    else if (birukananData.contains(where: {$0.namaStasiun == Departure})){
         //cek index dari yg di departure sesuaiin sama yg di struct
         let checkArrFavorite = birukananData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
         
@@ -145,7 +145,7 @@ func FavAndRecentLogic(){
     }
     
     //merah bawah
-    if (merahbawahData.contains(where: {$0.namaStasiun == Departure})){
+    else if (merahbawahData.contains(where: {$0.namaStasiun == Departure})){
         //cek index dari yg di departure sesuaiin sama yg di struct
         let checkArrFavorite = merahbawahData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
         
