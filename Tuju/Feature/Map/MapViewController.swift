@@ -15,6 +15,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
     
     let panel = FloatingPanelController()
     
+    // MapKit
     let mapView2 = MKMapView()
     
     @IBOutlet weak var mapView: GMSMapView!
@@ -34,19 +35,22 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         
         let camera = GMSCameraPosition.camera(withLatitude: coordinateLive.latitude, longitude: coordinateLive.longitude, zoom: 13.0)
         
-        guard let map = mapView else {return}
-        
-        map.animate(toLocation: coordinateLive)
-        map.camera = camera
-        map.animate(to: camera)
-        
-        //title = "TUJU"
-        
-        let searchVC = Tuju.PanelViewController()
-        searchVC.delegate = self
-        
-        panel.set(contentViewController: searchVC)
-        panel.addPanel(toParent: self)
+        // Testing
+//            let mapView = GMSMapView.map(withFrame: self.view.frame, camera: camera)
+//            self.view.addSubview(mapView)
+//
+            
+        // Section
+              guard let map = mapView else {return}
+              map.animate(toLocation: coordinateLive)
+              map.camera = camera
+              map.animate(to: camera)
+              
+              let searchVC = Tuju.PanelViewController()
+              searchVC.delegate = self
+              
+              panel.set(contentViewController: searchVC)
+              panel.addPanel(toParent: self)
         
     }
     

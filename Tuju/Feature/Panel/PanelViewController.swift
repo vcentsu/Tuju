@@ -24,8 +24,6 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 50))
         field.leftViewMode = .always
         
-        // field.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
-        
         return field
     }()
     
@@ -65,16 +63,18 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
     
     var locations = [Location]()
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .secondarySystemBackground
-        view.addSubview(label)
+        
+        //Asal
         view.addSubview(asalField)
-        view.addSubview(tujuanField)
         asalField.delegate = self
+        
+        view.addSubview(tujuanField)
         tujuanField.delegate = self
+        
+        view.addSubview(label)
         view.addSubview(startBtn)
     }
     
@@ -101,13 +101,13 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
 //        let vc = UINavigationController(rootViewController: textEntry)
 //        present(vc, animated: true)
 //    }
-
+    
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
+
         if asalField.isEditing {
             print("asal clicked")
-            
+
             let AsalVC =  UIStoryboard(name: "Asal", bundle: nil).instantiateViewController(withIdentifier: "AsalID")
             if let sheet = AsalVC.sheetPresentationController {
                 sheet.detents = [.medium(), .large()]
@@ -115,11 +115,13 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
             }
             self.present(AsalVC, animated: true, completion: nil)
             asalField.resignFirstResponder()
+
+
         }
         
         if tujuanField.isEditing {
             print("tujuan clicked")
-            
+
             let TujuanVC =  UIStoryboard(name: "Tujuan", bundle: nil).instantiateViewController(withIdentifier: "TujuanID")
             if let sheet = TujuanVC.sheetPresentationController {
                 sheet.detents = [.medium(), .large()]
@@ -130,18 +132,19 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        asalField.resignFirstResponder()
-        if let text = asalField.text, !text.isEmpty {
-            LocationManager.shared.findLocations(with: text) { [weak self] locations in
-                DispatchQueue.main.async {
-                    self?.locations = locations
-                    //self?.tableView.reloadData()
-                }
-            }
-        }
-        return true
-    }
+    // Not used
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        asalField.resignFirstResponder()
+//        if let text = asalField.text, !text.isEmpty {
+//            LocationManager.shared.findLocations(with: text) { [weak self] locations in
+//                DispatchQueue.main.async {
+//                    self?.locations = locations
+//                    //self?.tableView.reloadData()
+//                }
+//            }
+//        }
+//        return true
+//    }
     
     @objc func didTapMulai(sender: UIButton!) {
         print("Button tapped")

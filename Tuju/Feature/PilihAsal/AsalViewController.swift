@@ -15,7 +15,7 @@ class AsalViewController: MapViewController {
     
     var recommend : [Stasiun] = [Stasiun]()
     
-    public var completion: ((String?) -> Void)?
+    public var completionHandler: ((String?) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,13 +128,14 @@ extension AsalViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let items = recommend[indexPath.section]
+        let items = recommend[indexPath.item]
         
         // Passing Data
-        completion?(items.stasiunName)
+        let result: Void? = completionHandler?(items.stasiunName)
+
+        print("completionHandler returns… \(String(describing: result))")
         
-        
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
 }
 
