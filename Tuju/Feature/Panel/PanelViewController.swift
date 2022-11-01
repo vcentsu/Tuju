@@ -111,13 +111,18 @@ class PanelViewController: UIViewController, UITextFieldDelegate, AsalEntryViewC
     @objc private func didTapMulai() {
         // Draw the direction
         panel.move(to: .tip, animated: true)
+        Departure = self.asalField.text!
+        Destination = self.tujuanField.text!
+        RoutesLogic()
+        print(Routes)
+        print(numberOfTransit)
     }
     
     @objc private func didTapAsal() {
         let asalEntry = Tuju.AsalEntryViewController()
         asalEntry.completion = { [weak self] text in
             DispatchQueue.main.async {
-                self?.asalField.text = text
+                self?.asalField.text = text //Departure
             }
         }
         let vc = UINavigationController(rootViewController: asalEntry)
@@ -128,7 +133,7 @@ class PanelViewController: UIViewController, UITextFieldDelegate, AsalEntryViewC
         let tujuanEntry = Tuju.TujuanEntryViewController()
         tujuanEntry.completion = { [weak self] text in
             DispatchQueue.main.async {
-                self?.tujuanField.text = text
+                self?.tujuanField.text = text //Destination
             }
         }
         let vc = UINavigationController(rootViewController: tujuanEntry)
