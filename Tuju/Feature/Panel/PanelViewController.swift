@@ -114,6 +114,10 @@ class PanelViewController: UIViewController, UITextFieldDelegate, AsalEntryViewC
         Departure = self.asalField.text!
         Destination = self.tujuanField.text!
         RoutesLogic()
+        FavAndRecentLogic()
+        print(recentData)
+        print(favoriteData)
+        print(TransitStation)
         print(Routes)
         print(numberOfTransit)
     }

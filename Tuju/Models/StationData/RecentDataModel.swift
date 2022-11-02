@@ -17,5 +17,4 @@ struct RecentContent{
 
 //insert the dummy data
 var Recent: [RecentContent] = [
-    RecentContent(namaStasiun: "Karet", latitude: -6.200547009851408, longitude: 106.81575013745739, isFavorite: 3)
 ]

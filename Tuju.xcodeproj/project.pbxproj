@@ -659,11 +659,8 @@
 				D388130C28F563910062C702 /* MapViewController.swift in Sources */,
 				752FC90628F92F8B00FBA82F /* PanelViewController.swift in Sources */,
 				5C06E05C290292CE001BA971 /* StationDataModel.swift in Sources */,
-// main
 				7567F9652912594000730487 /* TujuanEntryViewController.swift in Sources */,
-// EO main
 				5C41AD1B29098A980077F60A /* FavAndRecentLogic.swift in Sources */,
-// FavoriteandRecentLogic
 				D388131228F563910062C702 /* Tuju.xcdatamodeld in Sources */,
 				752FC90828F92FC200FBA82F /* LocationManager.swift in Sources */,
 				5C2C60BC29093C2300BE6C00 /* FavoriteDataModel.swift in Sources */,
@@ -866,7 +863,7 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = TestLogic;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -898,7 +895,7 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = TestLogic;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

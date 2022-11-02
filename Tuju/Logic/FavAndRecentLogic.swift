@@ -176,7 +176,4 @@ func FavAndRecentLogic(){
             recentData.append(RecentContent(namaStasiun: tempNamaStasiun, latitude: tempLatitude, longitude: templongitude, isFavorite: tempisFavorite))
         }
     }
-    print(favoriteData)
-    print(recentData)
-
 }
