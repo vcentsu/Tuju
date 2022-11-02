@@ -71,19 +71,27 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
 //        self.view = mapView
         
     }
-   
+    
+    //    func startNav() {
+    //      var destinations = [GMSNavigationWaypoint]()
+    //      destinations.append(GMSNavigationWaypoint.init(placeID: "ChIJmQ6sHHH0aS4R2Kc4sEiEyUc",
+    //                                                     title: "Stasiun Manggarai")!)
+    //      destinations.append(GMSNavigationWaypoint.init(placeID:"ChIJt_uvMxX0aS4RgasvyQI7DJU",
+    //                                                     title:"Stasiun Cikini")!)
+    //
+    //      mapView.navigator?.setDestinations(destinations) { routeStatus in
+    //        self.mapView.navigator?.isGuidanceActive = true
+    //        self.mapView.locationSimulator?.simulateLocationsAlongExistingRoute()
+    //        self.mapView.cameraMode = .following
+    //      }
+    //    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         mapView.frame = view.bounds
     }
     
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//
-//        guard let map = mapView else {return}
-//        map.frame = view.bounds
-//    }
+
     
     func PanelViewController(_ vc: PanelViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?) {
         
