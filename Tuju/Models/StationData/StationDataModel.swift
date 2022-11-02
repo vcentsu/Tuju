@@ -8,7 +8,8 @@
 import Foundation
 import UIKit
 
-struct Station{
+
+struct Station {
     var namaStasiun: String?
     var latitude: Double?
     var longitude: Double?

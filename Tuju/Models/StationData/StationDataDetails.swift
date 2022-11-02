@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+
 let pondokRanji = Station(namaStasiun: "Pondok Ranji", latitude: -6.2761221112337555, longitude: 106.74492972581243)
 let kebayoran = Station(namaStasiun: "Kebayoran", latitude: -6.237100410964969, longitude: 106.78254607194879)
 let manggarai = Station(namaStasiun: "Manggarai", latitude: -6.209675277806892, longitude: 106.85025771231817)
