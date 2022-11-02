@@ -13,6 +13,7 @@
 		5C06E05E290294E1001BA971 /* StationDataDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C06E05D290294E1001BA971 /* StationDataDetails.swift */; };
 		5C2C60BA29092BCD00BE6C00 /* RecentDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2C60B929092BCD00BE6C00 /* RecentDataModel.swift */; };
 		5C2C60BC29093C2300BE6C00 /* FavoriteDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2C60BB29093C2300BE6C00 /* FavoriteDataModel.swift */; };
+		5C41AD1B29098A980077F60A /* FavAndRecentLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C41AD1A29098A980077F60A /* FavAndRecentLogic.swift */; };
 		5CB26BF528FD49EB0057CC3E /* LogicSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB26BF428FD49EB0057CC3E /* LogicSwift.swift */; };
 		5CB26BF728FD4A290057CC3E /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB26BF628FD4A290057CC3E /* Routes.swift */; };
 		5CB26BFA28FD4A750057CC3E /* TestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CB26BF828FD4A750057CC3E /* TestTableViewCell.xib */; };
@@ -65,6 +66,7 @@
 		5C06E05D290294E1001BA971 /* StationDataDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDataDetails.swift; sourceTree = "<group>"; };
 		5C2C60B929092BCD00BE6C00 /* RecentDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentDataModel.swift; sourceTree = "<group>"; };
 		5C2C60BB29093C2300BE6C00 /* FavoriteDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDataModel.swift; sourceTree = "<group>"; };
+		5C41AD1A29098A980077F60A /* FavAndRecentLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavAndRecentLogic.swift; sourceTree = "<group>"; };
 		5CB26BF428FD49EB0057CC3E /* LogicSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicSwift.swift; sourceTree = "<group>"; };
 		5CB26BF628FD4A290057CC3E /* Routes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
 		5CB26BF828FD4A750057CC3E /* TestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestTableViewCell.xib; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				5CB26BF828FD4A750057CC3E /* TestTableViewCell.xib */,
 				5CB26BFC28FD4A8C0057CC3E /* TestLogic.storyboard */,
 				5CB982A52906F81F00933DCF /* RoutesLogic.swift */,
+				5C41AD1A29098A980077F60A /* FavAndRecentLogic.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -656,7 +659,11 @@
 				D388130C28F563910062C702 /* MapViewController.swift in Sources */,
 				752FC90628F92F8B00FBA82F /* PanelViewController.swift in Sources */,
 				5C06E05C290292CE001BA971 /* StationDataModel.swift in Sources */,
+// main
 				7567F9652912594000730487 /* TujuanEntryViewController.swift in Sources */,
+// EO main
+				5C41AD1B29098A980077F60A /* FavAndRecentLogic.swift in Sources */,
+// FavoriteandRecentLogic
 				D388131228F563910062C702 /* Tuju.xcdatamodeld in Sources */,
 				752FC90828F92FC200FBA82F /* LocationManager.swift in Sources */,
 				5C2C60BC29093C2300BE6C00 /* FavoriteDataModel.swift in Sources */,
@@ -859,7 +866,7 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = TestLogic;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -891,7 +898,7 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = TestLogic;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
