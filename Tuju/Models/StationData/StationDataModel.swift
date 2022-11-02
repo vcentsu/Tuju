@@ -8,37 +8,10 @@
 import Foundation
 import UIKit
 
-struct HijauContent{
-    var namaStasiun: String?
-    var latitude: Double?
-    var longitude: Double?
-    var isFavorite: Int?
-}
 
-struct BiruKiriContent{
+struct Station {
     var namaStasiun: String?
     var latitude: Double?
     var longitude: Double?
-    var isFavorite: Int?
-}
-
-struct MerahAtasContent{
-    var namaStasiun: String?
-    var latitude: Double?
-    var longitude: Double?
-    var isFavorite: Int?
-}
-
-struct BiruKananContent{
-    var namaStasiun: String?
-    var latitude: Double?
-    var longitude: Double?
-    var isFavorite: Int?
-}
-
-struct MerahBawahContent{
-    var namaStasiun: String?
-    var latitude: Double?
-    var longitude: Double?
-    var isFavorite: Int?
+    
 }

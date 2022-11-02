@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import CoreLocation
+import GoogleMaps
 
 struct Location {
     let title: String

@@ -6,17 +6,24 @@
 //
 
 import UIKit
-import CoreLocation
+import FloatingPanel
+import GoogleMaps
 
 protocol PanelViewControllerDelegate: AnyObject {
-    func PanelViewController(_ vc: PanelViewController, didSelectLocationWith Coordinate: CLLocationCoordinate2D?)
+    func PanelViewController(_ vc: PanelViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?)
 }
 
-class PanelViewController: UIViewController, UITextFieldDelegate {
+class PanelViewController: UIViewController, UITextFieldDelegate, AsalEntryViewControllerDelegate {
+    
+    let panel = FloatingPanelController()
     
     weak var delegate: PanelViewControllerDelegate?
     
-    private let asalField: UITextField = {
+    var locations = [Location]()
+    
+    let mapView = GMSMapView(frame: .zero)
+    
+    var asalField: UITextField = {
         let field = UITextField()
         field.placeholder = "Asal: Pilih Stasiun Asal"
         field.layer.cornerRadius = 9
@@ -27,7 +34,7 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
         return field
     }()
     
-    private let tujuanField: UITextField = {
+    var tujuanField: UITextField = {
         let field = UITextField()
         field.placeholder = "Tujuan: Pilih Stasiun Tujuan"
         field.layer.cornerRadius = 9
@@ -38,13 +45,14 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
         return field
     }()
     
-    private let startBtn: UIButton = {
+    
+    let startBtn: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemOrange
         button.layer.cornerRadius = 20
         button.setTitle("Mulai Perjalanan", for: .normal)
-        button.addTarget(PanelViewController.self, action: #selector(didTapMulai), for: .touchUpInside)
-
+        button.addTarget(AsalEntryViewController.self, action: #selector(didTapMulai), for: .touchUpInside)
+        
         return button
     }()
     
@@ -57,76 +65,119 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
         let label = UILabel()
         label.attributedText = imageString
         label.font = .systemFont(ofSize: 14, weight: .ultraLight)
+        
         return label
     }()
-    
-    var locations = [Location]()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .secondarySystemBackground
-        view.addSubview(label)
+        
+        //Asal
         view.addSubview(asalField)
-        view.addSubview(tujuanField)
+        asalField.addTarget(self, action: #selector(didTapAsal), for: .touchUpInside)
         asalField.delegate = self
+    
+        //Tujuan
+        view.addSubview(tujuanField)
+        tujuanField.addTarget(self, action: #selector(didTapTujuan), for: .touchUpInside)
         tujuanField.delegate = self
+    
+        
+        view.addSubview(label)
         view.addSubview(startBtn)
+
+        let asalVC = Tuju.AsalEntryViewController()
+        asalVC.delegate = self
+        
+//        panel.set(contentViewController: asalVC)
+//        panel.addPanel(toParent: self)
+        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+        mapView.frame = view.bounds
         asalField.frame = CGRect(x: 20, y: 30, width: view.frame.size.width-40, height: 50)
         tujuanField.frame = CGRect(x: 20, y: 40+asalField.frame.size.height, width: view.frame.size.width-40, height: 50)
 
         label.sizeToFit()
         label.frame = CGRect(x: 25, y: 120+tujuanField.frame.size.height, width: label.frame.size.width, height: label.frame.size.height)
         startBtn.frame = CGRect(x: 20, y: 180+label.frame.size.height, width: view.frame.size.width-40, height: 50)
+        mapView.frame = view.bounds
     }
     
+    @objc private func didTapMulai() {
+        // Draw the direction
+        panel.move(to: .tip, animated: true)
+        Departure = self.asalField.text!
+        Destination = self.tujuanField.text!
+        RoutesLogic()
+        print(Routes)
+        print(numberOfTransit)
+    }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
+    @objc private func didTapAsal() {
+        let asalEntry = Tuju.AsalEntryViewController()
+        asalEntry.completion = { [weak self] text in
+            DispatchQueue.main.async {
+                self?.asalField.text = text //Departure
+            }
+        }
+        let vc = UINavigationController(rootViewController: asalEntry)
+        present(vc, animated: true)
+    }
+    
+    @objc private func didTapTujuan() {
+        let tujuanEntry = Tuju.TujuanEntryViewController()
+        tujuanEntry.completion = { [weak self] text in
+            DispatchQueue.main.async {
+                self?.tujuanField.text = text //Destination
+            }
+        }
+        let vc = UINavigationController(rootViewController: tujuanEntry)
+        present(vc, animated: true)
+    }
+    
+    func AsalEntryViewController(_ vc: AsalEntryViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?) {
         
-        if asalField.isEditing {
-            print("asal clicked")
-            
-            let AsalVC =  UIStoryboard(name: "Asal", bundle: nil).instantiateViewController(withIdentifier: "AsalID")
-            if let sheet = AsalVC.sheetPresentationController {
-                sheet.detents = [.medium(), .large()]
-                sheet.preferredCornerRadius = 24
-            }
-            self.present(AsalVC, animated: true, completion: nil)
-            asalField.resignFirstResponder()
+        guard let coordinates = coordinates else {
+            return
         }
         
-        if tujuanField.isEditing {
-            print("tujuan clicked")
-            
-            let TujuanVC =  UIStoryboard(name: "Tujuan", bundle: nil).instantiateViewController(withIdentifier: "TujuanID")
-            if let sheet = TujuanVC.sheetPresentationController {
-                sheet.detents = [.medium(), .large()]
-                sheet.preferredCornerRadius = 24
-            }
-            self.present(TujuanVC, animated: true, completion: nil)
-            tujuanField.resignFirstResponder()
-        }
+        panel.move(to: .half, animated: true)
+        
+        print("PANEL: \(coordinates.latitude), \(coordinates.longitude)")
+        
+      let camera = GMSCameraPosition.camera(withLatitude: coordinates.latitude, longitude: coordinates.longitude, zoom: 16.0)
+        mapView.animate(toLocation: coordinates)
+        mapView.camera = camera
+        mapView.animate(to: camera)
+        
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        asalField.resignFirstResponder()
-        if let text = asalField.text, !text.isEmpty {
-            LocationManager.shared.findLocations(with: text) { [weak self] locations in
-                DispatchQueue.main.async {
-                    self?.locations = locations
-                    //self?.tableView.reloadData()
-                }
-            }
-        }
-        return true
-    }
-    
-    @objc func didTapMulai(sender: UIButton!) {
-        print("Button tapped")
-    }
-    
+//    func TujuanEntryViewController(_ vc: TujuanEntryViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?) {
+//
+//        guard let coordinates = coordinates else {
+//            return
+//        }
+//
+//        // Hide panel
+////        panel.move(to: .tip, animated: true)
+//
+//        // Coordinates
+//        let pondokRanji: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: coordinates.latitude, longitude: coordinates.longitude)
+//
+//        // Set Initial Camera Position
+//        let pondokRanjiCam = GMSCameraUpdate.setTarget(
+//            pondokRanji
+//        )
+//
+//        let mapView = GMSMapView(frame: self.view.bounds)
+//
+//        mapView.animate(with: pondokRanjiCam)
+//
+//    }
+
 }
