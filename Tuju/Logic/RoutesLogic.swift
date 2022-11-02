@@ -23,6 +23,8 @@ var Routes = [String]()
 var numberOfTransit = 0
 
 func RoutesLogic(){
+    
+    
     Routes.removeAll()
     TransitStation.removeAll()
     numberOfTransit = 0
@@ -823,8 +825,8 @@ func RoutesLogic(){
         TransitStation.append(birukiriData[2].namaStasiun!)
         
         //define route
-        let route1 = hijauData[checkArr!...2]
-        for i in checkArr!...2 {
+        let route1 = hijauData[checkArr!...3]
+        for i in checkArr!...3 {
             Routes.append(route1[i].namaStasiun!)
         }
         
