@@ -14,4 +14,5 @@ struct Stasiun {
 
     var lang: String
     var long: String
+    
 }

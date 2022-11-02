@@ -11,6 +11,9 @@
 		5C06A0D529004A530003CBEE /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = 5CB26C2528FD5AA10057CC3E /* FloatingPanel */; };
 		5C06E05C290292CE001BA971 /* StationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C06E05B290292CE001BA971 /* StationDataModel.swift */; };
 		5C06E05E290294E1001BA971 /* StationDataDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C06E05D290294E1001BA971 /* StationDataDetails.swift */; };
+		5C2C60BA29092BCD00BE6C00 /* RecentDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2C60B929092BCD00BE6C00 /* RecentDataModel.swift */; };
+		5C2C60BC29093C2300BE6C00 /* FavoriteDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2C60BB29093C2300BE6C00 /* FavoriteDataModel.swift */; };
+		5C41AD1B29098A980077F60A /* FavAndRecentLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C41AD1A29098A980077F60A /* FavAndRecentLogic.swift */; };
 		5CB26BF528FD49EB0057CC3E /* LogicSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB26BF428FD49EB0057CC3E /* LogicSwift.swift */; };
 		5CB26BF728FD4A290057CC3E /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB26BF628FD4A290057CC3E /* Routes.swift */; };
 		5CB26BFA28FD4A750057CC3E /* TestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CB26BF828FD4A750057CC3E /* TestTableViewCell.xib */; };
@@ -19,12 +22,9 @@
 		5CB982A62906F81F00933DCF /* RoutesLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB982A52906F81F00933DCF /* RoutesLogic.swift */; };
 		752FC90628F92F8B00FBA82F /* PanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752FC90528F92F8B00FBA82F /* PanelViewController.swift */; };
 		752FC90828F92FC200FBA82F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752FC90728F92FC200FBA82F /* LocationManager.swift */; };
+		7567F963291257D900730487 /* AsalEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7567F962291257D900730487 /* AsalEntryViewController.swift */; };
+		7567F9652912594000730487 /* TujuanEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7567F9642912593F00730487 /* TujuanEntryViewController.swift */; };
 		BA4628150B3F114A13243CF8 /* Pods_Tuju_TujuUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBB02709D3DFDB0407B7D0E1 /* Pods_Tuju_TujuUITests.framework */; };
-		D30273592907F1C300925AF4 /* JourneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30273582907F1C300925AF4 /* JourneyViewController.swift */; };
-		D3567B2128FD22A300D84AB9 /* Tujuan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3567B2028FD22A300D84AB9 /* Tujuan.storyboard */; };
-		D36911B828F7FB2100E993E1 /* AsalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36911B728F7FB2100E993E1 /* AsalViewController.swift */; };
-		D36911BA28F7FB3300E993E1 /* TujuanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36911B928F7FB3300E993E1 /* TujuanViewController.swift */; };
-		D36911BC28F801A800E993E1 /* Asal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D36911BB28F801A700E993E1 /* Asal.storyboard */; };
 		D36911BE28F944F100E993E1 /* RecommendationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36911BD28F944F100E993E1 /* RecommendationTableViewCell.swift */; };
 		D388130828F563910062C702 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388130728F563910062C702 /* AppDelegate.swift */; };
 		D388130A28F563910062C702 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388130928F563910062C702 /* SceneDelegate.swift */; };
@@ -64,6 +64,9 @@
 		384D670AF78D1F487AB2E36C /* Pods_Tuju.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tuju.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C06E05B290292CE001BA971 /* StationDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDataModel.swift; sourceTree = "<group>"; };
 		5C06E05D290294E1001BA971 /* StationDataDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDataDetails.swift; sourceTree = "<group>"; };
+		5C2C60B929092BCD00BE6C00 /* RecentDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentDataModel.swift; sourceTree = "<group>"; };
+		5C2C60BB29093C2300BE6C00 /* FavoriteDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDataModel.swift; sourceTree = "<group>"; };
+		5C41AD1A29098A980077F60A /* FavAndRecentLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavAndRecentLogic.swift; sourceTree = "<group>"; };
 		5CB26BF428FD49EB0057CC3E /* LogicSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicSwift.swift; sourceTree = "<group>"; };
 		5CB26BF628FD4A290057CC3E /* Routes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
 		5CB26BF828FD4A750057CC3E /* TestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestTableViewCell.xib; sourceTree = "<group>"; };
@@ -78,14 +81,11 @@
 		752FC90928F931B300FBA82F /* FloatingPanel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatingPanel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		752FC90D28F9333A00FBA82F /* FloatingPanel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatingPanel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		752FC91128F9335200FBA82F /* FloatingPanel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatingPanel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7567F962291257D900730487 /* AsalEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsalEntryViewController.swift; sourceTree = "<group>"; };
+		7567F9642912593F00730487 /* TujuanEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TujuanEntryViewController.swift; sourceTree = "<group>"; };
 		86CC304CE8A9C55B93D71FEA /* Pods-Tuju.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tuju.release.xcconfig"; path = "Target Support Files/Pods-Tuju/Pods-Tuju.release.xcconfig"; sourceTree = "<group>"; };
 		9FA4455FC2C6CB1BEDBF69C2 /* Pods-Tuju-TujuUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tuju-TujuUITests.release.xcconfig"; path = "Target Support Files/Pods-Tuju-TujuUITests/Pods-Tuju-TujuUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A1C7EDE928D6BFC65EDA4743 /* Pods-Tuju.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tuju.debug.xcconfig"; path = "Target Support Files/Pods-Tuju/Pods-Tuju.debug.xcconfig"; sourceTree = "<group>"; };
-		D30273582907F1C300925AF4 /* JourneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = JourneyViewController.swift; path = Tuju/Feature/JourneyViewController.swift; sourceTree = SOURCE_ROOT; };
-		D3567B2028FD22A300D84AB9 /* Tujuan.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tujuan.storyboard; sourceTree = "<group>"; };
-		D36911B728F7FB2100E993E1 /* AsalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsalViewController.swift; sourceTree = "<group>"; };
-		D36911B928F7FB3300E993E1 /* TujuanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TujuanViewController.swift; sourceTree = "<group>"; };
-		D36911BB28F801A700E993E1 /* Asal.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Asal.storyboard; sourceTree = "<group>"; };
 		D36911BD28F944F100E993E1 /* RecommendationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationTableViewCell.swift; sourceTree = "<group>"; };
 		D388130428F563910062C702 /* Tuju.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tuju.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D388130728F563910062C702 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -214,8 +214,7 @@
 		5C06A0DE29004B3B0003CBEE /* PilihAsal */ = {
 			isa = PBXGroup;
 			children = (
-				D36911B728F7FB2100E993E1 /* AsalViewController.swift */,
-				D36911BB28F801A700E993E1 /* Asal.storyboard */,
+				7567F962291257D900730487 /* AsalEntryViewController.swift */,
 			);
 			path = PilihAsal;
 			sourceTree = "<group>";
@@ -223,8 +222,7 @@
 		5C06A0DF29004B5A0003CBEE /* PilihTujuan */ = {
 			isa = PBXGroup;
 			children = (
-				D36911B928F7FB3300E993E1 /* TujuanViewController.swift */,
-				D3567B2028FD22A300D84AB9 /* Tujuan.storyboard */,
+				7567F9642912593F00730487 /* TujuanEntryViewController.swift */,
 			);
 			path = PilihTujuan;
 			sourceTree = "<group>";
@@ -258,6 +256,8 @@
 			children = (
 				5C06E05B290292CE001BA971 /* StationDataModel.swift */,
 				5C06E05D290294E1001BA971 /* StationDataDetails.swift */,
+				5C2C60B929092BCD00BE6C00 /* RecentDataModel.swift */,
+				5C2C60BB29093C2300BE6C00 /* FavoriteDataModel.swift */,
 			);
 			path = StationData;
 			sourceTree = "<group>";
@@ -271,6 +271,7 @@
 				5CB26BF828FD4A750057CC3E /* TestTableViewCell.xib */,
 				5CB26BFC28FD4A8C0057CC3E /* TestLogic.storyboard */,
 				5CB982A52906F81F00933DCF /* RoutesLogic.swift */,
+				5C41AD1A29098A980077F60A /* FavAndRecentLogic.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -367,7 +368,6 @@
 		D3E387BE2906A25D00AFE101 /* Perjalanan */ = {
 			isa = PBXGroup;
 			children = (
-				D30273582907F1C300925AF4 /* JourneyViewController.swift */,
 			);
 			path = Perjalanan;
 			sourceTree = "<group>";
@@ -493,8 +493,6 @@
 				D388131428F563920062C702 /* Assets.xcassets in Resources */,
 				D388130F28F563910062C702 /* Main.storyboard in Resources */,
 				5CB26BFA28FD4A750057CC3E /* TestTableViewCell.xib in Resources */,
-				D3567B2128FD22A300D84AB9 /* Tujuan.storyboard in Resources */,
-				D36911BC28F801A800E993E1 /* Asal.storyboard in Resources */,
 				5CB26BFD28FD4A8C0057CC3E /* TestLogic.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -660,20 +658,23 @@
 				5CB982A62906F81F00933DCF /* RoutesLogic.swift in Sources */,
 				D388130C28F563910062C702 /* MapViewController.swift in Sources */,
 				752FC90628F92F8B00FBA82F /* PanelViewController.swift in Sources */,
-				D36911BA28F7FB3300E993E1 /* TujuanViewController.swift in Sources */,
 				5C06E05C290292CE001BA971 /* StationDataModel.swift in Sources */,
 				D30273592907F1C300925AF4 /* JourneyViewController.swift in Sources */,
+				7567F9652912594000730487 /* TujuanEntryViewController.swift in Sources */,
+				5C41AD1B29098A980077F60A /* FavAndRecentLogic.swift in Sources */,
 				D388131228F563910062C702 /* Tuju.xcdatamodeld in Sources */,
 				752FC90828F92FC200FBA82F /* LocationManager.swift in Sources */,
+				5C2C60BC29093C2300BE6C00 /* FavoriteDataModel.swift in Sources */,
 				5CB26BFB28FD4A750057CC3E /* TestTableViewCell.swift in Sources */,
-				D36911B828F7FB2100E993E1 /* AsalViewController.swift in Sources */,
 				5CB26BF528FD49EB0057CC3E /* LogicSwift.swift in Sources */,
 				5C06E05E290294E1001BA971 /* StationDataDetails.swift in Sources */,
 				D388130828F563910062C702 /* AppDelegate.swift in Sources */,
+				7567F963291257D900730487 /* AsalEntryViewController.swift in Sources */,
 				D3E387BB290653E900AFE101 /* Extension.swift in Sources */,
 				5CB26BF728FD4A290057CC3E /* Routes.swift in Sources */,
 				D36911BE28F944F100E993E1 /* RecommendationTableViewCell.swift in Sources */,
 				D388130A28F563910062C702 /* SceneDelegate.swift in Sources */,
+				5C2C60BA29092BCD00BE6C00 /* RecentDataModel.swift in Sources */,
 				D3E387B82902865500AFE101 /* Stasiun.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -839,6 +840,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
