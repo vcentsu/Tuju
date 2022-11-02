@@ -13,5 +13,5 @@ struct Station {
     var namaStasiun: String?
     var latitude: Double?
     var longitude: Double?
-    
+    var isFavorite: Int?
 }
