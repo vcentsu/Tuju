@@ -83,7 +83,6 @@ class PanelViewController: UIViewController, UITextFieldDelegate, AsalEntryViewC
         view.addSubview(tujuanField)
         tujuanField.addTarget(self, action: #selector(didTapTujuan), for: .touchUpInside)
         tujuanField.delegate = self
-    
         
         view.addSubview(label)
         view.addSubview(startBtn)
@@ -94,6 +93,18 @@ class PanelViewController: UIViewController, UITextFieldDelegate, AsalEntryViewC
 //        panel.set(contentViewController: asalVC)
 //        panel.addPanel(toParent: self)
         
+        updateView()
+        
+    }
+    
+    func updateView(){
+        if asalField.text == "" || tujuanField.text == "" {
+            startBtn.backgroundColor = .systemGreen
+            startBtn.isEnabled = false
+        } else {
+            startBtn.backgroundColor = .systemOrange
+            startBtn.isEnabled = true
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -105,7 +116,6 @@ class PanelViewController: UIViewController, UITextFieldDelegate, AsalEntryViewC
         label.sizeToFit()
         label.frame = CGRect(x: 25, y: 120+tujuanField.frame.size.height, width: label.frame.size.width, height: label.frame.size.height)
         startBtn.frame = CGRect(x: 20, y: 180+label.frame.size.height, width: view.frame.size.width-40, height: 50)
-        mapView.frame = view.bounds
     }
     
     @objc private func didTapMulai() {
@@ -120,6 +130,12 @@ class PanelViewController: UIViewController, UITextFieldDelegate, AsalEntryViewC
         print(TransitStation)
         print(Routes)
         print(numberOfTransit)
+        
+//        let vc = Tuju.PerjalananViewController()
+//        let vc = UINavigationController(rootViewController: PerjalananViewController())
+        self.navigationController?.pushViewController(Tuju.PerjalananViewController(), animated: true)
+//        present(vc, animated: true)
+        
     }
     
     @objc private func didTapAsal() {
@@ -127,6 +143,7 @@ class PanelViewController: UIViewController, UITextFieldDelegate, AsalEntryViewC
         asalEntry.completion = { [weak self] text in
             DispatchQueue.main.async {
                 self?.asalField.text = text //Departure
+                self?.updateView()
             }
         }
         let vc = UINavigationController(rootViewController: asalEntry)
@@ -138,6 +155,7 @@ class PanelViewController: UIViewController, UITextFieldDelegate, AsalEntryViewC
         tujuanEntry.completion = { [weak self] text in
             DispatchQueue.main.async {
                 self?.tujuanField.text = text //Destination
+                self?.updateView()
             }
         }
         let vc = UINavigationController(rootViewController: tujuanEntry)

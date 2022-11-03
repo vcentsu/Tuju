@@ -61,11 +61,15 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         
         manager.requestWhenInUseAuthorization()
 //        self.mapView.travelMode = .cycling
-
-        let panelVC = Tuju.PanelViewController()
+        let panelVC = Tuju.PanelViewController(nibName: nil, bundle: nil) //ViewController = Name of your controller
+        let nav1 = UINavigationController(rootViewController: Tuju.PanelViewController())
+        nav1.viewControllers = [panelVC]
         panelVC.delegate = self
         
-        panel.set(contentViewController: panelVC)
+//        let panelVC = Tuju.PanelViewController()
+//        panelVC.delegate = self
+        
+        panel.set(contentViewController: nav1)
         panel.addPanel(toParent: self)
 
 //        self.view = mapView
