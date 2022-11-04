@@ -118,7 +118,7 @@ class PanelViewController: UIViewController, UITextFieldDelegate, AsalEntryViewC
         print(recentData)
         print(favoriteData)
         print(TransitStation)
-        print(Routes)
+        print(RoutesData)
         print(numberOfTransit)
     }
     
