@@ -11,20 +11,16 @@ import FloatingPanel
 import GoogleMaps
 import CoreLocation
 
+
 class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControllerDelegate {
     
     let mapView = GMSMapView(frame: .zero)
-    
-    let notificationCenter = UNUserNotificationCenter.current()
-    
-    let manager = CLLocationManager()
-    
+//    let notificationCenter = UNUserNotificationCenter.current()
+    let locationManager = CLLocationManager()
     let panel = FloatingPanelController()
-    
-    var locations = [Location]()
-    
     let marker = GMSMarker()
     
+    var locations = [Location]()
     
     // Deafault Coordinates View
     var coordinateLive: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: -6.209675277806892, longitude: 106.85025771231817)
@@ -34,9 +30,9 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         //view.addSubview(mapView)
         
         // Do any additional setup after loading the view.
-        self.manager.delegate = self
-        self.manager.requestWhenInUseAuthorization()
-        self.manager.startUpdatingLocation()
+        self.locationManager.delegate = self
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
         self.mapView.delegate = self
         
 
@@ -59,7 +55,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         
         print(GMSServices.openSourceLicenseInfo())
         
-        manager.requestWhenInUseAuthorization()
+        locationManager.requestWhenInUseAuthorization()
 //        self.mapView.travelMode = .cycling
 
         let panelVC = Tuju.PanelViewController()
@@ -71,20 +67,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
 //        self.view = mapView
         
     }
-    
-    //    func startNav() {
-    //      var destinations = [GMSNavigationWaypoint]()
-    //      destinations.append(GMSNavigationWaypoint.init(placeID: "ChIJmQ6sHHH0aS4R2Kc4sEiEyUc",
-    //                                                     title: "Stasiun Manggarai")!)
-    //      destinations.append(GMSNavigationWaypoint.init(placeID:"ChIJt_uvMxX0aS4RgasvyQI7DJU",
-    //                                                     title:"Stasiun Cikini")!)
-    //
-    //      mapView.navigator?.setDestinations(destinations) { routeStatus in
-    //        self.mapView.navigator?.isGuidanceActive = true
-    //        self.mapView.locationSimulator?.simulateLocationsAlongExistingRoute()
-    //        self.mapView.cameraMode = .following
-    //      }
-    //    }
+
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

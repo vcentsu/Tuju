@@ -120,6 +120,7 @@ class PanelViewController: UIViewController, UITextFieldDelegate, AsalEntryViewC
         print(TransitStation)
         print(Routes)
         print(numberOfTransit)
+        
     }
     
     @objc private func didTapAsal() {
