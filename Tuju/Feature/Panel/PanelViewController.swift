@@ -101,7 +101,7 @@ class PanelViewController: UIViewController, UITextFieldDelegate, AsalEntryViewC
         mapView.frame = view.bounds
         asalField.frame = CGRect(x: 20, y: 30, width: view.frame.size.width-40, height: 50)
         tujuanField.frame = CGRect(x: 20, y: 40+asalField.frame.size.height, width: view.frame.size.width-40, height: 50)
-
+        
         label.sizeToFit()
         label.frame = CGRect(x: 25, y: 120+tujuanField.frame.size.height, width: label.frame.size.width, height: label.frame.size.height)
         startBtn.frame = CGRect(x: 20, y: 180+label.frame.size.height, width: view.frame.size.width-40, height: 50)

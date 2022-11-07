@@ -25,7 +25,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
     
     let marker = GMSMarker()
     
-    
     // Deafault Coordinates View
     var coordinateLive: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: -6.209675277806892, longitude: 106.85025771231817)
     
@@ -51,9 +50,16 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
 
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2D(latitude: coordinateLive.latitude, longitude: coordinateLive.longitude)
+        let markerCenter = CLLocationCoordinate2D(latitude: coordinateLive.latitude, longitude: coordinateLive.longitude)
         marker.title = "Stasiun Manggarai"
         marker.map = mapView
-
+        
+        let markerCircle = GMSCircle(position: markerCenter, radius: 200)
+        markerCircle.map = mapView
+        markerCircle.fillColor = UIColor(red: 0.0, green: 0, blue: 0.7, alpha: 0.2)
+        markerCircle.strokeColor = .blue
+        markerCircle.strokeWidth = 3
+        
         mapView.delegate = self
         self.view = mapView
         
@@ -67,9 +73,15 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         
         panel.set(contentViewController: panelVC)
         panel.addPanel(toParent: self)
-
-//        self.view = mapView
         
+        let circleCenter = CLLocationCoordinate2D(latitude: -6.209675277806892, longitude: 106.85025771231817)
+        let circle = GMSCircle(position: circleCenter, radius: 500)
+        circle.map = mapView
+        
+        circle.fillColor = UIColor(red: 0.7, green: 0, blue: 0, alpha: 0.2)
+        circle.strokeColor = .red
+        circle.strokeWidth = 3
+//        self.view = mapView
     }
     
     //    func startNav() {
