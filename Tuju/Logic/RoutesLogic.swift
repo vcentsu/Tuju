@@ -19,7 +19,7 @@ var Destination = "Destination"
 
 var TransitStation = [String]()
 
-var Routes = [String]()
+var RoutesData = Routes
 var numberOfTransit = 0
 
 func RoutesLogic(){
@@ -45,7 +45,7 @@ func RoutesLogic(){
             let route = hijauData[checkArr!...checkDes!]
             print(route.count)
             for i in checkArr!...checkDes! {
-                Routes.append(route[i].namaStasiun!)
+                RoutesData.append(RoutesContent(namaStasiun: route[i].namaStasiun, latitude: route[i].latitude, longitude: route[i].longitude))
             }
             
         }
@@ -56,7 +56,7 @@ func RoutesLogic(){
             let route = hijauData[checkArr!...checkDes!]
             print(route)
             for i in checkArr!...checkDes! {
-                Routes.append(route[i].namaStasiun!)
+                RoutesData.append(RoutesContent(namaStasiun: route[i].namaStasiun, latitude: route[i].latitude, longitude: route[i].longitude))
             }
             
             hijauData.reverse()
@@ -77,7 +77,7 @@ func RoutesLogic(){
         if (checkArr! < checkDes!){
             let route = birukananData[checkArr!...checkDes!]
             for i in checkArr!...checkDes! {
-                Routes.append(route[i].namaStasiun!)
+                RoutesData.append(RoutesContent(namaStasiun: route[i].namaStasiun, latitude: route[i].latitude, longitude: route[i].longitude))
             }
         }
         else{
@@ -87,7 +87,7 @@ func RoutesLogic(){
             let route = birukananData[checkArr!...checkDes!]
             
             for i in checkArr!...checkDes! {
-                Routes.append(route[i].namaStasiun!)
+                RoutesData.append(RoutesContent(namaStasiun: route[i].namaStasiun, latitude: route[i].latitude, longitude: route[i].longitude))
             }
             
             birukananData.reverse()
@@ -110,7 +110,7 @@ func RoutesLogic(){
             let route = birukiriData[checkArr!...checkDes!]
             print(Routes)
             for i in checkArr!...checkDes! {
-                Routes.append(route[i].namaStasiun!)
+                RoutesData.append(RoutesContent(namaStasiun: route[i].namaStasiun, latitude: route[i].latitude, longitude: route[i].longitude))
             }
         }
         else{
@@ -119,7 +119,7 @@ func RoutesLogic(){
             let checkDes = birukiriData.firstIndex(where:{ $0.namaStasiun == "\(Destination)"})
             let route = birukiriData[checkArr!...checkDes!]
             for i in checkArr!...checkDes! {
-                Routes.append(route[i].namaStasiun!)
+                RoutesData.append(RoutesContent(namaStasiun: route[i].namaStasiun, latitude: route[i].latitude, longitude: route[i].longitude))
             }
             
             birukiriData.reverse()
@@ -141,7 +141,7 @@ func RoutesLogic(){
             let route = merahatasData[checkArr!...checkDes!]
             print(Routes)
             for i in checkArr!...checkDes! {
-                Routes.append(route[i].namaStasiun!)
+                RoutesData.append(RoutesContent(namaStasiun: route[i].namaStasiun, latitude: route[i].latitude, longitude: route[i].longitude))
             }
         }
         else{
@@ -151,7 +151,7 @@ func RoutesLogic(){
             let route = merahatasData[checkArr!...checkDes!]
             
             for i in checkArr!...checkDes! {
-                Routes.append(route[i].namaStasiun!)
+                RoutesData.append(RoutesContent(namaStasiun: route[i].namaStasiun, latitude: route[i].latitude, longitude: route[i].longitude))
             }
             
             MerahAtas.reverse()
@@ -172,7 +172,7 @@ func RoutesLogic(){
         if (checkArr! < checkDes!){
             let route = merahbawahData[checkArr!...checkDes!]
             for i in checkArr!...checkDes! {
-                Routes.append(route[i].namaStasiun!)
+                RoutesData.append(RoutesContent(namaStasiun: route[i].namaStasiun, latitude: route[i].latitude, longitude: route[i].longitude))
             }
         }
         else{
@@ -182,7 +182,7 @@ func RoutesLogic(){
             let route = merahbawahData[checkArr!...checkDes!]
             
             for i in checkArr!...checkDes! {
-                Routes.append(route[i].namaStasiun!)
+                RoutesData.append(RoutesContent(namaStasiun: route[i].namaStasiun, latitude: route[i].latitude, longitude: route[i].longitude))
             }
             
             merahbawahData.reverse()
@@ -204,12 +204,12 @@ func RoutesLogic(){
         //define route
         let route1 = birukiriData[checkArr!...2]
         for i in checkArr!...2 {
-            Routes.append(route1[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route1[i].namaStasiun, latitude: route1[i].latitude, longitude: route1[i].longitude))
         }
         
         let route2 = birukananData[1...checkDes!]
         for i in 1...checkDes! {
-            Routes.append(route2[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route2[i].namaStasiun, latitude: route2[i].latitude, longitude: route2[i].longitude))
         }
         
     }
@@ -235,12 +235,12 @@ func RoutesLogic(){
         //define route
         let route1 = birukiriData[checkArr!...2]
         for i in checkArr!...2 {
-            Routes.append(route1[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route1[i].namaStasiun, latitude: route1[i].latitude, longitude: route1[i].longitude))
         }
         
         let route2 = merahatasData[1...checkDes!]
         for i in 1...checkDes! {
-            Routes.append(route2[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route2[i].namaStasiun, latitude: route2[i].latitude, longitude: route2[i].longitude))
         }
     }
     
@@ -265,12 +265,12 @@ func RoutesLogic(){
         //define route
         let route1 = birukiriData[checkArr!...2]
         for i in checkArr!...2 {
-            Routes.append(route1[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route1[i].namaStasiun, latitude: route1[i].latitude, longitude: route1[i].longitude))
         }
         
         let route2 = merahbawahData[1...checkDes!]
         for i in 1...checkDes! {
-            Routes.append(route2[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route2[i].namaStasiun, latitude: route2[i].latitude, longitude: route2[i].longitude))
         }
     }
     
@@ -291,12 +291,12 @@ func RoutesLogic(){
         //define route
         let route1 = birukananData[checkArr!...1]
         for i in checkArr!...1 {
-            Routes.append(route1[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route1[i].namaStasiun, latitude: route1[i].latitude, longitude: route1[i].longitude))
         }
 
         let route2 = birukiriData[0...checkDes!]
         for i in 0...checkDes! {
-            Routes.append(route2[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route2[i].namaStasiun, latitude: route2[i].latitude, longitude: route2[i].longitude))
         }
         
         
@@ -327,12 +327,12 @@ func RoutesLogic(){
         //define route
         let route1 = MerahAtas[checkArr!...6]
         for i in checkArr!...6 {
-            Routes.append(route1[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route1[i].namaStasiun, latitude: route1[i].latitude, longitude: route1[i].longitude))
         }
 
         let route2 = BiruKiri[1...checkDes!]
         for i in 1...checkDes! {
-            Routes.append(route2[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route2[i].namaStasiun, latitude: route2[i].latitude, longitude: route2[i].longitude))
         }
         
         merahatasData.reverse()
@@ -363,12 +363,12 @@ func RoutesLogic(){
         //define route
         let route1 = merahbawahData[checkArr!...6]
         for i in checkArr!...6 {
-            Routes.append(route1[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route1[i].namaStasiun, latitude: route1[i].latitude, longitude: route1[i].longitude))
         }
 
         let route2 = birukiriData[1...checkDes!]
         for i in 1...checkDes! {
-            Routes.append(route2[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route2[i].namaStasiun, latitude: route2[i].latitude, longitude: route2[i].longitude))
         }
         
         merahbawahData.reverse()
@@ -391,12 +391,12 @@ func RoutesLogic(){
         //define route
         let route1 = merahatasData[checkArr!...6]
         for i in checkArr!...6 {
-            Routes.append(route1[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route1[i].namaStasiun, latitude: route1[i].latitude, longitude: route1[i].longitude))
         }
 
         let route2 = merahbawahData[1...checkDes!]
         for i in 1...checkDes! {
-            Routes.append(route2[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route2[i].namaStasiun, latitude: route2[i].latitude, longitude: route2[i].longitude))
         }
         
         print(Routes)
@@ -420,12 +420,12 @@ func RoutesLogic(){
         //define route
         let route1 = merahbawahData[checkArr!...6]
         for i in checkArr!...6 {
-            Routes.append(route1[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route1[i].namaStasiun, latitude: route1[i].latitude, longitude: route1[i].longitude))
         }
 
         let route2 = merahatasData[1...checkDes!]
         for i in 1...checkDes! {
-            Routes.append(route2[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route2[i].namaStasiun, latitude: route2[i].latitude, longitude: route2[i].longitude))
         }
         
         merahbawahData.reverse()
@@ -453,12 +453,12 @@ func RoutesLogic(){
         //define route
         let route1 = merahatasData[checkArr!...6]
         for i in checkArr!...6 {
-            Routes.append(route1[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route1[i].namaStasiun, latitude: route1[i].latitude, longitude: route1[i].longitude))
         }
 
         let route2 = birukananData[1...checkDes!]
         for i in 1...checkDes! {
-            Routes.append(route2[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route2[i].namaStasiun, latitude: route2[i].latitude, longitude: route2[i].longitude))
         }
         
         MerahAtas.reverse()
@@ -486,12 +486,12 @@ func RoutesLogic(){
         //define route
         let route1 = birukananData[checkArr!...2]
         for i in checkArr!...2 {
-            Routes.append(route1[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route1[i].namaStasiun, latitude: route1[i].latitude, longitude: route1[i].longitude))
         }
 
         let route2 = merahatasData[1...checkDes!]
         for i in 1...checkDes! {
-            Routes.append(route2[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route2[i].namaStasiun, latitude: route2[i].latitude, longitude: route2[i].longitude))
         }
         
         birukananData.reverse()
@@ -520,12 +520,12 @@ func RoutesLogic(){
         //define route
         let route1 = BiruKanan[checkArr!...2]
         for i in checkArr!...2 {
-            Routes.append(route1[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route1[i].namaStasiun, latitude: route1[i].latitude, longitude: route1[i].longitude))
         }
 
         let route2 = MerahBawah[1...checkDes!]
         for i in 1...checkDes! {
-            Routes.append(route2[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route2[i].namaStasiun, latitude: route2[i].latitude, longitude: route2[i].longitude))
         }
         
         birukananData.reverse()
@@ -554,12 +554,12 @@ func RoutesLogic(){
         //define route
         let route1 = MerahBawah[checkArr!...6]
         for i in checkArr!...6 {
-            Routes.append(route1[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route1[i].namaStasiun, latitude: route1[i].latitude, longitude: route1[i].longitude))
         }
 
         let route2 = BiruKanan[1...checkDes!]
         for i in 1...checkDes! {
-            Routes.append(route2[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route2[i].namaStasiun, latitude: route2[i].latitude, longitude: route2[i].longitude))
         }
 
         merahbawahData.reverse()
@@ -586,12 +586,12 @@ func RoutesLogic(){
         //define route
         let route1 = hijauData[checkArr!...3]
         for i in checkArr!...3 {
-            Routes.append(route1[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route1[i].namaStasiun, latitude: route1[i].latitude, longitude: route1[i].longitude))
         }
         
         let route2 = birukiriData[0...checkDes!]
         for i in 0...checkDes! {
-            Routes.append(route2[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route2[i].namaStasiun, latitude: route2[i].latitude, longitude: route2[i].longitude))
         }
         
     }
@@ -620,12 +620,12 @@ func RoutesLogic(){
         //define route
         let route1 = birukiriData[checkArr!...2]
         for i in checkArr!...2 {
-            Routes.append(route1[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route1[i].namaStasiun, latitude: route1[i].latitude, longitude: route1[i].longitude))
         }
 
         let route2 = hijauData[0...checkDes!]
         for i in 0...checkDes! {
-            Routes.append(route2[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route2[i].namaStasiun, latitude: route2[i].latitude, longitude: route2[i].longitude))
         }
         
         hijauData.reverse()
@@ -654,17 +654,17 @@ func RoutesLogic(){
         //define route
         let route1 = hijauData[checkArr!...3]
         for i in checkArr!...3 {
-            Routes.append(route1[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route1[i].namaStasiun, latitude: route1[i].latitude, longitude: route1[i].longitude))
         }
         
         let route2 = birukiriData[0...1]
         for i in 0...1 {
-            Routes.append(route2[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route2[i].namaStasiun, latitude: route2[i].latitude, longitude: route2[i].longitude))
         }
         
         let route3 = merahatasData[0...checkDes!]
         for i in 0...checkDes! {
-            Routes.append(route3[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route3[i].namaStasiun, latitude: route3[i].latitude, longitude: route3[i].longitude))
         }
         
     }
@@ -700,17 +700,17 @@ func RoutesLogic(){
         //define route
         let route1 = merahatasData[checkArr!...6]
         for i in checkArr!...6 {
-            Routes.append(route1[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route1[i].namaStasiun, latitude: route1[i].latitude, longitude: route1[i].longitude))
         }
 
         let route2 = birukiriData[1...2]
         for i in 1...2 {
-            Routes.append(route2[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route2[i].namaStasiun, latitude: route2[i].latitude, longitude: route2[i].longitude))
         }
         
         let route3 = hijauData[0...checkDes!]
         for i in 0...checkDes! {
-            Routes.append(route3[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route3[i].namaStasiun, latitude: route3[i].latitude, longitude: route3[i].longitude))
         }
 
         hijauData.reverse()
@@ -740,17 +740,17 @@ func RoutesLogic(){
         //define route
         let route1 = hijauData[checkArr!...3]
         for i in checkArr!...3 {
-            Routes.append(route1[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route1[i].namaStasiun, latitude: route1[i].latitude, longitude: route1[i].longitude))
         }
         
         let route2 = birukiriData[0...2]
         for i in 0...2 {
-            Routes.append(route2[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route2[i].namaStasiun, latitude: route2[i].latitude, longitude: route2[i].longitude))
         }
         
         let route3 = birukananData[1...checkDes!]
         for i in 1...checkDes! {
-            Routes.append(route3[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route3[i].namaStasiun, latitude: route3[i].latitude, longitude: route3[i].longitude))
         }
         
 
@@ -787,17 +787,17 @@ func RoutesLogic(){
         //define route
         let route1 = birukananData[checkArr!...2]
         for i in checkArr!...2 {
-            Routes.append(route1[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route1[i].namaStasiun, latitude: route1[i].latitude, longitude: route1[i].longitude))
         }
 
         let route2 = birukiriData[1...2]
         for i in 1...2 {
-            Routes.append(route2[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route2[i].namaStasiun, latitude: route2[i].latitude, longitude: route2[i].longitude))
         }
         
         let route3 = hijauData[0...checkDes!]
         for i in 0...checkDes! {
-            Routes.append(route3[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route3[i].namaStasiun, latitude: route3[i].latitude, longitude: route3[i].longitude))
         }
 
         hijauData.reverse()
@@ -827,17 +827,17 @@ func RoutesLogic(){
         //define route
         let route1 = hijauData[checkArr!...3]
         for i in checkArr!...3 {
-            Routes.append(route1[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route1[i].namaStasiun, latitude: route1[i].latitude, longitude: route1[i].longitude))
         }
         
         let route2 = birukiriData[0...2]
         for i in 0...2 {
-            Routes.append(route2[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route2[i].namaStasiun, latitude: route2[i].latitude, longitude: route2[i].longitude))
         }
         
         let route3 = merahbawahData[1...checkDes!]
         for i in 1...checkDes! {
-            Routes.append(route3[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route3[i].namaStasiun, latitude: route3[i].latitude, longitude: route3[i].longitude))
         }
         
 
@@ -874,17 +874,17 @@ func RoutesLogic(){
         //define route
         let route1 = MerahBawah[checkArr!...6]
         for i in checkArr!...6 {
-            Routes.append(route1[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route1[i].namaStasiun, latitude: route1[i].latitude, longitude: route1[i].longitude))
         }
 
         let route2 = BiruKiri[1...2]
         for i in 1...2 {
-            Routes.append(route2[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route2[i].namaStasiun, latitude: route2[i].latitude, longitude: route2[i].longitude))
         }
         
         let route3 = Hijau[0...checkDes!]
         for i in 0...checkDes! {
-            Routes.append(route3[i].namaStasiun!)
+            RoutesData.append(RoutesContent(namaStasiun: route3[i].namaStasiun, latitude: route3[i].latitude, longitude: route3[i].longitude))
         }
 
         hijauData.reverse()
