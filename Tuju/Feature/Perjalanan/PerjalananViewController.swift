@@ -120,6 +120,8 @@ class PerjalananViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //navigationItem.hidesBackButton = true
+        
         //TOP
         view.addSubview(titleView)
         titleView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 85)
@@ -155,31 +157,43 @@ class PerjalananViewController: UIViewController {
         
         //TABLE
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
-        layout.itemSize = CGSize(width: 60, height: 60)
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 10, right: 20)
+        layout.itemSize = CGSize(width: 350, height: 90)
         layout.scrollDirection = .horizontal
         
         myCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        //if you use xibs:
+        //self.collectionView.register(UINib(nibName:"MyCollectionCell", bundle: nil), forCellWithReuseIdentifier: cellIdentifier)
+        
         myCollectionView.register(JourneyViewCell.self, forCellWithReuseIdentifier: "cell")
         myCollectionView.dataSource = self
         myCollectionView.delegate = self
         
         view.addSubview(myCollectionView)
         myCollectionView.frame = CGRect(x: 0, y: titleView.frame.size.height+contentView.frame.size.height, width: view.frame.size.width, height: view.frame.size.height-contentView.frame.size.height)
-        view.backgroundColor = .secondarySystemBackground
+        view.backgroundColor = .systemGray6
+        myCollectionView.backgroundColor = .systemGray6
     }
 
 
 }
 
 extension PerjalananViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: CGFloat(380), height: CGFloat(300))
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 20, left: 8, bottom: 5, right: 8)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = myCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! JourneyViewCell
-        
+        cell.backgroundColor = .white
         return cell
     }
     
