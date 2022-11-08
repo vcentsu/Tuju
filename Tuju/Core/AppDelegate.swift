@@ -8,19 +8,22 @@
 import UIKit
 import CoreData
 import GoogleMaps
+import NotificationCenter
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         GMSServices.provideAPIKey("AIzaSyC-gr-6ddyZ_XMEtf7plw4Rlpk61Syo30o")
         //GMSPlacesClient.provideAPIKey("AIzaSyC-gr-6ddyZ_XMEtf7plw4Rlpk61Syo30o")
-        
+        UNUserNotificationCenter.current().delegate = self
         return true
     }
-
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .badge, .sound])
+    }
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

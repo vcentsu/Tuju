@@ -11,8 +11,9 @@ import FloatingPanel
 import GoogleMaps
 import CoreLocation
 import AVFoundation
+import UserNotifications
 
-class MapViewController: UIViewController, GMSMapViewDelegate{
+class MapViewController: UIViewController, GMSMapViewDelegate, UNUserNotificationCenterDelegate{
     
     let mapView = GMSMapView(frame: .zero)
     
@@ -31,7 +32,16 @@ class MapViewController: UIViewController, GMSMapViewDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //view.addSubview(mapView)
+        
+        
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: [.alert, .badge, .sound]) { success, error in
+        }
+        
+        let content = UNMutableNotificationContent()
+        content.title = "You Will Arrive At Your Destination"
+        content.body = "You will arrive at ..."
+        
         
         // Do any additional setup after loading the view.
         manager.delegate = self
@@ -41,6 +51,19 @@ class MapViewController: UIViewController, GMSMapViewDelegate{
         
         let geoFenceRegion:CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(-6.209675277806892, 106.85025771231817), radius: 100, identifier: "Manggarai")
         manager.startMonitoring(for: geoFenceRegion)
+        geoFenceRegion.notifyOnEntry = true
+        geoFenceRegion.notifyOnExit = false
+        let trigger = UNLocationNotificationTrigger(region: geoFenceRegion, repeats: true)
+        
+        let id = UUID().uuidString
+        let request = UNNotificationRequest(
+            identifier: id, content: content, trigger: trigger)
+
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                // handle error
+            }
+        }
 
         let marker = GMSMarker()
         marker.map = mapView
@@ -62,6 +85,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate{
         circle.strokeColor = .red
         circle.strokeWidth = 3
     }
+    
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         print("Entered: \(region.identifier)")
@@ -92,7 +116,7 @@ extension MapViewController: CLLocationManagerDelegate{
         
         DispatchQueue.main.async {
             self.marker.map = self.mapView  // Setting marker on mapview in main thread.
-            }
+        }
         
         for currentLocation in locations{
             print("\(index): \(locations)")
