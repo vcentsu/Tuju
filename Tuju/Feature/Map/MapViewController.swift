@@ -47,7 +47,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
             zoom: 14.0
         )
 
-        let mapView = GMSMapView.map(withFrame: .zero, camera: camera)
+        mapView.camera = camera
 
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2D(latitude: coordinateLive.latitude, longitude: coordinateLive.longitude)
@@ -65,12 +65,13 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         let nav1 = UINavigationController(rootViewController: Tuju.PanelViewController())
         nav1.viewControllers = [panelVC]
         panelVC.delegate = self
+        panel.set(contentViewController: nav1)
+        panel.addPanel(toParent: self)
         
 //        let panelVC = Tuju.PanelViewController()
 //        panelVC.delegate = self
         
-        panel.set(contentViewController: nav1)
-        panel.addPanel(toParent: self)
+        
 
 //        self.view = mapView
         
@@ -95,10 +96,9 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         mapView.frame = view.bounds
     }
     
-
-    
-    func PanelViewController(_ vc: PanelViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?) {
+    func PanelViewController(didSelectLocationWith coordinates: CLLocationCoordinate2D?) {
         
+        print("HALLOMAP")
         guard let coordinates = coordinates else {
             return
         }
@@ -112,16 +112,15 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
                     longitude: coordinates.longitude,
                     zoom: 14.0
         )
-        
-        let mapView = GMSMapView.map(withFrame: .zero, camera: camera)
+
+        mapView.camera = camera
         
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2D(latitude: coordinates.latitude, longitude: coordinates.longitude)
         marker.title = locations.description
         marker.snippet = "Australia"
         marker.map = mapView
-        
-        self.view = mapView
+
     }
 }
 

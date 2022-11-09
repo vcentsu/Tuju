@@ -17,7 +17,7 @@ class PerjalananViewController: UIViewController {
     
     private var tujuan: UILabel = {
         let label = UILabel()
-        label.text = "Menuju Stasiun Manggarai"
+        label.text = "Menuju Stasiun \(Destination)"
         label.font = .systemFont(ofSize: 18, weight: .semibold)
         label.textColor = .white
         label.textAlignment = .center
@@ -25,9 +25,10 @@ class PerjalananViewController: UIViewController {
         return label
     }()
     
+    
     private var infoWaktu: UILabel = {
         let label = UILabel()
-        label.text = "4 stasiun lagi - 25 menit"
+        label.text = "\(Routes.count-1) stasiun lagi - 25 menit"
         label.font = .systemFont(ofSize: 14, weight: .medium)
         label.textColor = .white
         label.textAlignment = .center
@@ -46,155 +47,244 @@ class PerjalananViewController: UIViewController {
     
     private var cardView: UIView = {
         let view = UIView()
-        
         return view
     }()
     
     private var ubahBtn: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .systemOrange
+        button.backgroundColor = backgroundColor
         button.layer.cornerRadius = 18
         button.setTitle("Ubah Tujuan", for: .normal)
+        button.setTitleColor(UIColor(red: 250/255, green: 107/255, blue: 17/255, alpha: 1), for: .normal) //orangeBtn
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor(red: 250/255, green: 107/255, blue: 17/255, alpha: 1).cgColor
         return button
     }()
     
     private var stopBtn: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .systemOrange
+        button.backgroundColor = backgroundColor
         button.layer.cornerRadius = 18
         button.setTitle("Berhenti", for: .normal)
+        button.setTitleColor(UIColor(red: 250/255, green: 107/255, blue: 17/255, alpha: 1), for: .normal) //orangeBtn
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor(red: 250/255, green: 107/255, blue: 17/255, alpha: 1).cgColor
         return button
     }()
-    
-    private var contentStack:UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.distribution = .fillProportionally // Setting the distribution to fill based on the content
-        return stack
-    }()
-    
-//    private var btnStack:UIStackView = {
-//        let stack = UIStackView()
-//        stack.translatesAutoresizingMaskIntoConstraints = false
-//        stack.axis = .horizontal
-//        stack.distribution = .fillProportionally // Setting the distribution to fill based on the content
-//        return stack
-//    }()
     
     private var cardColor: UIView = {
         let view = UIView()
         return view
     }()
     
-    private var transitLabel: UILabel = {
+    private var transitLabel1: UILabel = {
         let label = UILabel()
         label.text = "TRANSIT"
         label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.textAlignment = .center
         return label
+        
+    }()
+    
+    private var transitLabel2: UILabel = {
+        let label = UILabel()
+        label.text = "TRANSIT"
+        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private let currentImg: UIImageView = {
+        let image = UIImage(systemName: "tram")
+        let imgView = UIImageView()
+        imgView.image = image
+        imgView.contentMode = .scaleAspectFit
+        imgView.clipsToBounds = true
+
+        return imgView
+    }()
+    
+    private let nextImg: UIImageView = {
+        let image = UIImage(systemName: "tram.fill")
+        let imgView = UIImageView()
+        imgView.image = image
+        imgView.contentMode = .scaleAspectFit
+        imgView.clipsToBounds = true
+
+        return imgView
+    }()
+    
+    private var goto: UIImageView = {
+        let imgView = UIImageView(image: UIImage(named: "moving"))
+        imgView.contentMode = .scaleAspectFit
+        imgView.clipsToBounds = true
+
+        return imgView
     }()
     
     private var currentStation: UILabel = {
         let label = UILabel()
-        label.text = "Palmerah"
-        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.text = "Pasar Minggu Baru"
+        label.font = .systemFont(ofSize: 13, weight: .regular)
+        label.numberOfLines = 0
+        label.textAlignment = .center
         return label
     }()
     
     private var nextStation: UILabel = {
         let label = UILabel()
         label.text = "Tanah Abang"
-        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: 13, weight: .regular)
+        label.textAlignment = .center
         return label
     }()
     
     private var timeStation: UILabel = {
         let label = UILabel()
         label.text = "15 menit"
-        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.font = .systemFont(ofSize: 13, weight: .thin)
+        label.textAlignment = .center
         return label
     }()
     
     private var myCollectionView: UICollectionView!
     
+    let currStation = ""
+    let neStation = ""
+    let isTransit = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        view.backgroundColor = backgroundColor
         //navigationItem.hidesBackButton = true
         
         //TOP
         view.addSubview(titleView)
+        titleView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.size.width, height: 85, enableInsets: false)
         titleView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 85)
+        titleView.applyGradient(withColours: [UIColor(red: 222/255, green: 0, blue: 0, alpha: 1),UIColor(red: 255/255, green: 119/255, blue: 10/255, alpha: 1)], gradientOrientation: .topRightBottomLeft)
         
         titleView.addSubview(tujuan)
         titleView.addSubview(infoWaktu)
-        tujuan.frame = CGRect(x: 20, y: 30, width: view.frame.size.width-40, height: 20)
-        infoWaktu.frame = CGRect(x: 20, y: 30+tujuan.frame.size.height, width: view.frame.size.width-40, height: 20)
+        tujuan.anchor(top: titleView.topAnchor, left: titleView.leftAnchor, bottom: nil, right: titleView.rightAnchor, paddingTop: 30, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: titleView.frame.size.width-40, height: 20, enableInsets: false)
+        infoWaktu.anchor(top: tujuan.bottomAnchor, left: titleView.leftAnchor, bottom: nil, right: titleView.rightAnchor, paddingTop: 0 , paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: titleView.frame.size.width-40, height: 20, enableInsets: false)
         
-        //CARD
+        
+        // MAIN CONTENT
         let contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.backgroundColor = .systemBlue
         
         view.addSubview(contentView)
-        contentView.frame = CGRect(x: 0, y: titleView.frame.size.height, width: view.frame.size.width, height: 280)
+        contentView.anchor(top: titleView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.size.width, height: 280, enableInsets: false)
         
         contentView.addSubview(background)
-        background.frame = CGRect(x: 0, y: 0, width: contentView.frame.size.width, height: contentView.frame.size.height)
+        background.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: contentView.frame.size.width, height: contentView.frame.size.height, enableInsets: false)
         
+        // CARD
         contentView.addSubview(cardView)
         cardView.backgroundColor = .white
-        cardView.frame = CGRect(x: 30, y: 15, width: contentView.frame.size.width-60, height: 152)
+        cardView.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: contentView.frame.size.width-60, height: 152, enableInsets: false)
         
         cardView.addSubview(cardColor)
         cardColor.backgroundColor = .systemGreen
-        cardColor.frame = CGRect(x: 0, y: 0, width: cardView.frame.size.width, height: 20)
+        cardColor.anchor(top: cardView.topAnchor, left: cardView.leftAnchor, bottom: nil, right: cardView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: cardView.frame.size.width, height: 20, enableInsets: false)
+        
+        cardView.addSubview(transitLabel1)
+        cardView.addSubview(currentImg)
+        currentImg.tintColor = .systemOrange
+        cardView.addSubview(currentStation)
+        cardView.addSubview(goto)
+        cardView.addSubview(transitLabel2)
+        cardView.addSubview(nextImg)
+        nextImg.tintColor = .systemOrange
+        cardView.addSubview(nextStation)
+        cardView.addSubview(timeStation)
+
+        transitLabel1.anchor(top: cardColor.bottomAnchor, left: cardView.leftAnchor, bottom: nil, right: nil, paddingTop: 12, paddingLeft: 20, paddingBottom: 0, paddingRight: 10, width: 90, height: 20, enableInsets: false)
+        currentImg.anchor(top: transitLabel1.bottomAnchor, left: cardView.leftAnchor, bottom: nil, right: nil, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 20, width: 50, height: 40, enableInsets: false)
+        currentStation.anchor(top: currentImg.bottomAnchor, left: cardView.leftAnchor, bottom: cardView.bottomAnchor, right: nil, paddingTop: 3, paddingLeft: 20, paddingBottom: 8, paddingRight: 10, width: 90, height: 35, enableInsets: false)
+        
+        transitLabel2.anchor(top: cardColor.bottomAnchor, left: nil, bottom: nil, right: cardView.rightAnchor, paddingTop: 12, paddingLeft: 0, paddingBottom: 0, paddingRight: 20, width: 90, height: 20, enableInsets: false)
+        nextImg.anchor(top: transitLabel2.bottomAnchor, left: nil, bottom: nil, right: cardView.rightAnchor, paddingTop: 10, paddingLeft: 20, paddingBottom: 0, paddingRight: 40, width: 50, height: 40, enableInsets: false)
+        nextStation.anchor(top: nextImg.bottomAnchor, left: nil, bottom: cardView.bottomAnchor, right: cardView.rightAnchor, paddingTop: 3, paddingLeft: 10, paddingBottom: 8, paddingRight: 20, width: 90, height: 35, enableInsets: false)
+        
+        goto.anchor(top: cardColor.bottomAnchor, left: currentImg.rightAnchor, bottom: nil, right: nextImg.leftAnchor, paddingTop: 40, paddingLeft: 5, paddingBottom: 0, paddingRight: 5, width: 140, height: 45, enableInsets: false)
+        timeStation.anchor(top: goto.bottomAnchor, left: currentImg.rightAnchor, bottom: nil, right: nextImg.leftAnchor, paddingTop: 15, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: 50, height: 15, enableInsets: false)
         
         contentView.addSubview(ubahBtn)
         contentView.addSubview(stopBtn)
-        ubahBtn.frame = CGRect(x: 30, y: 30+cardView.frame.size.height, width: 160, height: 40)
-        stopBtn.frame = CGRect(x: Int(contentView.frame.size.width-ubahBtn.frame.size.width)-30, y: 30+Int(cardView.frame.size.height), width: 160, height: 40)
+        ubahBtn.anchor(top: cardView.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: nil, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 15, width: 160, height: 40, enableInsets: false)
+        stopBtn.anchor(top: cardView.bottomAnchor, left: ubahBtn.rightAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 15, paddingLeft: 15, paddingBottom: 0, paddingRight: 30, width: 160, height: 40, enableInsets: false)
+
         
-        //TABLE
+        //COLLECTION
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 10, right: 20)
-        layout.itemSize = CGSize(width: 350, height: 90)
-        layout.scrollDirection = .horizontal
+        layout.scrollDirection = .vertical
         
         myCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        //if you use xibs:
-        //self.collectionView.register(UINib(nibName:"MyCollectionCell", bundle: nil), forCellWithReuseIdentifier: cellIdentifier)
-        
         myCollectionView.register(JourneyViewCell.self, forCellWithReuseIdentifier: "cell")
         myCollectionView.dataSource = self
         myCollectionView.delegate = self
         
         view.addSubview(myCollectionView)
-        myCollectionView.frame = CGRect(x: 0, y: titleView.frame.size.height+contentView.frame.size.height, width: view.frame.size.width, height: view.frame.size.height-contentView.frame.size.height)
+        myCollectionView.anchor(top: contentView.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.size.width, height: view.frame.size.height, enableInsets: false)
         view.backgroundColor = .systemGray6
         myCollectionView.backgroundColor = .systemGray6
+        
+        self.myCollectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
     }
-
 
 }
 
-extension PerjalananViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension PerjalananViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
+             let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as! SectionHeader
+             sectionHeader.label.text = "Rute Berikutnya"
+             return sectionHeader
+        } else { //No footer in this case but can add option for that
+             return UICollectionReusableView()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 40)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: CGFloat(380), height: CGFloat(300))
+        return CGSize(width: CGFloat(350), height: CGFloat(90))
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 20, left: 8, bottom: 5, right: 8)
+        return UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 20)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return (Routes.count - 2)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = myCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! JourneyViewCell
-        cell.backgroundColor = .white
-        return cell
+        let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? JourneyViewCell)
+        cell?.stationA.text = Routes[indexPath.row+1]
+        cell?.stationB.text = Routes[indexPath.row+2]
+        
+        if hijauData.contains(where: {$0.namaStasiun == Routes[indexPath.row+1]}) {
+            cell?.imageColor.image = UIImage(named: "hijaumuda")
+        } else if birukiriData.contains(where: {$0.namaStasiun == Routes[indexPath.row+1]}) {
+            cell?.imageColor.image = UIImage(named: "biru")
+        } else if birukananData.contains(where: {$0.namaStasiun == Routes[indexPath.row+1]}) {
+            cell?.imageColor.image = UIImage(named: "biru")
+        } else if merahatasData.contains(where: {$0.namaStasiun == Routes[indexPath.row+1]}) {
+            cell?.imageColor.image = UIImage(named: "merah")
+        } else if merahbawahData.contains(where: {$0.namaStasiun == Routes[indexPath.row+1]}) {
+            cell?.imageColor.image = UIImage(named: "merah")
+        }
+        
+        cell?.backgroundColor = .white
+        return cell!
     }
     
 }

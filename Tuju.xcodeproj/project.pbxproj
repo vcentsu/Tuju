@@ -39,8 +39,10 @@
 		D388132C28F563920062C702 /* TujuUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388132B28F563920062C702 /* TujuUITests.swift */; };
 		D388132E28F563920062C702 /* TujuUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388132D28F563920062C702 /* TujuUITestsLaunchTests.swift */; };
 		D3CCF72E2913C4170009E0B5 /* JourneyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CCF72D2913C4170009E0B5 /* JourneyViewCell.swift */; };
+		D3CCF736291A5CC00009E0B5 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CCF735291A5CC00009E0B5 /* SectionHeader.swift */; };
+		D3CCF73A291ADF1A0009E0B5 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CCF739291ADF1A0009E0B5 /* Gradient.swift */; };
 		D3E387B82902865500AFE101 /* Stasiun.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E387B72902865500AFE101 /* Stasiun.swift */; };
-		D3E387BB290653E900AFE101 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E387BA290653E900AFE101 /* Extension.swift */; };
+		D3E387BB290653E900AFE101 /* Anchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E387BA290653E900AFE101 /* Anchor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,8 +107,10 @@
 		D388132B28F563920062C702 /* TujuUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TujuUITests.swift; sourceTree = "<group>"; };
 		D388132D28F563920062C702 /* TujuUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TujuUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D3CCF72D2913C4170009E0B5 /* JourneyViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyViewCell.swift; sourceTree = "<group>"; };
+		D3CCF735291A5CC00009E0B5 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
+		D3CCF739291ADF1A0009E0B5 /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		D3E387B72902865500AFE101 /* Stasiun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stasiun.swift; sourceTree = "<group>"; };
-		D3E387BA290653E900AFE101 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		D3E387BA290653E900AFE101 /* Anchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anchor.swift; sourceTree = "<group>"; };
 		E673F6EFAFE6D7CECCB7F776 /* Pods-TujuTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TujuTests.release.xcconfig"; path = "Target Support Files/Pods-TujuTests/Pods-TujuTests.release.xcconfig"; sourceTree = "<group>"; };
 		E9BA84BE855D9660713126C9 /* Pods-Tuju-TujuUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tuju-TujuUITests.debug.xcconfig"; path = "Target Support Files/Pods-Tuju-TujuUITests/Pods-Tuju-TujuUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -170,6 +174,8 @@
 		5C06A0D729004A9E0003CBEE /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				D3E387BA290653E900AFE101 /* Anchor.swift */,
+				D3CCF739291ADF1A0009E0B5 /* Gradient.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -340,9 +346,9 @@
 				5CB26BF328FD49490057CC3E /* Logic */,
 				D388131828F563920062C702 /* Info.plist */,
 				D3CCF72D2913C4170009E0B5 /* JourneyViewCell.swift */,
+				D3CCF735291A5CC00009E0B5 /* SectionHeader.swift */,
 				D36911BD28F944F100E993E1 /* RecommendationTableViewCell.swift */,
 				D3E387B72902865500AFE101 /* Stasiun.swift */,
-				D3E387BA290653E900AFE101 /* Extension.swift */,
 			);
 			path = Tuju;
 			sourceTree = "<group>";
@@ -665,6 +671,7 @@
 				D388130C28F563910062C702 /* MapViewController.swift in Sources */,
 				752FC90628F92F8B00FBA82F /* PanelViewController.swift in Sources */,
 				5C06E05C290292CE001BA971 /* StationDataModel.swift in Sources */,
+				D3CCF736291A5CC00009E0B5 /* SectionHeader.swift in Sources */,
 				7567F9652912594000730487 /* TujuanEntryViewController.swift in Sources */,
 				D386070A2912BE97003D32FE /* PerjalananViewController.swift in Sources */,
 				5C41AD1B29098A980077F60A /* FavAndRecentLogic.swift in Sources */,
@@ -677,12 +684,13 @@
 				5C06E05E290294E1001BA971 /* StationDataDetails.swift in Sources */,
 				D388130828F563910062C702 /* AppDelegate.swift in Sources */,
 				7567F963291257D900730487 /* AsalEntryViewController.swift in Sources */,
-				D3E387BB290653E900AFE101 /* Extension.swift in Sources */,
+				D3E387BB290653E900AFE101 /* Anchor.swift in Sources */,
 				5CB26BF728FD4A290057CC3E /* Routes.swift in Sources */,
 				D36911BE28F944F100E993E1 /* RecommendationTableViewCell.swift in Sources */,
 				D388130A28F563910062C702 /* SceneDelegate.swift in Sources */,
 				5C2C60BA29092BCD00BE6C00 /* RecentDataModel.swift in Sources */,
 				D3E387B82902865500AFE101 /* Stasiun.swift in Sources */,
+				D3CCF73A291ADF1A0009E0B5 /* Gradient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
