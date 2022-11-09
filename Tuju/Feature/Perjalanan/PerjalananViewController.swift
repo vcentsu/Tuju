@@ -82,6 +82,7 @@ class PerjalananViewController: UIViewController {
         label.text = "TRANSIT"
         label.font = .systemFont(ofSize: 14, weight: .medium)
         label.textAlignment = .center
+        label.isHidden = true
         return label
         
     }()
@@ -91,6 +92,7 @@ class PerjalananViewController: UIViewController {
         label.text = "TRANSIT"
         label.font = .systemFont(ofSize: 14, weight: .medium)
         label.textAlignment = .center
+        label.isHidden = true
         return label
     }()
     
@@ -125,7 +127,7 @@ class PerjalananViewController: UIViewController {
     private var currentStation: UILabel = {
         let label = UILabel()
         label.text = "Pasar Minggu Baru"
-        label.font = .systemFont(ofSize: 13, weight: .regular)
+        label.font = .systemFont(ofSize: 14, weight: .regular)
         label.numberOfLines = 0
         label.textAlignment = .center
         return label
@@ -135,7 +137,7 @@ class PerjalananViewController: UIViewController {
         let label = UILabel()
         label.text = "Tanah Abang"
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 13, weight: .regular)
+        label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textAlignment = .center
         return label
     }()
@@ -150,8 +152,8 @@ class PerjalananViewController: UIViewController {
     
     private var myCollectionView: UICollectionView!
     
-    let currStation = ""
-    let neStation = ""
+    var currStation = ""
+    var neStation = ""
     let isTransit = false
     
     override func viewDidLoad() {
@@ -167,7 +169,7 @@ class PerjalananViewController: UIViewController {
         
         titleView.addSubview(tujuan)
         titleView.addSubview(infoWaktu)
-        tujuan.anchor(top: titleView.topAnchor, left: titleView.leftAnchor, bottom: nil, right: titleView.rightAnchor, paddingTop: 30, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: titleView.frame.size.width-40, height: 20, enableInsets: false)
+        tujuan.anchor(top: titleView.topAnchor, left: titleView.leftAnchor, bottom: nil, right: titleView.rightAnchor, paddingTop: 27, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: titleView.frame.size.width-40, height: 20, enableInsets: false)
         infoWaktu.anchor(top: tujuan.bottomAnchor, left: titleView.leftAnchor, bottom: nil, right: titleView.rightAnchor, paddingTop: 0 , paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: titleView.frame.size.width-40, height: 20, enableInsets: false)
         
         
@@ -177,7 +179,7 @@ class PerjalananViewController: UIViewController {
         contentView.backgroundColor = .systemBlue
         
         view.addSubview(contentView)
-        contentView.anchor(top: titleView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.size.width, height: 280, enableInsets: false)
+        contentView.anchor(top: titleView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.size.width, height: 285, enableInsets: false)
         
         contentView.addSubview(background)
         background.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: contentView.frame.size.width, height: contentView.frame.size.height, enableInsets: false)
@@ -185,7 +187,7 @@ class PerjalananViewController: UIViewController {
         // CARD
         contentView.addSubview(cardView)
         cardView.backgroundColor = .white
-        cardView.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: contentView.frame.size.width-60, height: 152, enableInsets: false)
+        cardView.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 30, width: contentView.frame.size.width-60, height: 157, enableInsets: false)
         
         cardView.addSubview(cardColor)
         cardColor.backgroundColor = .systemGreen
@@ -204,11 +206,11 @@ class PerjalananViewController: UIViewController {
 
         transitLabel1.anchor(top: cardColor.bottomAnchor, left: cardView.leftAnchor, bottom: nil, right: nil, paddingTop: 12, paddingLeft: 20, paddingBottom: 0, paddingRight: 10, width: 90, height: 20, enableInsets: false)
         currentImg.anchor(top: transitLabel1.bottomAnchor, left: cardView.leftAnchor, bottom: nil, right: nil, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 20, width: 50, height: 40, enableInsets: false)
-        currentStation.anchor(top: currentImg.bottomAnchor, left: cardView.leftAnchor, bottom: cardView.bottomAnchor, right: nil, paddingTop: 3, paddingLeft: 20, paddingBottom: 8, paddingRight: 10, width: 90, height: 35, enableInsets: false)
+        currentStation.anchor(top: currentImg.bottomAnchor, left: cardView.leftAnchor, bottom: cardView.bottomAnchor, right: nil, paddingTop: 3, paddingLeft: 20, paddingBottom: 8, paddingRight: 10, width: 90, height: 45, enableInsets: false)
         
         transitLabel2.anchor(top: cardColor.bottomAnchor, left: nil, bottom: nil, right: cardView.rightAnchor, paddingTop: 12, paddingLeft: 0, paddingBottom: 0, paddingRight: 20, width: 90, height: 20, enableInsets: false)
         nextImg.anchor(top: transitLabel2.bottomAnchor, left: nil, bottom: nil, right: cardView.rightAnchor, paddingTop: 10, paddingLeft: 20, paddingBottom: 0, paddingRight: 40, width: 50, height: 40, enableInsets: false)
-        nextStation.anchor(top: nextImg.bottomAnchor, left: nil, bottom: cardView.bottomAnchor, right: cardView.rightAnchor, paddingTop: 3, paddingLeft: 10, paddingBottom: 8, paddingRight: 20, width: 90, height: 35, enableInsets: false)
+        nextStation.anchor(top: nextImg.bottomAnchor, left: nil, bottom: cardView.bottomAnchor, right: cardView.rightAnchor, paddingTop: 3, paddingLeft: 10, paddingBottom: 8, paddingRight: 20, width: 90, height: 45, enableInsets: false)
         
         goto.anchor(top: cardColor.bottomAnchor, left: currentImg.rightAnchor, bottom: nil, right: nextImg.leftAnchor, paddingTop: 40, paddingLeft: 5, paddingBottom: 0, paddingRight: 5, width: 140, height: 45, enableInsets: false)
         timeStation.anchor(top: goto.bottomAnchor, left: currentImg.rightAnchor, bottom: nil, right: nextImg.leftAnchor, paddingTop: 15, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: 50, height: 15, enableInsets: false)
@@ -230,8 +232,7 @@ class PerjalananViewController: UIViewController {
         
         view.addSubview(myCollectionView)
         myCollectionView.anchor(top: contentView.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.size.width, height: view.frame.size.height, enableInsets: false)
-        view.backgroundColor = .systemGray6
-        myCollectionView.backgroundColor = .systemGray6
+        myCollectionView.backgroundColor = backgroundColor
         
         self.myCollectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
     }
@@ -272,19 +273,25 @@ extension PerjalananViewController: UICollectionViewDelegate, UICollectionViewDa
         cell?.stationB.text = Routes[indexPath.row+2]
         
         if hijauData.contains(where: {$0.namaStasiun == Routes[indexPath.row+1]}) {
-            cell?.imageColor.image = UIImage(named: "hijaumuda")
+            cell?.cardColor.backgroundColor = .systemGreen
         } else if birukiriData.contains(where: {$0.namaStasiun == Routes[indexPath.row+1]}) {
-            cell?.imageColor.image = UIImage(named: "biru")
+            cell?.cardColor.backgroundColor = .systemBlue
         } else if birukananData.contains(where: {$0.namaStasiun == Routes[indexPath.row+1]}) {
-            cell?.imageColor.image = UIImage(named: "biru")
+            cell?.cardColor.backgroundColor = .systemBlue
         } else if merahatasData.contains(where: {$0.namaStasiun == Routes[indexPath.row+1]}) {
-            cell?.imageColor.image = UIImage(named: "merah")
+            cell?.cardColor.backgroundColor = .systemRed
         } else if merahbawahData.contains(where: {$0.namaStasiun == Routes[indexPath.row+1]}) {
-            cell?.imageColor.image = UIImage(named: "merah")
+            cell?.cardColor.backgroundColor = .systemRed
+        }
+        
+        if indexPath.row == 0 {
+            currentStation.text = Routes[indexPath.row]
+            currStation = Routes[indexPath.row]
+            nextStation.text =  Routes[indexPath.row+1]
+            neStation = Routes[indexPath.row+1]
         }
         
         cell?.backgroundColor = .white
         return cell!
     }
-    
 }

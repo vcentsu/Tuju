@@ -57,15 +57,15 @@ class JourneyViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.addSubview(imageColor)
+        contentView.addSubview(cardColor)
         contentView.addSubview(stationA)
         contentView.addSubview(stationB)
         contentView.addSubview(goto)
         
-        imageColor.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: frame.size.width, height: 20, enableInsets: false)
-        stationA.anchor(top: imageColor.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: nil, paddingTop: 5, paddingLeft: 15, paddingBottom: 10, paddingRight: 10, width: 80, height: 20, enableInsets: false)
-        goto.anchor(top: imageColor.bottomAnchor, left: stationA.rightAnchor, bottom: bottomAnchor, right: nil, paddingTop: 5, paddingLeft: 10, paddingBottom: 10, paddingRight: 10, width: 90, height: 20, enableInsets: false)
-        stationB.anchor(top: imageColor.bottomAnchor, left: goto.rightAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 5, paddingLeft: 10, paddingBottom: 10, paddingRight: 15, width: 80, height: 20, enableInsets: false)
+        cardColor.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: frame.size.width, height: 20, enableInsets: false)
+        stationA.anchor(top: cardColor.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: nil, paddingTop: 5, paddingLeft: 15, paddingBottom: 10, paddingRight: 10, width: 80, height: 20, enableInsets: false)
+        goto.anchor(top: cardColor.bottomAnchor, left: stationA.rightAnchor, bottom: bottomAnchor, right: nil, paddingTop: 5, paddingLeft: 10, paddingBottom: 10, paddingRight: 10, width: 90, height: 20, enableInsets: false)
+        stationB.anchor(top: cardColor.bottomAnchor, left: goto.rightAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 5, paddingLeft: 10, paddingBottom: 10, paddingRight: 15, width: 80, height: 20, enableInsets: false)
     }
     
     required init?(coder: NSCoder) {
