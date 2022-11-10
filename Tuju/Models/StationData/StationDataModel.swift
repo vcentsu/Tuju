@@ -7,11 +7,12 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 
 struct Station {
     var namaStasiun: String?
-    var latitude: Double?
-    var longitude: Double?
+    var latitude: CLLocationDegrees?
+    var longitude: CLLocationDegrees?
     var isFavorite: Int?
 }

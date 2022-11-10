@@ -18,7 +18,7 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, UITableV
     
     weak var delegate: TujuanEntryViewControllerDelegate?
     
-    public var completion: ((String?) -> Void)?
+    public var completion: ((Station?) -> Void)?
     
     var locations = [Location]()
     
@@ -29,12 +29,14 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, UITableV
         let field = UITextField()
         field.placeholder = "Tujuan: Pilih Stasiun Tujuan"
         field.layer.cornerRadius = 9
-        field.backgroundColor = .tertiarySystemBackground
+        field.backgroundColor = .clear
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 50))
         field.leftViewMode = .always
         field.returnKeyType = .done
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
+        field.layer.borderWidth = 1
+        field.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
         
         return field
     }()
@@ -49,7 +51,7 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, UITableV
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .secondarySystemBackground
+        view.backgroundColor = backgroundColor
         
         view.addSubview(tujuanField)
         view.addSubview(tableView)
@@ -175,7 +177,7 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, UITableV
 //        print("YOUR COORDINATE: \(coordinate.latitude), \(coordinate.longitude)")
         
         tujuanField.text = stations[indexPath.row].namaStasiun
-        completion?(tujuanField.text)
+        completion?(stations[indexPath.row])
         
         dismiss(animated: true, completion: nil)
         
