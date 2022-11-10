@@ -28,7 +28,7 @@ class PerjalananViewController: UIViewController {
     
     private var infoWaktu: UILabel = {
         let label = UILabel()
-        label.text = "\(Routes.count-1) stasiun lagi - 25 menit"
+        label.text = "\(RoutesData.count-1) stasiun lagi - 25 menit"
         label.font = .systemFont(ofSize: 14, weight: .medium)
         label.textColor = .white
         label.textAlignment = .center
@@ -264,31 +264,29 @@ extension PerjalananViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (Routes.count - 2)
+        return (RoutesData.count - 2)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? JourneyViewCell)
-        cell?.stationA.text = Routes[indexPath.row+1]
-        cell?.stationB.text = Routes[indexPath.row+2]
+        cell?.stationA.text = RoutesData[indexPath.row+1].namaStasiun
+        cell?.stationB.text = RoutesData[indexPath.row+2].namaStasiun
         
-        if hijauData.contains(where: {$0.namaStasiun == Routes[indexPath.row+1]}) {
+        if hijauData.contains(where: {$0.namaStasiun == RoutesData[indexPath.row+1].namaStasiun}) {
             cell?.cardColor.backgroundColor = .systemGreen
-        } else if birukiriData.contains(where: {$0.namaStasiun == Routes[indexPath.row+1]}) {
+        } else if birukiriData.contains(where: {$0.namaStasiun == RoutesData[indexPath.row+1].namaStasiun}) {
             cell?.cardColor.backgroundColor = .systemBlue
-        } else if birukananData.contains(where: {$0.namaStasiun == Routes[indexPath.row+1]}) {
+        } else if birukananData.contains(where: {$0.namaStasiun == RoutesData[indexPath.row+1].namaStasiun}) {
             cell?.cardColor.backgroundColor = .systemBlue
-        } else if merahatasData.contains(where: {$0.namaStasiun == Routes[indexPath.row+1]}) {
+        } else if merahatasData.contains(where: {$0.namaStasiun == RoutesData[indexPath.row+1].namaStasiun}) {
             cell?.cardColor.backgroundColor = .systemRed
-        } else if merahbawahData.contains(where: {$0.namaStasiun == Routes[indexPath.row+1]}) {
+        } else if merahbawahData.contains(where: {$0.namaStasiun == RoutesData[indexPath.row+1].namaStasiun}) {
             cell?.cardColor.backgroundColor = .systemRed
         }
         
         if indexPath.row == 0 {
-            currentStation.text = Routes[indexPath.row]
-            currStation = Routes[indexPath.row]
-            nextStation.text =  Routes[indexPath.row+1]
-            neStation = Routes[indexPath.row+1]
+            currentStation.text = RoutesData[indexPath.row].namaStasiun
+            nextStation.text =  RoutesData[indexPath.row+1].namaStasiun
         }
         
         cell?.backgroundColor = .white
