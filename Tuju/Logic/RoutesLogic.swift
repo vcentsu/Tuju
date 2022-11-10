@@ -25,7 +25,7 @@ var numberOfTransit = 0
 func RoutesLogic(){
     
     
-    Routes.removeAll()
+    RoutesData.removeAll()
     TransitStation.removeAll()
     numberOfTransit = 0
     
@@ -108,7 +108,7 @@ func RoutesLogic(){
         
         if (checkArr! < checkDes!){
             let route = birukiriData[checkArr!...checkDes!]
-            print(Routes)
+            print(RoutesData)
             for i in checkArr!...checkDes! {
                 RoutesData.append(RoutesContent(namaStasiun: route[i].namaStasiun, latitude: route[i].latitude, longitude: route[i].longitude))
             }
@@ -139,7 +139,7 @@ func RoutesLogic(){
         
         if (checkArr! < checkDes!){
             let route = merahatasData[checkArr!...checkDes!]
-            print(Routes)
+            print(RoutesData)
             for i in checkArr!...checkDes! {
                 RoutesData.append(RoutesContent(namaStasiun: route[i].namaStasiun, latitude: route[i].latitude, longitude: route[i].longitude))
             }
@@ -399,7 +399,7 @@ func RoutesLogic(){
             RoutesData.append(RoutesContent(namaStasiun: route2[i].namaStasiun, latitude: route2[i].latitude, longitude: route2[i].longitude))
         }
         
-        print(Routes)
+        print(RoutesData)
         
         merahatasData.reverse()
     }

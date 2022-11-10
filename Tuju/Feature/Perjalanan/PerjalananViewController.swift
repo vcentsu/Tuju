@@ -150,6 +150,28 @@ class PerjalananViewController: UIViewController {
         return label
     }()
     
+    lazy var emptyImg: UIImageView = {
+        let image = UIImage(systemName: "tram.fill")
+        let imgView = UIImageView()
+        imgView.image = image
+        imgView.contentMode = .scaleAspectFit
+        imgView.clipsToBounds = true
+        imgView.tintColor = UIColor(red: 255/255, green: 118/255, blue: 12/255, alpha: 0.5)
+        imgView.isHidden = true
+        return imgView
+    }()
+    
+    lazy var emptyLbl: UILabel = {
+        let label = UILabel()
+        label.text = "Anda sedang berada pada rute terakhir"
+        label.font = .systemFont(ofSize: 18, weight: .regular)
+        label.textColor = UIColor(red: 124/255, green: 24/255, blue: 124/255, alpha: 0.5)
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.isHidden = true
+        return label
+    }()
+    
     private var myCollectionView: UICollectionView!
     
     var currStation = ""
@@ -235,6 +257,11 @@ class PerjalananViewController: UIViewController {
         myCollectionView.backgroundColor = backgroundColor
         
         self.myCollectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
+        
+        view.addSubview(emptyImg)
+        view.addSubview(emptyLbl)
+        emptyImg.anchor(top: myCollectionView.topAnchor , left: myCollectionView.leftAnchor, bottom: nil, right: myCollectionView.rightAnchor, paddingTop: 90, paddingLeft: 80, paddingBottom: 0, paddingRight: 80, width: 70, height: 70, enableInsets: false)
+        emptyLbl.anchor(top: emptyImg.bottomAnchor, left: myCollectionView.leftAnchor, bottom: nil, right: myCollectionView.rightAnchor, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 270, height: 60, enableInsets: false)
     }
 
 }
@@ -264,6 +291,33 @@ extension PerjalananViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if RoutesData.count == 2 {
+            if hijauData.contains(where: {$0.namaStasiun == RoutesData[0].namaStasiun}) {
+                cardColor.backgroundColor = .systemGreen
+                currentImg.tintColor = .systemGreen
+            } else if birukiriData.contains(where: {$0.namaStasiun == RoutesData[0].namaStasiun}) {
+                cardColor.backgroundColor = .systemBlue
+                currentImg.tintColor = .systemBlue
+            } else if birukananData.contains(where: {$0.namaStasiun == RoutesData[0].namaStasiun}) {
+                cardColor.backgroundColor = .systemBlue
+                currentImg.tintColor = .systemBlue
+            } else if merahatasData.contains(where: {$0.namaStasiun == RoutesData[0].namaStasiun}) {
+                cardColor.backgroundColor = .systemRed
+                currentImg.tintColor = .systemRed
+            } else if merahbawahData.contains(where: {$0.namaStasiun == RoutesData[0].namaStasiun}) {
+                cardColor.backgroundColor = .systemRed
+                currentImg.tintColor = .systemRed
+            }
+            
+            currentStation.text = RoutesData[0].namaStasiun
+            nextStation.text =  RoutesData[1].namaStasiun
+            
+            emptyImg.isHidden = false
+            emptyLbl.isHidden = false
+        }else{
+            emptyImg.isHidden = true
+            emptyLbl.isHidden = true
+        }
         return (RoutesData.count - 2)
     }
     
@@ -271,7 +325,7 @@ extension PerjalananViewController: UICollectionViewDelegate, UICollectionViewDa
         let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? JourneyViewCell)
         cell?.stationA.text = RoutesData[indexPath.row+1].namaStasiun
         cell?.stationB.text = RoutesData[indexPath.row+2].namaStasiun
-        
+
         if hijauData.contains(where: {$0.namaStasiun == RoutesData[indexPath.row+1].namaStasiun}) {
             cell?.cardColor.backgroundColor = .systemGreen
         } else if birukiriData.contains(where: {$0.namaStasiun == RoutesData[indexPath.row+1].namaStasiun}) {
@@ -285,9 +339,22 @@ extension PerjalananViewController: UICollectionViewDelegate, UICollectionViewDa
         }
         
         if indexPath.row == 0 {
+            if hijauData.contains(where: {$0.namaStasiun == RoutesData[indexPath.row].namaStasiun}) {
+                cardColor.backgroundColor = .systemGreen
+            } else if birukiriData.contains(where: {$0.namaStasiun == RoutesData[indexPath.row].namaStasiun}) {
+                cardColor.backgroundColor = .systemBlue
+            } else if birukananData.contains(where: {$0.namaStasiun == RoutesData[indexPath.row].namaStasiun}) {
+                cardColor.backgroundColor = .systemBlue
+            } else if merahatasData.contains(where: {$0.namaStasiun == RoutesData[indexPath.row].namaStasiun}) {
+                cardColor.backgroundColor = .systemRed
+            } else if merahbawahData.contains(where: {$0.namaStasiun == RoutesData[indexPath.row].namaStasiun}) {
+                cardColor.backgroundColor = .systemRed
+            }
+            
             currentStation.text = RoutesData[indexPath.row].namaStasiun
             nextStation.text =  RoutesData[indexPath.row+1].namaStasiun
         }
+        //collectionView.reloadData()
         
         cell?.backgroundColor = .white
         return cell!
