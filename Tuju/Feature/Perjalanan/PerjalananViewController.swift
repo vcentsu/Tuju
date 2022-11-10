@@ -53,8 +53,9 @@ class PerjalananViewController: UIViewController {
     private var ubahBtn: UIButton = {
         let button = UIButton()
         button.backgroundColor = backgroundColor
-        button.layer.cornerRadius = 18
+        button.layer.cornerRadius = 13
         button.setTitle("Ubah Tujuan", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .regular)
         button.setTitleColor(UIColor(red: 250/255, green: 107/255, blue: 17/255, alpha: 1), for: .normal) //orangeBtn
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor(red: 250/255, green: 107/255, blue: 17/255, alpha: 1).cgColor
@@ -64,8 +65,9 @@ class PerjalananViewController: UIViewController {
     private var stopBtn: UIButton = {
         let button = UIButton()
         button.backgroundColor = backgroundColor
-        button.layer.cornerRadius = 18
+        button.layer.cornerRadius = 13
         button.setTitle("Berhenti", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .regular)
         button.setTitleColor(UIColor(red: 250/255, green: 107/255, blue: 17/255, alpha: 1), for: .normal) //orangeBtn
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor(red: 250/255, green: 107/255, blue: 17/255, alpha: 1).cgColor
@@ -185,13 +187,13 @@ class PerjalananViewController: UIViewController {
         
         //TOP
         view.addSubview(titleView)
-        titleView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.size.width, height: 85, enableInsets: false)
-        titleView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 85)
+        titleView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.size.width, height: 80, enableInsets: false)
+        titleView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 80)
         titleView.applyGradient(withColours: [UIColor(red: 222/255, green: 0, blue: 0, alpha: 1),UIColor(red: 255/255, green: 119/255, blue: 10/255, alpha: 1)], gradientOrientation: .topRightBottomLeft)
         
         titleView.addSubview(tujuan)
         titleView.addSubview(infoWaktu)
-        tujuan.anchor(top: titleView.topAnchor, left: titleView.leftAnchor, bottom: nil, right: titleView.rightAnchor, paddingTop: 27, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: titleView.frame.size.width-40, height: 20, enableInsets: false)
+        tujuan.anchor(top: titleView.topAnchor, left: titleView.leftAnchor, bottom: nil, right: titleView.rightAnchor, paddingTop: 24, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: titleView.frame.size.width-40, height: 20, enableInsets: false)
         infoWaktu.anchor(top: tujuan.bottomAnchor, left: titleView.leftAnchor, bottom: nil, right: titleView.rightAnchor, paddingTop: 0 , paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: titleView.frame.size.width-40, height: 20, enableInsets: false)
         
         
@@ -201,7 +203,7 @@ class PerjalananViewController: UIViewController {
         contentView.backgroundColor = .systemBlue
         
         view.addSubview(contentView)
-        contentView.anchor(top: titleView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.size.width, height: 285, enableInsets: false)
+        contentView.anchor(top: titleView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.size.width, height: 275, enableInsets: false)
         
         contentView.addSubview(background)
         background.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: contentView.frame.size.width, height: contentView.frame.size.height, enableInsets: false)
@@ -239,8 +241,8 @@ class PerjalananViewController: UIViewController {
         
         contentView.addSubview(ubahBtn)
         contentView.addSubview(stopBtn)
-        ubahBtn.anchor(top: cardView.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: nil, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 15, width: 160, height: 40, enableInsets: false)
-        stopBtn.anchor(top: cardView.bottomAnchor, left: ubahBtn.rightAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 15, paddingLeft: 15, paddingBottom: 0, paddingRight: 30, width: 160, height: 40, enableInsets: false)
+        ubahBtn.anchor(top: cardView.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: nil, paddingTop: 15, paddingLeft: 30, paddingBottom: 0, paddingRight: 15, width: 160, height: 35, enableInsets: false)
+        stopBtn.anchor(top: cardView.bottomAnchor, left: ubahBtn.rightAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 15, paddingLeft: 15, paddingBottom: 0, paddingRight: 30, width: 160, height: 35, enableInsets: false)
 
         
         //COLLECTION
@@ -341,14 +343,19 @@ extension PerjalananViewController: UICollectionViewDelegate, UICollectionViewDa
         if indexPath.row == 0 {
             if hijauData.contains(where: {$0.namaStasiun == RoutesData[indexPath.row].namaStasiun}) {
                 cardColor.backgroundColor = .systemGreen
+                currentImg.tintColor = .systemGreen
             } else if birukiriData.contains(where: {$0.namaStasiun == RoutesData[indexPath.row].namaStasiun}) {
                 cardColor.backgroundColor = .systemBlue
+                currentImg.tintColor = .systemBlue
             } else if birukananData.contains(where: {$0.namaStasiun == RoutesData[indexPath.row].namaStasiun}) {
                 cardColor.backgroundColor = .systemBlue
+                currentImg.tintColor = .systemBlue
             } else if merahatasData.contains(where: {$0.namaStasiun == RoutesData[indexPath.row].namaStasiun}) {
                 cardColor.backgroundColor = .systemRed
+                currentImg.tintColor = .systemRed
             } else if merahbawahData.contains(where: {$0.namaStasiun == RoutesData[indexPath.row].namaStasiun}) {
                 cardColor.backgroundColor = .systemRed
+                currentImg.tintColor = .systemRed
             }
             
             currentStation.text = RoutesData[indexPath.row].namaStasiun

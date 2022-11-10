@@ -159,9 +159,6 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
             let coordinates = CLLocationCoordinate2D(latitude: station.latitude ?? 0.0, longitude: station.longitude ?? 0.0)
             self!.delegate?.PanelViewController(didSelectLocationWith: coordinates)
             
-//            DispatchQueue.main.async {
-//                self?.asalField.text = "Asal: \(station.namaStasiun ?? "Pilih stasiun asal")" //Departure
-//            }
             self?.asalField.text = "Asal: \(station.namaStasiun ?? "Pilih stasiun asal")" //Departure
             if let dep = station.namaStasiun {
                 self?.tempdep = dep
@@ -180,10 +177,7 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
         
         tujuanEntry.completion = { [weak self] station in
             guard let station = station else {return}
-            
-//            DispatchQueue.main.async {
-//                self?.tujuanField.text = "Tujuan: \(station.namaStasiun ?? "Pilih stasiun tujuan")" //Destination
-//            }
+
             self?.tujuanField.text = "Tujuan: \(station.namaStasiun ?? "Pilih stasiun tujuan")" //Destination
             if let des = station.namaStasiun {
                 self?.tempdes = des

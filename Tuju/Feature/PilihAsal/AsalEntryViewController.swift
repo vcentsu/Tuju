@@ -13,7 +13,7 @@ protocol AsalEntryViewControllerDelegate: AnyObject {
     func AsalEntryViewController(_ vc: AsalEntryViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?)
 }
 
-class AsalEntryViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, GMSMapViewDelegate {
+class AsalEntryViewController: UIViewController, UITextFieldDelegate, GMSMapViewDelegate {
     
     weak var delegate: AsalEntryViewControllerDelegate?
 
@@ -107,7 +107,33 @@ class AsalEntryViewController: UIViewController, UITextFieldDelegate, UITableVie
 //        asalField.isFirstResponder = true
     }
     
-    // UITextFieldDelegate
+    //Search
+    @objc func searchRecords(_ textField: UITextField){
+        
+        tableView.isHidden = false
+        self.stations.removeAll()
+        if textField.text?.count != 0 {
+            for station in originalStationsList {
+                if let stationToSearch = textField.text{
+                    let range  = station.namaStasiun?.lowercased().range(of: stationToSearch, options: .caseInsensitive, range: nil, locale: nil)
+                    if range != nil {
+                        self.stations.append(station)
+                    }
+                }
+            }
+        } else if textField.text?.count == 0 {
+            tableView.isHidden = true
+        } else {
+            for station in originalStationsList {
+                stations.append(station)
+            }
+        }
+        tableView.reloadData()
+    }
+}
+
+extension AsalEntryViewController: UITableViewDelegate, UITableViewDataSource {
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         asalField.resignFirstResponder()
         
@@ -122,40 +148,11 @@ class AsalEntryViewController: UIViewController, UITextFieldDelegate, UITableVie
         return true
     }
     
-    //Search
-    @objc func searchRecords(_ textField: UITextField){
-        
-        tableView.isHidden = false
-        self.stations.removeAll()
-        if textField.text?.count != 0 {
-            
-            for station in originalStationsList {
-                if let stationToSearch = textField.text{
-                    let range  = station.namaStasiun?.lowercased().range(of: stationToSearch, options: .caseInsensitive, range: nil, locale: nil)
-                    if range != nil {
-                        self.stations.append(station)
-                    }
-                }
-                
-            }
-        } else if textField.text?.count == 0 {
-            tableView.isHidden = true
-        } else {
-            
-            for station in originalStationsList {
-                stations.append(station)
-            }
-            
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            return 60
         }
-        
-        tableView.reloadData()
-    }
-    
-    
-    // UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
         return stations.count
     }
     
@@ -201,11 +198,5 @@ class AsalEntryViewController: UIViewController, UITextFieldDelegate, UITableVie
 //
 //           self.navigationController?.pushViewController(PanelVC, animated: true)
         
-        
-        
     }
-    
-    
-    
-    
 }
