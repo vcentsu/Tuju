@@ -37,10 +37,10 @@ class LogicSwift: UIViewController, UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TestTableViewCell", for: indexPath) as! TestTableViewCell
-        cell.departurestationLbl.text = Routes[indexPath.row]
+        cell.departurestationLbl.text = RoutesData[indexPath.row].namaStasiun
         
         if(indexPath.row < Routes.count - 1){
-            cell.destinationstationLbl.text = Routes[indexPath.row + 1]
+            cell.destinationstationLbl.text = RoutesData[indexPath.row + 1].namaStasiun
         }
         else{
             cell.destinationstationLbl.text = "Arrived"
@@ -54,7 +54,7 @@ class LogicSwift: UIViewController, UITableViewDataSource, UITableViewDelegate{
             cell.transitLbl.isHidden = true
         }
         //kalo belom arrive dan ada turun di TA atau Manggarai
-        else if(Routes[indexPath.row] == "Tanah Abang" || Routes[indexPath.row] == "Manggarai"){
+        else if(RoutesData[indexPath.row].namaStasiun == "Tanah Abang" || RoutesData[indexPath.row].namaStasiun == "Manggarai"){
             cell.transitLbl.isHidden = false
             cell.transitLbl.text = "Transit"
         }

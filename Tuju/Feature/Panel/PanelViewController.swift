@@ -139,7 +139,7 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
         print(recentData)
         print(favoriteData)
         print(TransitStation)
-        print(Routes)
+        print(RoutesData)
         print(numberOfTransit)
         
         self.navigationController?.pushViewController(Tuju.PerjalananViewController(), animated: true)
