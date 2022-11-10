@@ -8,6 +8,9 @@ target 'Tuju' do
   # Pods for Tuju
   pod 'GoogleMaps', '7.1.0'
   pod 'FloatingPanel', '2.5.4'
+  pod 'Alamofire'
+  pod 'SwiftyJSON'
+  pod 'GooglePlaces'
 
   target 'TujuTests' do
     inherit! :search_paths

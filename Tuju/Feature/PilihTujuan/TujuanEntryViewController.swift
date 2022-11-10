@@ -25,7 +25,7 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, UITableV
     var stations = [Station]()
     var originalStationsList = [Station]()
     
-    private let tujuanField: UITextField = {
+    private let destinationTextfield: UITextField = {
         let field = UITextField()
         field.placeholder = "Tujuan: Pilih Stasiun Tujuan"
         field.layer.cornerRadius = 9
@@ -51,7 +51,7 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, UITableV
         super.viewDidLoad()
         view.backgroundColor = .secondarySystemBackground
         
-        view.addSubview(tujuanField)
+        view.addSubview(destinationTextfield)
         view.addSubview(tableView)
         
         stations.append(pondokRanji)
@@ -84,18 +84,18 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, UITableV
         
         tableView.delegate = self
         tableView.dataSource = self
-        tujuanField.delegate = self
+        destinationTextfield.delegate = self
         
         tableView.backgroundColor = .secondarySystemBackground
         
-        tujuanField.addTarget(self, action: #selector(searchRecords(_ :)), for: .editingChanged)
+        destinationTextfield.addTarget(self, action: #selector(searchRecords(_ :)), for: .editingChanged)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        tujuanField.frame = CGRect(x: 20, y: 30, width: view.frame.size.width-40, height: 50)
-        let tableY: CGFloat = tujuanField.frame.origin.y+tujuanField.frame.size.height+5
+        destinationTextfield.frame = CGRect(x: 20, y: 30, width: view.frame.size.width-40, height: 50)
+        let tableY: CGFloat = destinationTextfield.frame.origin.y+destinationTextfield.frame.size.height+5
         tableView.frame = CGRect(x: 0,
                                  y: tableY,
                                  width: view.frame.size.width,
@@ -103,9 +103,9 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, UITableV
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        tujuanField.resignFirstResponder()
+        destinationTextfield.resignFirstResponder()
         
-        if let text = tujuanField.text, !text.isEmpty {
+        if let text = destinationTextfield.text, !text.isEmpty {
             LocationManager.shared.findLocations(with: text) { [weak self] locations in
                 DispatchQueue.main.async {
                     self?.locations = locations
@@ -174,8 +174,8 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, UITableV
 //
 //        print("YOUR COORDINATE: \(coordinate.latitude), \(coordinate.longitude)")
         
-        tujuanField.text = stations[indexPath.row].namaStasiun
-        completion?(tujuanField.text)
+        destinationTextfield.text = stations[indexPath.row].namaStasiun
+        completion?(destinationTextfield.text)
         
         dismiss(animated: true, completion: nil)
         

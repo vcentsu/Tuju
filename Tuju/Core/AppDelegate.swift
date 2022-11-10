@@ -8,17 +8,26 @@
 import UIKit
 import CoreData
 import GoogleMaps
+import GooglePlaces
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var window: UIWindow?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         GMSServices.provideAPIKey("AIzaSyC-gr-6ddyZ_XMEtf7plw4Rlpk61Syo30o")
-        //GMSPlacesClient.provideAPIKey("AIzaSyC-gr-6ddyZ_XMEtf7plw4Rlpk61Syo30o")
+        GMSPlacesClient.provideAPIKey("AIzaSyC-gr-6ddyZ_XMEtf7plw4Rlpk61Syo30o")
         
         return true
+    }
+    
+    func clear(){
+        let VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
+        window?.rootViewController = VC
+        window?.makeKeyAndVisible()
     }
 
     // MARK: UISceneSession Lifecycle

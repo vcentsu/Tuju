@@ -8,6 +8,7 @@
 import UIKit
 import FloatingPanel
 import GoogleMaps
+import CoreLocation
 
 protocol PanelViewControllerDelegate: AnyObject {
     func PanelViewController(_ vc: PanelViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?)
@@ -17,13 +18,17 @@ class PanelViewController: UIViewController, UITextFieldDelegate, AsalEntryViewC
     
     let panel = FloatingPanelController()
     
+    var sourceCordinate: CLLocationCoordinate2D!
+    var destinationCordinate: CLLocationCoordinate2D!
+    var locationManager: CLLocationManager!
+    
     weak var delegate: PanelViewControllerDelegate?
     
     var locations = [Location]()
     
     let mapView = GMSMapView(frame: .zero)
     
-    var asalField: UITextField = {
+    var sourceTextfield: UITextField = {
         let field = UITextField()
         field.placeholder = "Asal: Pilih Stasiun Asal"
         field.layer.cornerRadius = 9
@@ -34,7 +39,7 @@ class PanelViewController: UIViewController, UITextFieldDelegate, AsalEntryViewC
         return field
     }()
     
-    var tujuanField: UITextField = {
+    var destinationTextfield: UITextField = {
         let field = UITextField()
         field.placeholder = "Tujuan: Pilih Stasiun Tujuan"
         field.layer.cornerRadius = 9
@@ -75,14 +80,14 @@ class PanelViewController: UIViewController, UITextFieldDelegate, AsalEntryViewC
         view.backgroundColor = .secondarySystemBackground
         
         //Asal
-        view.addSubview(asalField)
-        asalField.addTarget(self, action: #selector(didTapAsal), for: .touchUpInside)
-        asalField.delegate = self
+        view.addSubview(sourceTextfield)
+        sourceTextfield.addTarget(self, action: #selector(didTapAsal), for: .touchUpInside)
+        sourceTextfield.delegate = self
     
         //Tujuan
-        view.addSubview(tujuanField)
-        tujuanField.addTarget(self, action: #selector(didTapTujuan), for: .touchUpInside)
-        tujuanField.delegate = self
+        view.addSubview(destinationTextfield)
+        destinationTextfield.addTarget(self, action: #selector(didTapTujuan), for: .touchUpInside)
+        destinationTextfield.delegate = self
     
         
         view.addSubview(label)
@@ -99,11 +104,11 @@ class PanelViewController: UIViewController, UITextFieldDelegate, AsalEntryViewC
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         mapView.frame = view.bounds
-        asalField.frame = CGRect(x: 20, y: 30, width: view.frame.size.width-40, height: 50)
-        tujuanField.frame = CGRect(x: 20, y: 40+asalField.frame.size.height, width: view.frame.size.width-40, height: 50)
+        sourceTextfield.frame = CGRect(x: 20, y: 30, width: view.frame.size.width-40, height: 50)
+        destinationTextfield.frame = CGRect(x: 20, y: 40+sourceTextfield.frame.size.height, width: view.frame.size.width-40, height: 50)
 
         label.sizeToFit()
-        label.frame = CGRect(x: 25, y: 120+tujuanField.frame.size.height, width: label.frame.size.width, height: label.frame.size.height)
+        label.frame = CGRect(x: 25, y: 120+destinationTextfield.frame.size.height, width: label.frame.size.width, height: label.frame.size.height)
         startBtn.frame = CGRect(x: 20, y: 180+label.frame.size.height, width: view.frame.size.width-40, height: 50)
         mapView.frame = view.bounds
     }
@@ -111,8 +116,8 @@ class PanelViewController: UIViewController, UITextFieldDelegate, AsalEntryViewC
     @objc private func didTapMulai() {
         // Draw the direction
         panel.move(to: .tip, animated: true)
-        Departure = self.asalField.text!
-        Destination = self.tujuanField.text!
+        Departure = self.sourceTextfield.text!
+        Destination = self.destinationTextfield.text!
         RoutesLogic()
         FavAndRecentLogic()
         print(recentData)
@@ -121,13 +126,23 @@ class PanelViewController: UIViewController, UITextFieldDelegate, AsalEntryViewC
         print(RoutesData)
         print(numberOfTransit)
         
+        if sourceCordinate != nil && destinationCordinate != nil{
+            let VC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
+            VC.origin = sourceCordinate
+            VC.destination = destinationCordinate
+            self.present(VC, animated: true)
+        }else{
+            print("BOTH_CORDINATES_NOT_PRESENT")
+        }
+        
+        
     }
     
     @objc private func didTapAsal() {
         let asalEntry = Tuju.AsalEntryViewController()
         asalEntry.completion = { [weak self] text in
             DispatchQueue.main.async {
-                self?.asalField.text = text //Departure
+                self?.sourceTextfield.text = text //Departure
             }
         }
         let vc = UINavigationController(rootViewController: asalEntry)
@@ -138,7 +153,7 @@ class PanelViewController: UIViewController, UITextFieldDelegate, AsalEntryViewC
         let tujuanEntry = Tuju.TujuanEntryViewController()
         tujuanEntry.completion = { [weak self] text in
             DispatchQueue.main.async {
-                self?.tujuanField.text = text //Destination
+                self?.destinationTextfield.text = text //Destination
             }
         }
         let vc = UINavigationController(rootViewController: tujuanEntry)
@@ -147,18 +162,18 @@ class PanelViewController: UIViewController, UITextFieldDelegate, AsalEntryViewC
     
     func AsalEntryViewController(_ vc: AsalEntryViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?) {
         
-        guard let coordinates = coordinates else {
-            return
-        }
-        
-        panel.move(to: .half, animated: true)
-        
-        print("PANEL: \(coordinates.latitude), \(coordinates.longitude)")
-        
-      let camera = GMSCameraPosition.camera(withLatitude: coordinates.latitude, longitude: coordinates.longitude, zoom: 16.0)
-        mapView.animate(toLocation: coordinates)
-        mapView.camera = camera
-        mapView.animate(to: camera)
+//        guard let coordinates = coordinates else {
+//            return
+//        }
+//
+//        panel.move(to: .half, animated: true)
+//
+//        print("PANEL: \(coordinates.latitude), \(coordinates.longitude)")
+//
+//      let camera = GMSCameraPosition.camera(withLatitude: coordinates.latitude, longitude: coordinates.longitude, zoom: 16.0)
+//        mapView.animate(toLocation: coordinates)
+//        mapView.camera = camera
+//        mapView.animate(to: camera)
         
     }
     
