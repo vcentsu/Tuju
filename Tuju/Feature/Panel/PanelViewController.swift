@@ -8,6 +8,8 @@
 import UIKit
 import FloatingPanel
 import GoogleMaps
+import CoreLocation
+import UserNotifications
 
 protocol PanelViewControllerDelegate: AnyObject {
     func PanelViewController(_ vc: PanelViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?)
@@ -115,6 +117,7 @@ class PanelViewController: UIViewController, UITextFieldDelegate, AsalEntryViewC
         Destination = self.tujuanField.text!
         RoutesLogic()
         FavAndRecentLogic()
+        addDestinationGeofence()
         print(recentData)
         print(favoriteData)
         print(TransitStation)

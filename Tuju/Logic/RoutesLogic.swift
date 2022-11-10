@@ -25,7 +25,7 @@ var numberOfTransit = 0
 func RoutesLogic(){
     
     
-    Routes.removeAll()
+    RoutesData.removeAll()
     TransitStation.removeAll()
     numberOfTransit = 0
     
@@ -846,9 +846,9 @@ func RoutesLogic(){
     //Merah Bawah - Biru Kiri - Hijau
     else if (merahbawahData.contains(where: {$0.namaStasiun == Departure}) && hijauData.contains(where: {$0.namaStasiun == Destination})){
         
-        hijauData.reverse()
-        birukiriData.reverse()
         merahbawahData.reverse()
+        birukiriData.reverse()
+        hijauData.reverse()
         
         //cek index array
         let checkArr = merahbawahData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})
@@ -872,17 +872,17 @@ func RoutesLogic(){
         }
         
         //define route
-        let route1 = MerahBawah[checkArr!...6]
+        let route1 = merahbawahData[checkArr!...6]
         for i in checkArr!...6 {
             RoutesData.append(RoutesContent(namaStasiun: route1[i].namaStasiun, latitude: route1[i].latitude, longitude: route1[i].longitude))
         }
 
-        let route2 = BiruKiri[1...2]
+        let route2 = birukiriData[1...2]
         for i in 1...2 {
             RoutesData.append(RoutesContent(namaStasiun: route2[i].namaStasiun, latitude: route2[i].latitude, longitude: route2[i].longitude))
         }
         
-        let route3 = Hijau[0...checkDes!]
+        let route3 = hijauData[0...checkDes!]
         for i in 0...checkDes! {
             RoutesData.append(RoutesContent(namaStasiun: route3[i].namaStasiun, latitude: route3[i].latitude, longitude: route3[i].longitude))
         }

@@ -38,33 +38,58 @@ class MapViewController: UIViewController, GMSMapViewDelegate, UNUserNotificatio
             options: [.alert, .badge, .sound]) { success, error in
         }
         
-        let content = UNMutableNotificationContent()
-        content.title = "You Will Arrive At Your Destination"
-        content.body = "You will arrive at ..."
-        
-        
         // Do any additional setup after loading the view.
         manager.delegate = self
         manager.requestAlwaysAuthorization()
         manager.startUpdatingLocation()
         mapView.delegate = self
         
-        let geoFenceRegion:CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(-6.209675277806892, 106.85025771231817), radius: 100, identifier: "Manggarai")
-        manager.startMonitoring(for: geoFenceRegion)
-        geoFenceRegion.notifyOnEntry = true
-        geoFenceRegion.notifyOnExit = false
-        let trigger = UNLocationNotificationTrigger(region: geoFenceRegion, repeats: true)
+        //GEOFENCE AND ALERT MANGGARAI
+        let geoFenceRegionManggarai:CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(-6.209675277806892, 106.85025771231817), radius: 100, identifier: "Manggarai")
+        manager.startMonitoring(for: geoFenceRegionManggarai)
+        geoFenceRegionManggarai.notifyOnEntry = true
+        geoFenceRegionManggarai.notifyOnExit = false
+        let manggaraiTrigger = UNLocationNotificationTrigger(region: geoFenceRegionManggarai, repeats: true)
         
-        let id = UUID().uuidString
-        let request = UNNotificationRequest(
-            identifier: id, content: content, trigger: trigger)
+        let contentManggarai = UNMutableNotificationContent()
+        contentManggarai.title = "You Will Arrive At \(geoFenceRegionManggarai.identifier)"
+        contentManggarai.body = "Prepare yourself! Y    ou will arrive at \(geoFenceRegionManggarai.identifier)"
+        contentManggarai.sound = UNNotificationSound.default
+        
+        let Manggaraiid = UUID().uuidString
+        let Manggarairequest = UNNotificationRequest(
+            identifier: Manggaraiid, content: contentManggarai, trigger: manggaraiTrigger)
 
-        UNUserNotificationCenter.current().add(request) { error in
+        UNUserNotificationCenter.current().add(Manggarairequest) { error in
             if let error = error {
                 // handle error
             }
         }
-
+        
+        //GEOFENCE AND ALERT TANAH ABANG
+        let geoFenceRegionTanahAbang: CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(-6.2071537130553835, 106.79744762581176), radius: 100, identifier: "Tanah Abang")
+        manager.startMonitoring(for: geoFenceRegionTanahAbang)
+        geoFenceRegionTanahAbang.notifyOnEntry = true
+        geoFenceRegionTanahAbang.notifyOnExit = false
+        let TanahAbangTrigger = UNLocationNotificationTrigger(region: geoFenceRegionTanahAbang, repeats: true)
+        
+        let contentTanahAbang = UNMutableNotificationContent()
+        contentTanahAbang.title = "You Will Arrive At \(geoFenceRegionTanahAbang.identifier)"
+        contentTanahAbang.body = "Prepare yourself! You will arrive at \(geoFenceRegionTanahAbang.identifier)"
+        contentTanahAbang.sound = UNNotificationSound.default
+        
+        let TanahAbangid = UUID().uuidString
+        let TanahAbangrequest = UNNotificationRequest(
+            identifier: TanahAbangid, content: contentTanahAbang, trigger: TanahAbangTrigger)
+        
+        UNUserNotificationCenter.current().add(TanahAbangrequest) { error in
+            if let error = error {
+                // handle error
+            }
+        }
+        
+        
+        
         let marker = GMSMarker()
         marker.map = mapView
         
@@ -89,6 +114,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, UNUserNotificatio
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         print("Entered: \(region.identifier)")
+        print(region)
         AudioServicesPlaySystemSound(systemSoundID)
     }
     
@@ -122,6 +148,36 @@ extension MapViewController: CLLocationManagerDelegate{
             print("\(index): \(locations)")
             //"0: [locations]"
         }
+    }
+}
+
+func addDestinationGeofence(){
+    UNUserNotificationCenter.current().requestAuthorization(
+        options: [.alert, .badge, .sound]) { success, error in
+    }
+    let manager = CLLocationManager()
+    //GEOFENCE AND ALERT DESTINATION
+    var destinationGeo = RoutesData.last
+    let geoFenceDestination: CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(destinationGeo?.latitude ?? 0, destinationGeo?.longitude ?? 0), radius: 100, identifier: "\(destinationGeo?.namaStasiun ?? "")")
+    manager.startMonitoring(for: geoFenceDestination)
+    geoFenceDestination.notifyOnEntry = true
+    geoFenceDestination.notifyOnExit = false
+    let destinationTrigger = UNLocationNotificationTrigger(region: geoFenceDestination, repeats: true)
+    
+    let contentDestination = UNMutableNotificationContent()
+    contentDestination.title = "You Will Arrive At \(geoFenceDestination.identifier)"
+    contentDestination.body = "Prepare Yourself! You will arrive at \(geoFenceDestination.identifier)"
+    contentDestination.sound = UNNotificationSound.default
+    
+    let Destinationid = UUID().uuidString
+    let Destinationrequest = UNNotificationRequest(identifier: Destinationid, content: contentDestination, trigger: destinationTrigger)
+    
+    UNUserNotificationCenter.current().add(Destinationrequest) { error in
+        if let error = error {
+            // handle error
+        }
+        
+        print(geoFenceDestination)
     }
 }
 
