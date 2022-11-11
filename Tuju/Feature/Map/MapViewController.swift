@@ -4,20 +4,40 @@
 //
 //  Created by Vincentius Sutanto on 11/10/22.
 //
-
 import UIKit
 import MapKit
 import FloatingPanel
 import GoogleMaps
 import CoreLocation
+import Alamofire
+import SwiftyJSON
+
+protocol PanelViewControllerDelegate: AnyObject {
+    func PanelViewController(didSelectLocationWith coordinates: CLLocationCoordinate2D?)
+    func getDataAsal(didSelectLocationWithAsal asalCoordinates: CLLocationCoordinate2D?)
+    func getDataTujuan(didSelectLocationWithTujuan tujuanCoordinates: CLLocationCoordinate2D?)
+}
 
 class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControllerDelegate {
     
-    let mapView = GMSMapView(frame: .zero)
+    var locationManager: CLLocationManager!
+    var permissionFlag: Bool!
+    var currentLocation: CLLocation!
+    var mapView = GMSMapView(frame: .zero)
+    var polylineArray: [GMSPolyline] = []
+    var origin: CLLocationCoordinate2D!
+    var destination: CLLocationCoordinate2D!
+    var transferPolyline: String!
+    var pickupCoordinate: CLLocationCoordinate2D!
+    var geocoder: GMSGeocoder!
+    var city: String!
+    var address: String!
+    
+//    let mapView = GMSMapView(frame: .zero)
     
     let notificationCenter = UNUserNotificationCenter.current()
     
-    let manager = CLLocationManager()
+//    let manager = CLLocationManager()
     
     let panel = FloatingPanelController()
     
@@ -31,81 +51,89 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //view.addSubview(mapView)
+        city = ""
+        address = ""
+        geocoder = GMSGeocoder()
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
         
-        // Do any additional setup after loading the view.
-        self.manager.delegate = self
-        self.manager.requestWhenInUseAuthorization()
-        self.manager.startUpdatingLocation()
-        self.mapView.delegate = self
-        
+        //Set default map
+        recenterMaps()
 
-        // Set Initial Camera Position
-        let camera = GMSCameraPosition.camera(
-            withLatitude: coordinateLive.latitude,
-            longitude: coordinateLive.longitude,
-            zoom: 14.0
-        )
-
-        mapView.camera = camera
-
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: coordinateLive.latitude, longitude: coordinateLive.longitude)
-        marker.title = "Stasiun Manggarai"
-        marker.map = mapView
-
-        mapView.delegate = self
-        self.view = mapView
-        
-        print(GMSServices.openSourceLicenseInfo())
-        
-        manager.requestWhenInUseAuthorization()
-//        self.mapView.travelMode = .cycling
-        let panelVC = Tuju.PanelViewController(nibName: nil, bundle: nil) //ViewController = Name of your controller
+        let panelVC = Tuju.PanelViewController() //ViewController = Name of your controller
         let nav1 = UINavigationController(rootViewController: Tuju.PanelViewController())
         nav1.viewControllers = [panelVC]
         panelVC.delegate = self
         panel.set(contentViewController: nav1)
         panel.addPanel(toParent: self)
         
-//        let panelVC = Tuju.PanelViewController()
-//        panelVC.delegate = self
-        
-        
-
-//        self.view = mapView
-        
+        print("License: \n\n\(GMSServices.openSourceLicenseInfo())")
     }
-    
-    //    func startNav() {
-    //      var destinations = [GMSNavigationWaypoint]()
-    //      destinations.append(GMSNavigationWaypoint.init(placeID: "ChIJmQ6sHHH0aS4R2Kc4sEiEyUc",
-    //                                                     title: "Stasiun Manggarai")!)
-    //      destinations.append(GMSNavigationWaypoint.init(placeID:"ChIJt_uvMxX0aS4RgasvyQI7DJU",
-    //                                                     title:"Stasiun Cikini")!)
-    //
-    //      mapView.navigator?.setDestinations(destinations) { routeStatus in
-    //        self.mapView.navigator?.isGuidanceActive = true
-    //        self.mapView.locationSimulator?.simulateLocationsAlongExistingRoute()
-    //        self.mapView.cameraMode = .following
-    //      }
-    //    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         mapView.frame = view.bounds
     }
     
-    func PanelViewController(didSelectLocationWith coordinates: CLLocationCoordinate2D?) {
+    func recenterMaps(){
         
-        print("HALLOMAP")
+        self.permissionFlag = true
+        self.currentLocation = locationManager.location
+        
+        // Set Initial Camera Position
+        self.pickupCoordinate = CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
+        
+        if pickupCoordinate != nil{
+            
+            //Set Camera Position
+            let camera = GMSCameraPosition.camera(withLatitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude, zoom: 14.0)
+            mapView.camera = camera
+
+            mapView.mapType = .normal
+            geocoder.reverseGeocodeCoordinate(CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude), completionHandler: {
+                response, error in
+                if error == nil{
+                    if let resultAdd = response?.firstResult(){
+                        self.mapView.delegate = self
+                        let lines = resultAdd.lines! as [String]
+                        self.city = resultAdd.locality
+                        print("ADDRESS RECENTER MAP => \(lines.joined(separator: "\n"))")
+                        
+//                        let marker = GMSMarker()
+//                        marker.position = CLLocationCoordinate2D(latitude: self.currentLocation.coordinate.latitude, longitude: self.currentLocation.coordinate.longitude)
+//                        marker.snippet = lines.joined(separator: "\n")
+//                        marker.title = "\(resultAdd.locality ?? "Unavailable")"
+//                        self.address = lines.joined(separator: "\n")
+//                        marker.map = self.mapView
+                    }else{
+                        print("ERROR_PLEASE_TRY_AGAIN_LATER")
+                    }
+                }
+            })
+        }else{
+           print("CURRENT_LOCATION_OBJECT_IS_NIL")
+        }
+        //Set pin on map
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
+//        marker.map = mapView
+        mapView.delegate = self
+        self.view = mapView
+    }
+    
+    func PanelViewController(didSelectLocationWith coordinates: CLLocationCoordinate2D?) {
+            
+        print("PanelViewController")
         guard let coordinates = coordinates else {
             return
         }
         
         panel.move(to: .half, animated: true)
         
-        print("UTAMA! \(coordinates)")
+        print("PanelViewController! \(coordinates)")
         
         let camera = GMSCameraPosition.camera(
                     withLatitude: coordinates.latitude,
@@ -122,24 +150,114 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         marker.map = mapView
 
     }
+    
+    func getDataAsal(didSelectLocationWithAsal asalCoordinates: CLLocationCoordinate2D?) {
+        print("getDataAsal")
+        guard let asalCoordinates = asalCoordinates else {
+            return
+        }
+        
+        let camera = GMSCameraPosition.camera(
+                    withLatitude: asalCoordinates.latitude,
+                    longitude: asalCoordinates.longitude,
+                    zoom: 14.0
+        )
+        mapView.camera = camera
+        
+        print("Asal: \(asalCoordinates)")
+        
+        origin = asalCoordinates
+    }
+    
+    func getDataTujuan(didSelectLocationWithTujuan tujuanCoordinates: CLLocationCoordinate2D?) {
+        print("getDataTujuan")
+        guard let tujuanCoordinates = tujuanCoordinates else {
+            return
+        }
+        
+        let camera = GMSCameraPosition.camera(
+                    withLatitude: tujuanCoordinates.latitude,
+                    longitude: tujuanCoordinates.longitude,
+                    zoom: 14.0
+        )
+        
+        mapView.camera = camera
+        
+        print("Tujuan: \(tujuanCoordinates)")
+        
+        destination = tujuanCoordinates
+                
+        print("Drawing a map!")
+        if permissionFlag{
+
+            let origin  = "\(origin.latitude),\(origin.longitude)"
+            let destination = "\(destination.latitude),\(destination.longitude)"
+        }
+    
+        // drive to train
+        let url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=transit&transit_mode=train&alternatives=false&key=AIzaSyC-gr-6ddyZ_XMEtf7plw4Rlpk61Syo30o"
+        
+        AF.request(url).responseJSON(completionHandler: {
+            Response in
+//            if Response.result.isSuccess {
+            if case. success(let value) = response.result {
+//            do{
+                    let json =  try JSON(data: Response.data!)
+                    let routes = json["routes"].arrayValue
+                    print(json)
+                    for i in 0 ..< routes.count{
+                        let route = routes[i]
+                        let routeOverviewPolyline = route["overview_polyline"].dictionary
+                        let points = routeOverviewPolyline?["points"]?.stringValue
+                        let path = GMSPath.init(fromEncodedPath: points!)
+                        let polyline = GMSPolyline.init(path: path)
+                        polyline.isTappable = true
+                        if i == 0{
+                            polyline.strokeColor = UIColor.blue
+                            polyline.strokeWidth = 5
+                            self.transferPolyline = points // SAVE THESE POINTS THEY ARE ENCODED LAT LONGS OF SUGGESTED ROUTES
+                            if self.googleMaps != nil
+                            {
+                                let bounds = GMSCoordinateBounds(path: path!)
+                                self.googleMaps!.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 50.0))
+                            }
+                        }else{
+                            polyline.strokeColor = UIColor.lightGray
+                            polyline.strokeWidth = 4
+                        }
+                        
+                        self.polylineArray.append(polyline)
+                        polyline.map = self.googleMaps
+                    }
+                    
+                }catch{
+                    print("ERROR")
+                }
+                
+            }else{
+                
+            }
+        })
+                
+    
+    }
 }
 
 extension MapViewController: CLLocationManagerDelegate{
-    
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else {
             return
         }
-        
+
         let coordinateLive = location.coordinate
-        
+
         mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
-        
+
         marker.position = coordinateLive
+        marker.icon = UIImage(systemName: "train.side.rear.car")
         marker.map = mapView
-    
-        print("License: \n\n\(GMSServices.openSourceLicenseInfo())")
+//        print("Updating current location")
     }
 }
-

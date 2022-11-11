@@ -9,9 +9,18 @@ import UIKit
 import FloatingPanel
 import GoogleMaps
 
-protocol PanelViewControllerDelegate: AnyObject {
-    func PanelViewController(didSelectLocationWith coordinates: CLLocationCoordinate2D?)
-}
+//protocol PanelViewControllerDelegate: AnyObject {
+//    func PanelViewController(didSelectLocationWithAsal coordinates: CLLocationCoordinate2D?)
+//}
+
+//protocol AsalEntryViewControllerDelegate: AnyObject {
+//    func AsalEntryViewController(_ vc: AsalEntryViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?)
+//}
+//
+//protocol TujuanEntryViewControllerDelegate: AnyObject {
+//    func TujuanEntryViewController(_ vc: TujuanEntryViewController, didSelectLocationWithTujuan coordinates: CLLocationCoordinate2D?)
+//}
+
 
 let backgroundColor = UIColor(red: 255/255, green: 252/255, blue: 246/255, alpha: 1)
 
@@ -20,6 +29,9 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
     let panel = FloatingPanelController()
     
     weak var delegate: PanelViewControllerDelegate?
+    
+//     var delegateAsal: dataAsalDelegate?
+//     var delegateTujuan: dataTujuanDelegate?
     
     var locations = [Location]()
     var tempdep: String = ""
@@ -119,6 +131,9 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
                 self.startBtn.applyGradient(withColours: [UIColor(red: 222/255, green: 0, blue: 0, alpha: 1),UIColor(red: 255/255, green: 119/255, blue: 10/255, alpha: 1)], gradientOrientation: .topRightBottomLeft)
                 self.startBtn.layer.cornerRadius = 19
             }
+            
+            // draw route
+//            drawRoute()
         }
     }
     
@@ -156,8 +171,11 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
         asalEntry.completion = { [weak self] station in
             guard let station = station else {return}
 
-            let coordinates = CLLocationCoordinate2D(latitude: station.latitude ?? 0.0, longitude: station.longitude ?? 0.0)
-            self!.delegate?.PanelViewController(didSelectLocationWith: coordinates)
+            let asalCoordinates = CLLocationCoordinate2D(latitude: station.latitude ?? 0.0, longitude: station.longitude ?? 0.0)
+            
+            
+
+            //            self!.dele?.getDataAsal(didSelectLocationWith: asalCoordinates)
             
 //            DispatchQueue.main.async {
 //                self?.asalField.text = "Asal: \(station.namaStasiun ?? "Pilih stasiun asal")" //Departure
@@ -166,6 +184,9 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
             if let dep = station.namaStasiun {
                 self?.tempdep = dep
             }
+            self!.delegate?.PanelViewController(didSelectLocationWith: asalCoordinates)
+            self!.delegate?.getDataAsal(didSelectLocationWithAsal: asalCoordinates)
+//            self!.delegateAsal?.getDataAsal(didSelectLocationWithAsal: asalCoordinates)
             self?.updateView()
             
         }
@@ -184,59 +205,30 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
 //            DispatchQueue.main.async {
 //                self?.tujuanField.text = "Tujuan: \(station.namaStasiun ?? "Pilih stasiun tujuan")" //Destination
 //            }
+            
+            
+            
+            let tujuanCoordinates = CLLocationCoordinate2D(latitude: station.latitude ?? 0.0, longitude: station.longitude ?? 0.0)
+            
+//            self!.delegateTujuan?.getDataTujuan(didSelectLocationWithTujuan: tujuanCoordinates)
+            
+            
+            
+//            self!.delegateTujuan?.getDataTujuan(didSelectLocationWithTujuan: tujuanCoordinates)
+            
+            
+//            self!.delegate?.getDataTujuan(tujuanCoordinates: tujuanCoordinates)
+            
             self?.tujuanField.text = "Tujuan: \(station.namaStasiun ?? "Pilih stasiun tujuan")" //Destination
             if let des = station.namaStasiun {
                 self?.tempdes = des
             }
+            self!.delegate?.PanelViewController(didSelectLocationWith: tujuanCoordinates)
+            self!.delegate?.getDataTujuan(didSelectLocationWithTujuan: tujuanCoordinates)
+//            self!.delegateTujuan?.getDataTujuan(didSelectLocationWithTujuan: tujuanCoordinates)
+            
             self?.updateView()
         }
     }
-    
-//    func AsalEntryViewController(_ vc: AsalEntryViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?) {
-//
-//        guard let coordinates = coordinates else {
-//            return
-//        }
-//
-//        panel.move(to: .half, animated: true)
-//
-//        print("PANEL: \(coordinates.latitude), \(coordinates.longitude)")
-//
-//      let camera = GMSCameraPosition.camera(withLatitude: coordinates.latitude, longitude: coordinates.longitude, zoom: 16.0)
-//        mapView.animate(toLocation: coordinates)
-//        mapView.camera = camera
-//        mapView.animate(to: camera)
-//
-//    }
-//
-//    func TujuanEntryViewController(_ vc: TujuanEntryViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?) {
-//
-//        print(#function)
-//
-//    }
-    
-    
-//    func TujuanEntryViewController(_ vc: TujuanEntryViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?) {
-//
-//        guard let coordinates = coordinates else {
-//            return
-//        }
-//
-//        // Hide panel
-////        panel.move(to: .tip, animated: true)
-//
-//        // Coordinates
-//        let pondokRanji: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: coordinates.latitude, longitude: coordinates.longitude)
-//
-//        // Set Initial Camera Position
-//        let pondokRanjiCam = GMSCameraUpdate.setTarget(
-//            pondokRanji
-//        )
-//
-//        let mapView = GMSMapView(frame: self.view.bounds)
-//
-//        mapView.animate(with: pondokRanjiCam)
-//
-//    }
 
 }

@@ -8,15 +8,9 @@
 import UIKit
 import GoogleMaps
 
-
-protocol TujuanEntryViewControllerDelegate: AnyObject {
-    func TujuanEntryViewController(_ vc: TujuanEntryViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?)
-}
-
-
 class TujuanEntryViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, GMSMapViewDelegate {
     
-    weak var delegate: TujuanEntryViewControllerDelegate?
+//    weak var delegate: TujuanEntryViewControllerDelegate?
     
     public var completion: ((Station?) -> Void)?
     
@@ -172,7 +166,7 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, UITableV
         // Notify  map controller to show pin at selected place
 //        let coordinate = locations[indexPath.row].coordinates
 //
-//        delegate?.TujuanEntryViewController(self, didSelectLocationWith: coordinate)
+//        delegate?.TujuanEntryViewController(self, didSelectLocationWithTujuan: coordinate)
 //
 //        print("YOUR COORDINATE: \(coordinate.latitude), \(coordinate.longitude)")
         

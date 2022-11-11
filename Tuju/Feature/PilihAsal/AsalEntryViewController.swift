@@ -9,13 +9,11 @@ import UIKit
 import GoogleMaps
 
 
-protocol AsalEntryViewControllerDelegate: AnyObject {
-    func AsalEntryViewController(_ vc: AsalEntryViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?)
-}
+
 
 class AsalEntryViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, GMSMapViewDelegate {
     
-    weak var delegate: AsalEntryViewControllerDelegate?
+//    weak var delegate: AsalEntryViewControllerDelegate?
 
     public var completion: ((Station?) -> Void)?
     

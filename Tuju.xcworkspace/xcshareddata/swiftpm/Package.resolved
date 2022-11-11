@@ -8,6 +8,15 @@
         "revision" : "b00a05b9ed7717da0e5ce1b760e27ffcbaddd333",
         "version" : "2.5.4"
       }
+    },
+    {
+      "identity" : "googlemaps-sp",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/YAtechnologies/GoogleMaps-SP.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "f36c570076b3b2990065ae8e59e66804db108831"
+      }
     }
   ],
   "version" : 2
