@@ -10,8 +10,10 @@ import MapKit
 import FloatingPanel
 import GoogleMaps
 import CoreLocation
+import AVFoundation
+import UserNotifications
 
-class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControllerDelegate {
+class MapViewController: UIViewController, GMSMapViewDelegate, UNUserNotificationCenterDelegate{
     
     let mapView = GMSMapView(frame: .zero)
     
@@ -25,38 +27,30 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
     
     let marker = GMSMarker()
     
-    
     // Deafault Coordinates View
     var coordinateLive: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: -6.209675277806892, longitude: 106.85025771231817)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //view.addSubview(mapView)
+        
+        
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: [.alert, .badge, .sound]) { success, error in
+        }
         
         // Do any additional setup after loading the view.
-        self.manager.delegate = self
-        self.manager.requestWhenInUseAuthorization()
-        self.manager.startUpdatingLocation()
-        self.mapView.delegate = self
+        manager.delegate = self
+        manager.requestAlwaysAuthorization()
+        manager.startUpdatingLocation()
+        mapView.delegate = self
         
-
-        // Set Initial Camera Position
-        let camera = GMSCameraPosition.camera(
-            withLatitude: coordinateLive.latitude,
-            longitude: coordinateLive.longitude,
-            zoom: 14.0
-        )
-
-        mapView.camera = camera
-
         let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: coordinateLive.latitude, longitude: coordinateLive.longitude)
-        marker.title = "Stasiun Manggarai"
         marker.map = mapView
-
+        
         mapView.delegate = self
         self.view = mapView
         
+
         print(GMSServices.openSourceLicenseInfo())
         
         manager.requestWhenInUseAuthorization()
@@ -75,26 +69,58 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
 
 //        self.view = mapView
         
+        let circleCenter = CLLocationCoordinate2D(latitude: -6.209675277806892, longitude: 106.85025771231817)
+        let circle = GMSCircle(position: circleCenter, radius: 500)
+        circle.map = mapView
+        
+        circle.fillColor = UIColor(red: 0.7, green: 0, blue: 0, alpha: 0.2)
+        circle.strokeColor = .red
+        circle.strokeWidth = 3
     }
     
-    //    func startNav() {
-    //      var destinations = [GMSNavigationWaypoint]()
-    //      destinations.append(GMSNavigationWaypoint.init(placeID: "ChIJmQ6sHHH0aS4R2Kc4sEiEyUc",
-    //                                                     title: "Stasiun Manggarai")!)
-    //      destinations.append(GMSNavigationWaypoint.init(placeID:"ChIJt_uvMxX0aS4RgasvyQI7DJU",
-    //                                                     title:"Stasiun Cikini")!)
-    //
-    //      mapView.navigator?.setDestinations(destinations) { routeStatus in
-    //        self.mapView.navigator?.isGuidanceActive = true
-    //        self.mapView.locationSimulator?.simulateLocationsAlongExistingRoute()
-    //        self.mapView.cameraMode = .following
-    //      }
-    //    }
+    
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        RoutesData.removeFirst()
+        nextStationGeofence()
+        print("Entered: \(region.identifier)")
+        print(region)
+        print(RoutesData)
+        AudioServicesPlaySystemSound(systemSoundID)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        
+        print("Exited: \(region.identifier)")
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         mapView.frame = view.bounds
     }
+
+}
+
+extension MapViewController: CLLocationManagerDelegate{
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        guard let currentlocValue: CLLocationCoordinate2D = manager.location?.coordinate else {return}
+        let newLocation = locations.last
+        let camera = GMSCameraPosition.camera(withLatitude: (newLocation?.coordinate.latitude)!, longitude: (newLocation?.coordinate.longitude)!, zoom: 15.0)
+        self.mapView.animate(to: camera)
+        let lat  = (newLocation?.coordinate.latitude)! // get current location latitude
+        let long = (newLocation?.coordinate.longitude)! //get current location longitude
+        
+        marker.position = CLLocationCoordinate2DMake(lat, long)
+        
+        DispatchQueue.main.async {
+            self.marker.map = self.mapView  // Setting marker on mapview in main thread.
+        }
+        
+        for currentLocation in locations{
+            print("\(index): \(locations)")
+            //"0: [locations]"
+        }
+
     
     func PanelViewController(didSelectLocationWith coordinates: CLLocationCoordinate2D?) {
         
@@ -121,25 +147,89 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         marker.snippet = "Australia"
         marker.map = mapView
 
+
     }
 }
 
-extension MapViewController: CLLocationManagerDelegate{
+func addDestinationGeofence(){
+    UNUserNotificationCenter.current().requestAuthorization(
+        options: [.alert, .badge, .sound]) { success, error in
+    }
+    let manager = CLLocationManager()
+    //GEOFENCE AND ALERT DESTINATION
+    var destinationGeo = RoutesData.last
+    let geoFenceDestination: CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(destinationGeo?.latitude ?? 0, destinationGeo?.longitude ?? 0), radius: 100, identifier: "\(destinationGeo?.namaStasiun ?? "")")
+    manager.startMonitoring(for: geoFenceDestination)
+    geoFenceDestination.notifyOnEntry = true
+    geoFenceDestination.notifyOnExit = false
+    let destinationTrigger = UNLocationNotificationTrigger(region: geoFenceDestination, repeats: true)
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.first else {
-            return
+    let contentDestination = UNMutableNotificationContent()
+    contentDestination.title = "You Will Arrive At \(geoFenceDestination.identifier)"
+    contentDestination.body = "Prepare Yourself! You will arrive at your destination, \(geoFenceDestination.identifier)"
+    contentDestination.sound = UNNotificationSound.default
+    
+    let Destinationid = UUID().uuidString
+    let Destinationrequest = UNNotificationRequest(identifier: Destinationid, content: contentDestination, trigger: destinationTrigger)
+    
+    UNUserNotificationCenter.current().add(Destinationrequest) { error in
+        if let error = error {
+            // handle error
         }
         
-        let coordinateLive = location.coordinate
-        
-        mapView.isMyLocationEnabled = true
-        mapView.settings.myLocationButton = true
-        
-        marker.position = coordinateLive
-        marker.map = mapView
-    
-        print("License: \n\n\(GMSServices.openSourceLicenseInfo())")
+        print(geoFenceDestination)
     }
 }
+
+func nextStationGeofence(){
+    let manager = CLLocationManager()
+    //GEOFENCE AND ALERT DESTINATION
+    if(RoutesData.count>2){
+        let geoFencenNextStation: CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(RoutesData[1].latitude ?? 0, RoutesData[1].longitude ?? 0), radius: 100, identifier: "\(RoutesData[1].namaStasiun ?? "")")
+        manager.startMonitoring(for: geoFencenNextStation)
+        geoFencenNextStation.notifyOnEntry = true
+        geoFencenNextStation.notifyOnExit = false
+        
+        if(RoutesData[1].namaStasiun == "Tanah Abang"){
+            let TanahAbangTrigger = UNLocationNotificationTrigger(region: geoFencenNextStation, repeats: true)
+            
+            let contentTanahAbang = UNMutableNotificationContent()
+            contentTanahAbang.title = "You Will Arrive At \(geoFencenNextStation.identifier)"
+            contentTanahAbang.body = "Prepare yourself! You will arrive at \(geoFencenNextStation.identifier)"
+            contentTanahAbang.sound = UNNotificationSound.default
+            
+            let TanahAbangid = UUID().uuidString
+            let TanahAbangrequest = UNNotificationRequest(
+                identifier: TanahAbangid, content: contentTanahAbang, trigger: TanahAbangTrigger)
+            
+            UNUserNotificationCenter.current().add(TanahAbangrequest) { error in
+                if let error = error {
+                    // handle error
+                }
+            }
+        }
+        
+        else if(RoutesData[1].namaStasiun == "Manggarai"){
+            let manggaraiTrigger = UNLocationNotificationTrigger(region: geoFencenNextStation, repeats: true)
+            
+            let contentManggarai = UNMutableNotificationContent()
+            contentManggarai.title = "You Will Arrive At \(geoFencenNextStation.identifier)"
+            contentManggarai.body = "Prepare yourself! Y    ou will arrive at \(geoFencenNextStation.identifier)"
+            contentManggarai.sound = UNNotificationSound.default
+            
+            let Manggaraiid = UUID().uuidString
+            let Manggarairequest = UNNotificationRequest(
+                identifier: Manggaraiid, content: contentManggarai, trigger: manggaraiTrigger)
+
+            UNUserNotificationCenter.current().add(Manggarairequest) { error in
+                if let error = error {
+                    // handle error
+                }
+            }
+        }
+        
+        print(geoFencenNextStation)
+        }
+    }
+
 

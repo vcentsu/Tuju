@@ -12,6 +12,7 @@
 		5C06E05E290294E1001BA971 /* StationDataDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C06E05D290294E1001BA971 /* StationDataDetails.swift */; };
 		5C2C60BA29092BCD00BE6C00 /* RecentDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2C60B929092BCD00BE6C00 /* RecentDataModel.swift */; };
 		5C2C60BC29093C2300BE6C00 /* FavoriteDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2C60BB29093C2300BE6C00 /* FavoriteDataModel.swift */; };
+		5C32756B291A52C700EA6323 /* SoundNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C32756A291A52C700EA6323 /* SoundNotification.swift */; };
 		5C41AD1B29098A980077F60A /* FavAndRecentLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C41AD1A29098A980077F60A /* FavAndRecentLogic.swift */; };
 		5CA14FA02914F82D00E20FAF /* RoutesDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA14F9F2914F82D00E20FAF /* RoutesDataModel.swift */; };
 		5CB26BF528FD49EB0057CC3E /* LogicSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB26BF428FD49EB0057CC3E /* LogicSwift.swift */; };
@@ -71,6 +72,7 @@
 		5C06E05D290294E1001BA971 /* StationDataDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDataDetails.swift; sourceTree = "<group>"; };
 		5C2C60B929092BCD00BE6C00 /* RecentDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentDataModel.swift; sourceTree = "<group>"; };
 		5C2C60BB29093C2300BE6C00 /* FavoriteDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDataModel.swift; sourceTree = "<group>"; };
+		5C32756A291A52C700EA6323 /* SoundNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundNotification.swift; sourceTree = "<group>"; };
 		5C41AD1A29098A980077F60A /* FavAndRecentLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavAndRecentLogic.swift; sourceTree = "<group>"; };
 		5CA14F9F2914F82D00E20FAF /* RoutesDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesDataModel.swift; sourceTree = "<group>"; };
 		5CB26BF428FD49EB0057CC3E /* LogicSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicSwift.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 		5C06A0D829004AA30003CBEE /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				5C32756A291A52C700EA6323 /* SoundNotification.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -670,6 +673,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C32756B291A52C700EA6323 /* SoundNotification.swift in Sources */,
 				5CB982A62906F81F00933DCF /* RoutesLogic.swift in Sources */,
 				D388130C28F563910062C702 /* MapViewController.swift in Sources */,
 				752FC90628F92F8B00FBA82F /* PanelViewController.swift in Sources */,
@@ -880,7 +884,9 @@
 				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Tuju/Info.plist;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location is shared to the admin for efficient purposes";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Your location is shared to the admin for efficient purposes";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location is shared to the admin for efficient purposes";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -912,7 +918,9 @@
 				EXCLUDED_ARCHS = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Tuju/Info.plist;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location is shared to the admin for efficient purposes";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Your location is shared to the admin for efficient purposes";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location is shared to the admin for efficient purposes";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

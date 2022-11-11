@@ -8,6 +8,8 @@
 import UIKit
 import FloatingPanel
 import GoogleMaps
+import CoreLocation
+import UserNotifications
 
 protocol PanelViewControllerDelegate: AnyObject {
     func PanelViewController(didSelectLocationWith coordinates: CLLocationCoordinate2D?)
@@ -95,7 +97,7 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
         
         asalField.frame = CGRect(x: 20, y: 30, width: view.frame.size.width-40, height: 50)
         tujuanField.frame = CGRect(x: 20, y: 40+asalField.frame.size.height, width: view.frame.size.width-40, height: 50)
-
+        
         label.sizeToFit()
         label.frame = CGRect(x: 25, y: 120+tujuanField.frame.size.height, width: label.frame.size.width, height: label.frame.size.height)
         
@@ -136,14 +138,18 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
         Destination = tempdes
         RoutesLogic()
         FavAndRecentLogic()
+        nextStationGeofence()
+        addDestinationGeofence()
         print(recentData)
         print(favoriteData)
         print(TransitStation)
         print(RoutesData)
         print(numberOfTransit)
         
+
         self.navigationController?.pushViewController(Tuju.PerjalananViewController(), animated: true)
         
+
     }
     
     @objc private func didTapAsal() {
