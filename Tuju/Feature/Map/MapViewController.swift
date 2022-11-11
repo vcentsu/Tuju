@@ -51,10 +51,23 @@ class MapViewController: UIViewController, GMSMapViewDelegate, UNUserNotificatio
         self.view = mapView
         
 
-        let panelVC = Tuju.PanelViewController()
+        print(GMSServices.openSourceLicenseInfo())
         
-        panel.set(contentViewController: panelVC)
+        manager.requestWhenInUseAuthorization()
+//        self.mapView.travelMode = .cycling
+        let panelVC = Tuju.PanelViewController(nibName: nil, bundle: nil) //ViewController = Name of your controller
+        let nav1 = UINavigationController(rootViewController: Tuju.PanelViewController())
+        nav1.viewControllers = [panelVC]
+        panelVC.delegate = self
+        panel.set(contentViewController: nav1)
         panel.addPanel(toParent: self)
+        
+//        let panelVC = Tuju.PanelViewController()
+//        panelVC.delegate = self
+        
+        
+
+//        self.view = mapView
         
         let circleCenter = CLLocationCoordinate2D(latitude: -6.209675277806892, longitude: 106.85025771231817)
         let circle = GMSCircle(position: circleCenter, radius: 500)
@@ -84,6 +97,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, UNUserNotificatio
         super.viewDidLayoutSubviews()
         mapView.frame = view.bounds
     }
+
 }
 
 extension MapViewController: CLLocationManagerDelegate{
@@ -106,6 +120,34 @@ extension MapViewController: CLLocationManagerDelegate{
             print("\(index): \(locations)")
             //"0: [locations]"
         }
+
+    
+    func PanelViewController(didSelectLocationWith coordinates: CLLocationCoordinate2D?) {
+        
+        print("HALLOMAP")
+        guard let coordinates = coordinates else {
+            return
+        }
+        
+        panel.move(to: .half, animated: true)
+        
+        print("UTAMA! \(coordinates)")
+        
+        let camera = GMSCameraPosition.camera(
+                    withLatitude: coordinates.latitude,
+                    longitude: coordinates.longitude,
+                    zoom: 14.0
+        )
+
+        mapView.camera = camera
+        
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: coordinates.latitude, longitude: coordinates.longitude)
+        marker.title = locations.description
+        marker.snippet = "Australia"
+        marker.map = mapView
+
+
     }
 }
 

@@ -9,7 +9,7 @@ import UIKit
 
 class RecommendationTableViewCell: UITableViewCell {
 
-    private var imageStasiun: UIImageView = {
+    var imageStasiun: UIImageView = {
         let image = UIImage(systemName: "tram")
 
         let imgView = UIImageView() //(frame: CGRectMake(10, 50, 100, 300))
@@ -20,18 +20,16 @@ class RecommendationTableViewCell: UITableViewCell {
         return imgView
     }()
     
-    private let namaStasiun: UILabel = {
+    let namaStasiun: UILabel = {
         let label = UILabel()
-//        label.text = "Stasiun Manggarai"
         label.textColor = .black
         label.font = .systemFont(ofSize: 14, weight: .medium)
         label.textAlignment = .left
         return label
     }()
     
-    private let jarakStasiun: UILabel = {
+    let jarakStasiun: UILabel = {
         let label = UILabel()
-//        label.text = "5.19 Km"
         label.textColor = .purple
         label.font = .systemFont(ofSize: 12, weight: .light)
         label.textAlignment = .left
@@ -54,6 +52,7 @@ class RecommendationTableViewCell: UITableViewCell {
         imageStasiun.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: nil, paddingTop: 10, paddingLeft: 20, paddingBottom: 10, paddingRight: 0, width: 35, height: 35, enableInsets: false)
         namaStasiun.anchor(top: topAnchor, left: imageStasiun.rightAnchor, bottom: nil, right: nil, paddingTop: 12, paddingLeft: 10, paddingBottom: 0, paddingRight: 0, width: frame.size.width / 2, height: 0, enableInsets: false)
         jarakStasiun.anchor(top: namaStasiun.bottomAnchor, left: imageStasiun.rightAnchor, bottom: nil, right: nil, paddingTop: 3, paddingLeft: 10, paddingBottom: 0, paddingRight: 0, width: frame.size.width / 2, height: 0, enableInsets: false)
+
     }
     
     required init?(coder: NSCoder) {
