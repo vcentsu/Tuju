@@ -26,6 +26,13 @@ class AsalEntryViewController: UIViewController, UITextFieldDelegate, GMSMapView
     var stations = [Station]()
     var originalStationsList = [Station]()
     
+    let asalTitle: UILabel = {
+        let label = UILabel()
+        label.text = "Asal"
+        label.font = .systemFont(ofSize: 24, weight: .bold)
+        return label
+    }()
+    
     private let asalField: UITextField = {
         let field = UITextField()
         field.placeholder = "Asal: Pilih Stasiun Asal"
@@ -44,7 +51,7 @@ class AsalEntryViewController: UIViewController, UITextFieldDelegate, GMSMapView
     
     private let tableView: UITableView = {
         let table = UITableView()
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        table.register(RecommendationTableViewCell.self, forCellReuseIdentifier: "cell")
         
         return table
         
@@ -52,8 +59,12 @@ class AsalEntryViewController: UIViewController, UITextFieldDelegate, GMSMapView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        navigationItem.title = "Asal"
+//        navigationItem.largeTitleDisplayMode = .always
+        
         view.backgroundColor = backgroundColor
         
+        view.addSubview(asalTitle)
         view.addSubview(asalField)
         view.addSubview(tableView)
         
@@ -83,28 +94,25 @@ class AsalEntryViewController: UIViewController, UITextFieldDelegate, GMSMapView
             originalStationsList.append(station)
         }
         
+        // Table
         tableView.isHidden = true
-        
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = .clear
+        
         asalField.delegate = self
-        
-        tableView.backgroundColor = .secondarySystemBackground
-        
         asalField.addTarget(self, action: #selector(searchRecords(_ :)), for: .editingChanged)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        asalField.frame = CGRect(x: 20, y: 30, width: view.frame.size.width-40, height: 50)
+        asalTitle.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: view.frame.size.width-40, height: 0, enableInsets: false)
+        asalField.anchor(top: asalTitle.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: view.frame.size.width-40, height: 50, enableInsets: false)
         let tableY: CGFloat = asalField.frame.origin.y+asalField.frame.size.height+5
         tableView.frame = CGRect(x: 0,
                                  y: tableY,
                                  width: view.frame.size.width,
                                  height: view.frame.size.height-tableY)
-        
-//        asalField.isFirstResponder = true
     }
     
     //Search
@@ -149,7 +157,7 @@ extension AsalEntryViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return 60
+            return 70
         }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -158,21 +166,20 @@ extension AsalEntryViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-//
-//        cell.textLabel?.text = locations[indexPath.row].title
-//        cell.textLabel?.numberOfLines = 0
-//        cell.contentView.backgroundColor = .secondarySystemBackground
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! RecommendationTableViewCell
+
+        cell.namaStasiun.text = stations[indexPath.row].namaStasiun
+        cell.jarakStasiun.text = "12km"
+        cell.contentView.backgroundColor = .white
 //        return cell
         
-        var cell = tableView.dequeueReusableCell(withIdentifier: "station")
-        
-        if cell == nil {
-            cell = UITableViewCell(style: .default, reuseIdentifier: "station")
-        }
-        cell?.textLabel?.text = stations[indexPath.row].namaStasiun
-        
-        return cell!
+//        var cell = tableView.dequeueReusableCell(withIdentifier: "station")
+//
+//        if cell == nil {
+//            cell = UITableViewCell(style: .default, reuseIdentifier: "station")
+//        }
+       
+        return cell
         
     }
     

@@ -14,7 +14,7 @@ protocol TujuanEntryViewControllerDelegate: AnyObject {
 }
 
 
-class TujuanEntryViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, GMSMapViewDelegate {
+class TujuanEntryViewController: UIViewController, UITextFieldDelegate, GMSMapViewDelegate {
     
     weak var delegate: TujuanEntryViewControllerDelegate?
     
@@ -24,6 +24,14 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, UITableV
     
     var stations = [Station]()
     var originalStationsList = [Station]()
+    
+    let tujuanTitle: UILabel = {
+        let label = UILabel()
+        label.text = "Tujuan"
+        label.font = .systemFont(ofSize: 24, weight: .bold)
+        
+        return label
+    }()
     
     private let tujuanField: UITextField = {
         let field = UITextField()
@@ -43,16 +51,17 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, UITableV
     
     private let tableView: UITableView = {
         let table = UITableView()
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        table.register(RecommendationTableViewCell.self, forCellReuseIdentifier: "cell")
         
         return table
-        
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = backgroundColor
         
+        view.addSubview(tujuanTitle)
         view.addSubview(tujuanField)
         view.addSubview(tableView)
         
@@ -88,7 +97,7 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, UITableV
         tableView.dataSource = self
         tujuanField.delegate = self
         
-        tableView.backgroundColor = .secondarySystemBackground
+        tableView.backgroundColor = .clear
         
         tujuanField.addTarget(self, action: #selector(searchRecords(_ :)), for: .editingChanged)
     }
@@ -96,7 +105,8 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, UITableV
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        tujuanField.frame = CGRect(x: 20, y: 30, width: view.frame.size.width-40, height: 50)
+        tujuanTitle.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: view.frame.size.width-40, height: 0, enableInsets: false)
+        tujuanField.anchor(top: tujuanTitle.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: view.frame.size.width-40, height: 50, enableInsets: false)
         let tableY: CGFloat = tujuanField.frame.origin.y+tujuanField.frame.size.height+5
         tableView.frame = CGRect(x: 0,
                                  y: tableY,
@@ -148,7 +158,13 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, UITableV
         tableView.reloadData()
     }
     
-    // UITableViewDataSource
+}
+
+extension TujuanEntryViewController: UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            return 70
+        }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return stations.count
@@ -156,14 +172,20 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell = tableView.dequeueReusableCell(withIdentifier: "station")
+//        var cell = tableView.dequeueReusableCell(withIdentifier: "station")
+//
+//        if cell == nil {
+//            cell = UITableViewCell(style: .default, reuseIdentifier: "station")
+//        }
+//        cell?.textLabel?.text = stations[indexPath.row].namaStasiun
         
-        if cell == nil {
-            cell = UITableViewCell(style: .default, reuseIdentifier: "station")
-        }
-        cell?.textLabel?.text = stations[indexPath.row].namaStasiun
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! RecommendationTableViewCell
+
+        cell.namaStasiun.text = stations[indexPath.row].namaStasiun
+        cell.jarakStasiun.text = "12km"
+        cell.contentView.backgroundColor = .white
         
-        return cell!
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

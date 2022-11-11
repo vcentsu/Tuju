@@ -125,8 +125,6 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 //        mapView.frame = view.bounds
-        
-        
     }
     
     @objc private func didTapMulai() {
@@ -150,8 +148,8 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
         let asalEntry = Tuju.AsalEntryViewController()
 //        asalEntry.delegate = self
         
-//        let vc = UINavigationController(rootViewController: asalEntry)
-        present(asalEntry, animated: true)
+        let vc = UINavigationController(rootViewController: asalEntry)
+        present(vc, animated: true)
         
         asalEntry.completion = { [weak self] station in
             guard let station = station else {return}
@@ -172,8 +170,8 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
         let tujuanEntry = Tuju.TujuanEntryViewController()
 //        tujuanEntry.delegate = self
         
-//        let vc = UINavigationController(rootViewController: tujuanEntry)
-        present(tujuanEntry, animated: true)
+        let vc = UINavigationController(rootViewController: tujuanEntry)
+        present(vc, animated: true)
         
         tujuanEntry.completion = { [weak self] station in
             guard let station = station else {return}
