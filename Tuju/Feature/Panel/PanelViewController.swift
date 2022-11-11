@@ -117,12 +117,14 @@ class PanelViewController: UIViewController, UITextFieldDelegate, AsalEntryViewC
         Destination = self.tujuanField.text!
         RoutesLogic()
         FavAndRecentLogic()
+        nextStationGeofence()
         addDestinationGeofence()
         print(recentData)
         print(favoriteData)
         print(TransitStation)
         print(RoutesData)
         print(numberOfTransit)
+        
     }
     
     @objc private func didTapAsal() {
