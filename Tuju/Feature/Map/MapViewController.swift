@@ -13,7 +13,12 @@ import CoreLocation
 import AVFoundation
 import UserNotifications
 
-class MapViewController: UIViewController, GMSMapViewDelegate, UNUserNotificationCenterDelegate{
+protocol PanelViewControllerDelegate: AnyObject {
+    func PanelViewController(didSelectLocationWith coordinates: CLLocationCoordinate2D?)
+}
+
+class MapViewController: UIViewController, GMSMapViewDelegate, UNUserNotificationCenterDelegate, PanelViewControllerDelegate{
+    
     
     let mapView = GMSMapView(frame: .zero)
     
@@ -93,12 +98,42 @@ class MapViewController: UIViewController, GMSMapViewDelegate, UNUserNotificatio
         print("Exited: \(region.identifier)")
     }
     
+    func PanelViewController(didSelectLocationWith coordinates: CLLocationCoordinate2D?) {
+        
+        print("HALLOMAP")
+        guard let coordinates = coordinates else {
+            return
+        }
+        
+        panel.move(to: .half, animated: true)
+        
+        print("UTAMA! \(coordinates)")
+        
+        let camera = GMSCameraPosition.camera(
+            withLatitude: coordinates.latitude,
+            longitude: coordinates.longitude,
+            zoom: 14.0
+        )
+        
+        mapView.camera = camera
+        
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: coordinates.latitude, longitude: coordinates.longitude)
+        marker.title = locations.description
+        marker.snippet = "Australia"
+        marker.map = mapView
+        
+        
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         mapView.frame = view.bounds
     }
 
 }
+
+
 
 extension MapViewController: CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -120,41 +155,14 @@ extension MapViewController: CLLocationManagerDelegate{
             print("\(index): \(locations)")
             //"0: [locations]"
         }
-
-    
-    func PanelViewController(didSelectLocationWith coordinates: CLLocationCoordinate2D?) {
         
-        print("HALLOMAP")
-        guard let coordinates = coordinates else {
-            return
-        }
-        
-        panel.move(to: .half, animated: true)
-        
-        print("UTAMA! \(coordinates)")
-        
-        let camera = GMSCameraPosition.camera(
-                    withLatitude: coordinates.latitude,
-                    longitude: coordinates.longitude,
-                    zoom: 14.0
-        )
-
-        mapView.camera = camera
-        
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: coordinates.latitude, longitude: coordinates.longitude)
-        marker.title = locations.description
-        marker.snippet = "Australia"
-        marker.map = mapView
-
-
     }
 }
 
 func addDestinationGeofence(){
     UNUserNotificationCenter.current().requestAuthorization(
         options: [.alert, .badge, .sound]) { success, error in
-    }
+        }
     let manager = CLLocationManager()
     //GEOFENCE AND ALERT DESTINATION
     var destinationGeo = RoutesData.last
@@ -220,7 +228,7 @@ func nextStationGeofence(){
             let Manggaraiid = UUID().uuidString
             let Manggarairequest = UNNotificationRequest(
                 identifier: Manggaraiid, content: contentManggarai, trigger: manggaraiTrigger)
-
+            
             UNUserNotificationCenter.current().add(Manggarairequest) { error in
                 if let error = error {
                     // handle error
@@ -229,7 +237,6 @@ func nextStationGeofence(){
         }
         
         print(geoFencenNextStation)
-        }
     }
-
+}
 

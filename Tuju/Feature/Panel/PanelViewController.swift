@@ -11,9 +11,7 @@ import GoogleMaps
 import CoreLocation
 import UserNotifications
 
-protocol PanelViewControllerDelegate: AnyObject {
-    func PanelViewController(didSelectLocationWith coordinates: CLLocationCoordinate2D?)
-}
+
 
 let backgroundColor = UIColor(red: 255/255, green: 252/255, blue: 246/255, alpha: 1)
 
