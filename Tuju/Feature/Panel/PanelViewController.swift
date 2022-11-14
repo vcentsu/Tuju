@@ -21,6 +21,8 @@ class PanelViewController: UIViewController, UITextFieldDelegate{
     
     weak var delegate: PanelViewControllerDelegate?
     
+    
+//    var locations = [Location]()
     var tempdep: String = ""
     var tempdes: String = ""
     
