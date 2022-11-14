@@ -8,6 +8,7 @@ import UIKit
 import MapKit
 import FloatingPanel
 import GoogleMaps
+import GooglePlaces
 import CoreLocation
 import Alamofire
 import SwiftyJSON
@@ -18,7 +19,7 @@ protocol PanelViewControllerDelegate: AnyObject {
     func getDataTujuan(didSelectLocationWithTujuan tujuanCoordinates: CLLocationCoordinate2D?)
 }
 
-class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControllerDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, PanelViewControllerDelegate {
     
     var locationManager: CLLocationManager!
     var permissionFlag: Bool!
@@ -122,6 +123,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
 //        marker.map = mapView
         mapView.delegate = self
         self.view = mapView
+        
     }
     
     func PanelViewController(didSelectLocationWith coordinates: CLLocationCoordinate2D?) {
@@ -186,22 +188,22 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         print("Tujuan: \(tujuanCoordinates)")
         
         destination = tujuanCoordinates
-                
-        print("Drawing a map!")
+
+        // Drawing Map
+        print("Drawing on the map!")
         if permissionFlag{
 
             let origin  = "\(origin.latitude),\(origin.longitude)"
             let destination = "\(destination.latitude),\(destination.longitude)"
         }
     
-        // drive to train
         let url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=transit&transit_mode=train&alternatives=false&key=AIzaSyC-gr-6ddyZ_XMEtf7plw4Rlpk61Syo30o"
         
-        AF.request(url).responseJSON(completionHandler: {
-            Response in
-//            if Response.result.isSuccess {
-            if case. success(let value) = response.result {
-//            do{
+        AF.request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON(completionHandler: {
+                Response in
+//                    if Response.result.isSuccess {
+            if case .success(_) = Response.result {
+                do{
                     let json =  try JSON(data: Response.data!)
                     let routes = json["routes"].arrayValue
                     print(json)
@@ -216,10 +218,10 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
                             polyline.strokeColor = UIColor.blue
                             polyline.strokeWidth = 5
                             self.transferPolyline = points // SAVE THESE POINTS THEY ARE ENCODED LAT LONGS OF SUGGESTED ROUTES
-                            if self.googleMaps != nil
+                            if self.mapView != nil
                             {
                                 let bounds = GMSCoordinateBounds(path: path!)
-                                self.googleMaps!.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 50.0))
+                                self.mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 50.0))
                             }
                         }else{
                             polyline.strokeColor = UIColor.lightGray
@@ -227,7 +229,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
                         }
                         
                         self.polylineArray.append(polyline)
-                        polyline.map = self.googleMaps
+                        polyline.map = self.mapView
                     }
                     
                 }catch{
@@ -243,21 +245,21 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
     }
 }
 
-extension MapViewController: CLLocationManagerDelegate{
-
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.first else {
-            return
-        }
-
-        let coordinateLive = location.coordinate
-
-        mapView.isMyLocationEnabled = true
-        mapView.settings.myLocationButton = true
-
-        marker.position = coordinateLive
-        marker.icon = UIImage(systemName: "train.side.rear.car")
-        marker.map = mapView
-//        print("Updating current location")
-    }
-}
+//extension MapViewController: CLLocationManagerDelegate{
+//
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        guard let location = locations.first else {
+//            return
+//        }
+//
+//        let coordinateLive = location.coordinate
+//
+//        mapView.isMyLocationEnabled = true
+//        mapView.settings.myLocationButton = true
+//
+//        marker.position = coordinateLive
+//        marker.icon = UIImage(systemName: "train.side.rear.car")
+//        marker.map = mapView
+////        print("Updating current location")
+//    }
+//}
