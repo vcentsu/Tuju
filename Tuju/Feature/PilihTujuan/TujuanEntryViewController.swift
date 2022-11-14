@@ -29,7 +29,6 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, GMSMapVi
         let label = UILabel()
         label.text = "Tujuan"
         label.font = .systemFont(ofSize: 24, weight: .bold)
-        
         return label
     }()
     
