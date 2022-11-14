@@ -9,6 +9,9 @@ import UIKit
 
 class PerjalananViewController: UIViewController {
     
+    var delegate: PerjalananViewControllerDelegate?
+    
+    
     private var titleView: UIView = {
         let view = UIView()
         view.backgroundColor = .red
@@ -172,7 +175,7 @@ class PerjalananViewController: UIViewController {
         return label
     }()
     
-    private var myCollectionView: UICollectionView!
+    var myCollectionView: UICollectionView!
     
     var currStation = ""
     var neStation = ""
@@ -354,7 +357,6 @@ extension PerjalananViewController: UICollectionViewDelegate, UICollectionViewDa
             currentStation.text = RoutesData[indexPath.row].namaStasiun
             nextStation.text =  RoutesData[indexPath.row+1].namaStasiun
         }
-        //collectionView.reloadData()
         
         cell?.backgroundColor = .white
         return cell!

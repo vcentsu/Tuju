@@ -15,7 +15,8 @@ import UserNotifications
 
 let backgroundColor = UIColor(red: 255/255, green: 252/255, blue: 246/255, alpha: 1)
 
-class PanelViewController: UIViewController, UITextFieldDelegate {
+class PanelViewController: UIViewController, UITextFieldDelegate{
+
 
     let panel = FloatingPanelController()
     
@@ -24,6 +25,8 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
     var locations = [Location]()
     var tempdep: String = ""
     var tempdes: String = ""
+    
+    let perjalananView = Tuju.PerjalananViewController()
     
 //    let mapView = GMSMapView(frame: .zero)
     
@@ -145,7 +148,9 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
         print(numberOfTransit)
         
 
-        self.navigationController?.pushViewController(Tuju.PerjalananViewController(), animated: true)
+        
+//        perjalananView.delegate = self
+        self.navigationController?.pushViewController(perjalananView, animated: true)
         
 
     }
@@ -243,4 +248,14 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
 //
 //    }
 
+}
+
+extension PanelViewController {
+
+    func refreshCollectionView() {
+        //perintahkan PerjalananView untuk refresh CollectionView
+        print(#function)
+        perjalananView.myCollectionView.reloadData()
+    }
+    
 }

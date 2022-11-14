@@ -15,10 +15,16 @@ import UserNotifications
 
 protocol PanelViewControllerDelegate: AnyObject {
     func PanelViewController(didSelectLocationWith coordinates: CLLocationCoordinate2D?)
+    func refreshPerjalananView()
 }
 
-class MapViewController: UIViewController, GMSMapViewDelegate, UNUserNotificationCenterDelegate, PanelViewControllerDelegate{
+protocol PerjalananViewControllerDelegate: AnyObject {
+    func refreshCollectionView()
+}
+
+class MapViewController: UIViewController, GMSMapViewDelegate, UNUserNotificationCenterDelegate{
     
+    var myCollection: UICollectionView?
     
     let mapView = GMSMapView(frame: .zero)
     
@@ -34,6 +40,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate, UNUserNotificatio
     
     // Deafault Coordinates View
     var coordinateLive: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: -6.209675277806892, longitude: 106.85025771231817)
+    
+    let panelVC = Tuju.PanelViewController(nibName: nil, bundle: nil) //ViewController = Name of your controller
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,19 +68,11 @@ class MapViewController: UIViewController, GMSMapViewDelegate, UNUserNotificatio
         
         manager.requestWhenInUseAuthorization()
 //        self.mapView.travelMode = .cycling
-        let panelVC = Tuju.PanelViewController(nibName: nil, bundle: nil) //ViewController = Name of your controller
+        
         let nav1 = UINavigationController(rootViewController: Tuju.PanelViewController())
         nav1.viewControllers = [panelVC]
-        panelVC.delegate = self
         panel.set(contentViewController: nav1)
         panel.addPanel(toParent: self)
-        
-//        let panelVC = Tuju.PanelViewController()
-//        panelVC.delegate = self
-        
-        
-
-//        self.view = mapView
         
         let circleCenter = CLLocationCoordinate2D(latitude: -6.209675277806892, longitude: 106.85025771231817)
         let circle = GMSCircle(position: circleCenter, radius: 500)
@@ -83,12 +83,14 @@ class MapViewController: UIViewController, GMSMapViewDelegate, UNUserNotificatio
         circle.strokeWidth = 3
     }
     
-    
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         RoutesData.removeFirst()
         nextStationGeofence()
         print("Entered: \(region.identifier)")
         print(region)
+//        myCollection?.reloadData()
+        panelVC.refreshCollectionView()
+        
         print(RoutesData)
         AudioServicesPlaySystemSound(systemSoundID)
     }
@@ -98,33 +100,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate, UNUserNotificatio
         print("Exited: \(region.identifier)")
     }
     
-    func PanelViewController(didSelectLocationWith coordinates: CLLocationCoordinate2D?) {
-        
-        print("HALLOMAP")
-        guard let coordinates = coordinates else {
-            return
-        }
-        
-        panel.move(to: .half, animated: true)
-        
-        print("UTAMA! \(coordinates)")
-        
-        let camera = GMSCameraPosition.camera(
-            withLatitude: coordinates.latitude,
-            longitude: coordinates.longitude,
-            zoom: 14.0
-        )
-        
-        mapView.camera = camera
-        
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: coordinates.latitude, longitude: coordinates.longitude)
-        marker.title = locations.description
-        marker.snippet = "Australia"
-        marker.map = mapView
-        
-        
-    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -240,3 +215,38 @@ func nextStationGeofence(){
     }
 }
 
+extension MapViewController{
+    func refreshPerjalananView() {
+        //perintahkan Panel untuk perintahkan PerjalananView untuk refresh CollectionView
+        
+    }
+    
+    func PanelViewController(didSelectLocationWith coordinates: CLLocationCoordinate2D?) {
+        
+        print("HALLOMAP")
+        guard let coordinates = coordinates else {
+            return
+        }
+        
+        panel.move(to: .half, animated: true)
+        
+        print("UTAMA! \(coordinates)")
+        
+        let camera = GMSCameraPosition.camera(
+            withLatitude: coordinates.latitude,
+            longitude: coordinates.longitude,
+            zoom: 14.0
+        )
+        
+        mapView.camera = camera
+        
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: coordinates.latitude, longitude: coordinates.longitude)
+        marker.title = locations.description
+        marker.snippet = "Australia"
+        marker.map = mapView
+        
+        
+    }
+    
+}
