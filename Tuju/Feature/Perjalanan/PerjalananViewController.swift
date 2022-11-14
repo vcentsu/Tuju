@@ -272,6 +272,8 @@ class PerjalananViewController: UIViewController {
         if let navController = self.navigationController {
             navController.popViewController(animated: true)
         }
+        
+        // should also clear/reset the collection view
     }
 
 }
