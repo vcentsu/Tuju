@@ -72,6 +72,7 @@ class PerjalananViewController: UIViewController {
         button.setTitleColor(UIColor(red: 250/255, green: 107/255, blue: 17/255, alpha: 1), for: .normal) //orangeBtn
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor(red: 250/255, green: 107/255, blue: 17/255, alpha: 1).cgColor
+        button.addTarget(self, action: #selector(didTapBerhenti), for: .touchUpInside)
         return button
     }()
     
@@ -184,8 +185,8 @@ class PerjalananViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = backgroundColor
-        //navigationItem.hidesBackButton = true
         
+        navigationItem.hidesBackButton = true // Hides back button, Berhenti is now working to go back.
         //TOP
         view.addSubview(titleView)
         titleView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.size.width, height: 85, enableInsets: false)
@@ -265,6 +266,12 @@ class PerjalananViewController: UIViewController {
         view.addSubview(emptyLbl)
         emptyImg.anchor(top: myCollectionView.topAnchor , left: myCollectionView.leftAnchor, bottom: nil, right: myCollectionView.rightAnchor, paddingTop: 90, paddingLeft: 80, paddingBottom: 0, paddingRight: 80, width: 70, height: 70, enableInsets: false)
         emptyLbl.anchor(top: emptyImg.bottomAnchor, left: myCollectionView.leftAnchor, bottom: nil, right: myCollectionView.rightAnchor, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 270, height: 60, enableInsets: false)
+    }
+    
+    @objc private func didTapBerhenti() {
+        if let navController = self.navigationController {
+            navController.popViewController(animated: true)
+        }
     }
 
 }
