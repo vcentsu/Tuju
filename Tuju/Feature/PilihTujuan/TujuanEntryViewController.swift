@@ -10,11 +10,7 @@ import GoogleMaps
 
 class TujuanEntryViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, GMSMapViewDelegate {
     
-//    weak var delegate: TujuanEntryViewControllerDelegate?
-    
     public var completion: ((Station?) -> Void)?
-    
-    var locations = [Location]()
     
     var stations = [Station]()
     var originalStationsList = [Station]()
@@ -98,21 +94,6 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, UITableV
                                  height: view.frame.size.height-tableY)
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        tujuanField.resignFirstResponder()
-        
-        if let text = tujuanField.text, !text.isEmpty {
-            LocationManager.shared.findLocations(with: text) { [weak self] locations in
-                DispatchQueue.main.async {
-                    self?.locations = locations
-                    self?.tableView.reloadData()
-                    
-                }
-            }
-        }
-        return true
-    }
-    
     //Search
     @objc func searchRecords(_ textField: UITextField){
         
@@ -162,13 +143,6 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        // Notify  map controller to show pin at selected place
-//        let coordinate = locations[indexPath.row].coordinates
-//
-//        delegate?.TujuanEntryViewController(self, didSelectLocationWithTujuan: coordinate)
-//
-//        print("YOUR COORDINATE: \(coordinate.latitude), \(coordinate.longitude)")
         
         tujuanField.text = stations[indexPath.row].namaStasiun
         completion?(stations[indexPath.row])

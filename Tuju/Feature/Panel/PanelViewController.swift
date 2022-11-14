@@ -9,19 +9,6 @@ import UIKit
 import FloatingPanel
 import GoogleMaps
 
-//protocol PanelViewControllerDelegate: AnyObject {
-//    func PanelViewController(didSelectLocationWithAsal coordinates: CLLocationCoordinate2D?)
-//}
-
-//protocol AsalEntryViewControllerDelegate: AnyObject {
-//    func AsalEntryViewController(_ vc: AsalEntryViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?)
-//}
-//
-//protocol TujuanEntryViewControllerDelegate: AnyObject {
-//    func TujuanEntryViewController(_ vc: TujuanEntryViewController, didSelectLocationWithTujuan coordinates: CLLocationCoordinate2D?)
-//}
-
-
 let backgroundColor = UIColor(red: 255/255, green: 252/255, blue: 246/255, alpha: 1)
 
 class PanelViewController: UIViewController, UITextFieldDelegate {
@@ -30,14 +17,9 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
     
     weak var delegate: PanelViewControllerDelegate?
     
-//     var delegateAsal: dataAsalDelegate?
-//     var delegateTujuan: dataTujuanDelegate?
-    
-    var locations = [Location]()
+//    var locations = [Location]()
     var tempdep: String = ""
     var tempdes: String = ""
-    
-//    let mapView = GMSMapView(frame: .zero)
     
     lazy var asalField: UITextField = {
         let field = UITextField()
@@ -92,12 +74,12 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         view.backgroundColor = backgroundColor
         
-        //Asal
+        //Showing Asal
         view.addSubview(asalField)
         asalField.addTarget(self, action: #selector(didTapAsal), for: .touchUpInside)
         asalField.delegate = self
     
-        //Tujuan
+        //Showing Tujuan
         view.addSubview(tujuanField)
         tujuanField.addTarget(self, action: #selector(didTapTujuan), for: .touchUpInside)
         tujuanField.delegate = self
@@ -113,12 +95,6 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
         
         startBtn.frame = CGRect(x: 20, y: 180+label.frame.size.height, width: view.frame.size.width-40, height: 50)
         startBtn.applyGradient(withColours: [UIColor(red: 248/255, green: 221/255, blue: 204/255, alpha: 1),UIColor(red: 252/255, green: 238/255, blue: 209/255, alpha: 1)], gradientOrientation: .topRightBottomLeft)
-
-//        let asalVC = Tuju.AsalEntryViewController()
-//        asalVC.delegate = self
-        
-//        updateView()
-        
     }
     
     func updateView(){
@@ -131,21 +107,17 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
                 self.startBtn.applyGradient(withColours: [UIColor(red: 222/255, green: 0, blue: 0, alpha: 1),UIColor(red: 255/255, green: 119/255, blue: 10/255, alpha: 1)], gradientOrientation: .topRightBottomLeft)
                 self.startBtn.layer.cornerRadius = 19
             }
-            
-            // draw route
-//            drawRoute()
         }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        mapView.frame = view.bounds
+
         
         
     }
     
     @objc private func didTapMulai() {
-        // Draw the direction
         panel.move(to: .tip, animated: true)
         Departure = tempdep
         Destination = tempdes
@@ -162,71 +134,40 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func didTapAsal() {
-        let asalEntry = Tuju.AsalEntryViewController()
-//        asalEntry.delegate = self
         
-//        let vc = UINavigationController(rootViewController: asalEntry)
+        let asalEntry = Tuju.AsalEntryViewController()
         present(asalEntry, animated: true)
         
         asalEntry.completion = { [weak self] station in
             guard let station = station else {return}
 
             let asalCoordinates = CLLocationCoordinate2D(latitude: station.latitude ?? 0.0, longitude: station.longitude ?? 0.0)
-            
-            
-
-            //            self!.dele?.getDataAsal(didSelectLocationWith: asalCoordinates)
-            
-//            DispatchQueue.main.async {
-//                self?.asalField.text = "Asal: \(station.namaStasiun ?? "Pilih stasiun asal")" //Departure
-//            }
+ 
             self?.asalField.text = "Asal: \(station.namaStasiun ?? "Pilih stasiun asal")" //Departure
             if let dep = station.namaStasiun {
                 self?.tempdep = dep
             }
-            self!.delegate?.PanelViewController(didSelectLocationWith: asalCoordinates)
             self!.delegate?.getDataAsal(didSelectLocationWithAsal: asalCoordinates)
-//            self!.delegateAsal?.getDataAsal(didSelectLocationWithAsal: asalCoordinates)
             self?.updateView()
             
         }
     }
     
     @objc private func didTapTujuan() {
-        let tujuanEntry = Tuju.TujuanEntryViewController()
-//        tujuanEntry.delegate = self
         
-//        let vc = UINavigationController(rootViewController: tujuanEntry)
+        let tujuanEntry = Tuju.TujuanEntryViewController()
         present(tujuanEntry, animated: true)
         
         tujuanEntry.completion = { [weak self] station in
             guard let station = station else {return}
-            
-//            DispatchQueue.main.async {
-//                self?.tujuanField.text = "Tujuan: \(station.namaStasiun ?? "Pilih stasiun tujuan")" //Destination
-//            }
-            
-            
-            
+                        
             let tujuanCoordinates = CLLocationCoordinate2D(latitude: station.latitude ?? 0.0, longitude: station.longitude ?? 0.0)
-            
-//            self!.delegateTujuan?.getDataTujuan(didSelectLocationWithTujuan: tujuanCoordinates)
-            
-            
-            
-//            self!.delegateTujuan?.getDataTujuan(didSelectLocationWithTujuan: tujuanCoordinates)
-            
-            
-//            self!.delegate?.getDataTujuan(tujuanCoordinates: tujuanCoordinates)
             
             self?.tujuanField.text = "Tujuan: \(station.namaStasiun ?? "Pilih stasiun tujuan")" //Destination
             if let des = station.namaStasiun {
                 self?.tempdes = des
             }
-            self!.delegate?.PanelViewController(didSelectLocationWith: tujuanCoordinates)
             self!.delegate?.getDataTujuan(didSelectLocationWithTujuan: tujuanCoordinates)
-//            self!.delegateTujuan?.getDataTujuan(didSelectLocationWithTujuan: tujuanCoordinates)
-            
             self?.updateView()
         }
     }
