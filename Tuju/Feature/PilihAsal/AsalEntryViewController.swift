@@ -8,20 +8,9 @@
 import UIKit
 import GoogleMaps
 
-
-protocol AsalEntryViewControllerDelegate: AnyObject {
-    func AsalEntryViewController(_ vc: AsalEntryViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?)
-}
-
 class AsalEntryViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, GMSMapViewDelegate {
     
-    weak var delegate: AsalEntryViewControllerDelegate?
-
     public var completion: ((Station?) -> Void)?
-    
-    var locations = [Location]()
-
-//    let stations: [Station] = []
     
     var stations = [Station]()
     var originalStationsList = [Station]()
@@ -104,22 +93,6 @@ class AsalEntryViewController: UIViewController, UITextFieldDelegate, UITableVie
                                  width: view.frame.size.width,
                                  height: view.frame.size.height-tableY)
         
-//        asalField.isFirstResponder = true
-    }
-    
-    // UITextFieldDelegate
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        asalField.resignFirstResponder()
-        
-        if let text = asalField.text, !text.isEmpty {
-            LocationManager.shared.findLocations(with: text) { [weak self] locations in
-                DispatchQueue.main.async {
-                    self?.locations = locations
-                    self?.tableView.reloadData()
-                }
-            }
-        }
-        return true
     }
     
     //Search
@@ -153,21 +126,13 @@ class AsalEntryViewController: UIViewController, UITextFieldDelegate, UITableVie
     
     
     // UITableViewDataSource
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         return stations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-//
-//        cell.textLabel?.text = locations[indexPath.row].title
-//        cell.textLabel?.numberOfLines = 0
-//        cell.contentView.backgroundColor = .secondarySystemBackground
-//        return cell
-        
+
         var cell = tableView.dequeueReusableCell(withIdentifier: "station")
         
         if cell == nil {
@@ -182,30 +147,10 @@ class AsalEntryViewController: UIViewController, UITextFieldDelegate, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        // Notify  map controller to show pin at selected place
-//        guard let lat = stations[indexPath.row].latitude  else { return "" }
-//        guard let long = stations[indexPath.row].longitude else { return "" }
-//        let coordonates = CLLocationCoordinate2D.init(latitude: lat, longitude: long)
-//        delegate?.AsalEntryViewController(self, didSelectLocationWith: coordonates)
-//
-//        print("YOUR COORDINATE ASAL: \(coordinate.latitude), \(coordinate.longitude)")
-        
         asalField.text = stations[indexPath.row].namaStasiun
         completion?(stations[indexPath.row])
         
         dismiss(animated: true, completion: nil)
         
-//        let PanelVC = self.storyboard?.instantiateViewController(withIdentifier: "PanelViewController") as! PanelViewController
-//
-//        PanelVC.asalField.text = stations[indexPath.row]
-//
-//           self.navigationController?.pushViewController(PanelVC, animated: true)
-        
-        
-        
     }
-    
-    
-    
-    
 }
