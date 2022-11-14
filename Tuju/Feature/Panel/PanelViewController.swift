@@ -8,18 +8,23 @@
 import UIKit
 import FloatingPanel
 import GoogleMaps
+import CoreLocation
+import UserNotifications
+
 
 let backgroundColor = UIColor(red: 255/255, green: 252/255, blue: 246/255, alpha: 1)
 
-class PanelViewController: UIViewController, UITextFieldDelegate {
+class PanelViewController: UIViewController, UITextFieldDelegate{
+
 
     let panel = FloatingPanelController()
     
     weak var delegate: PanelViewControllerDelegate?
     
-//    var locations = [Location]()
     var tempdep: String = ""
     var tempdes: String = ""
+    
+    let perjalananView = Tuju.PerjalananViewController()
     
     lazy var asalField: UITextField = {
         let field = UITextField()
@@ -89,7 +94,7 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
         
         asalField.frame = CGRect(x: 20, y: 30, width: view.frame.size.width-40, height: 50)
         tujuanField.frame = CGRect(x: 20, y: 40+asalField.frame.size.height, width: view.frame.size.width-40, height: 50)
-
+        
         label.sizeToFit()
         label.frame = CGRect(x: 25, y: 120+tujuanField.frame.size.height, width: label.frame.size.width, height: label.frame.size.height)
         
@@ -123,14 +128,20 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
         Destination = tempdes
         RoutesLogic()
         FavAndRecentLogic()
+        nextStationGeofence()
+        addDestinationGeofence()
         print(recentData)
         print(favoriteData)
         print(TransitStation)
         print(RoutesData)
         print(numberOfTransit)
         
-        self.navigationController?.pushViewController(Tuju.PerjalananViewController(), animated: true)
+
         
+//        perjalananView.delegate = self
+        self.navigationController?.pushViewController(perjalananView, animated: true)
+        
+
     }
     
     @objc private func didTapAsal() {
@@ -172,4 +183,14 @@ class PanelViewController: UIViewController, UITextFieldDelegate {
         }
     }
 
+}
+
+extension PanelViewController {
+
+    func refreshCollectionView() {
+        //perintahkan PerjalananView untuk refresh CollectionView
+        print(#function)
+        perjalananView.myCollectionView.reloadData()
+    }
+    
 }
