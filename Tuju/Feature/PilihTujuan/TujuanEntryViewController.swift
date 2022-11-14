@@ -48,11 +48,40 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, GMSMapVi
         return field
     }()
     
-    private let tableView: UITableView = {
+    private let searchTableView: UITableView = {
         let table = UITableView()
         table.register(RecommendationTableViewCell.self, forCellReuseIdentifier: "cell")
         
         return table
+    }()
+    
+    private let recentfavTableView: UITableView = {
+        let table = UITableView()
+        table.register(RecommendationTableViewCell.self, forCellReuseIdentifier: "cell")
+        
+        return table
+    }()
+    
+    lazy var emptyImg: UIImageView = {
+        let image = UIImage(systemName: "tram.fill")
+        let imgView = UIImageView()
+        imgView.image = image
+        imgView.contentMode = .scaleAspectFit
+        imgView.clipsToBounds = true
+        imgView.tintColor = UIColor(red: 255/255, green: 118/255, blue: 12/255, alpha: 0.5)
+        imgView.isHidden = true
+        return imgView
+    }()
+    
+    lazy var emptyLbl: UILabel = {
+        let label = UILabel()
+        label.text = "Upss, riwayat pencarian masih kosong!"
+        label.font = .systemFont(ofSize: 18, weight: .regular)
+        label.textColor = UIColor(red: 124/255, green: 24/255, blue: 124/255, alpha: 0.5)
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.isHidden = true
+        return label
     }()
 
     override func viewDidLoad() {
@@ -62,7 +91,8 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, GMSMapVi
         
         view.addSubview(tujuanTitle)
         view.addSubview(tujuanField)
-        view.addSubview(tableView)
+        
+        tujuanField.addTarget(self, action: #selector(searchRecords(_ :)), for: .editingChanged)
         
         stations.append(pondokRanji)
         stations.append(kebayoran)
@@ -90,15 +120,29 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, GMSMapVi
             originalStationsList.append(station)
         }
 
-        tableView.isHidden = true
+        // Table
+        view.addSubview(searchTableView)
+        view.addSubview(recentfavTableView)
+        searchTableView.isHidden = true
+        searchTableView.delegate = self
+        searchTableView.dataSource = self
+        searchTableView.backgroundColor = .clear
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        tujuanField.delegate = self
+        recentfavTableView.isHidden = false
+        recentfavTableView.delegate = self
+        recentfavTableView.dataSource = self
+        recentfavTableView.backgroundColor = .clear
         
-        tableView.backgroundColor = .clear
-        
-        tujuanField.addTarget(self, action: #selector(searchRecords(_ :)), for: .editingChanged)
+        if recentData.isEmpty {
+            recentfavTableView.isHidden = true
+            view.addSubview(emptyImg)
+            view.addSubview(emptyLbl)
+            emptyImg.anchor(top: recentfavTableView.topAnchor , left: recentfavTableView.leftAnchor, bottom: nil, right: recentfavTableView.rightAnchor, paddingTop: 90, paddingLeft: 80, paddingBottom: 0, paddingRight: 80, width: 70, height: 70, enableInsets: false)
+            emptyLbl.anchor(top: emptyImg.bottomAnchor, left: recentfavTableView.leftAnchor, bottom: nil, right: recentfavTableView.rightAnchor, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 270, height: 60, enableInsets: false)
+            
+            emptyImg.isHidden = false
+            emptyLbl.isHidden = false
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -107,7 +151,11 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, GMSMapVi
         tujuanTitle.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: view.frame.size.width-40, height: 0, enableInsets: false)
         tujuanField.anchor(top: tujuanTitle.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: view.frame.size.width-40, height: 50, enableInsets: false)
         let tableY: CGFloat = tujuanField.frame.origin.y+tujuanField.frame.size.height+5
-        tableView.frame = CGRect(x: 0,
+        searchTableView.frame = CGRect(x: 0,
+                                 y: tableY,
+                                 width: view.frame.size.width,
+                                 height: view.frame.size.height-tableY)
+        recentfavTableView.frame = CGRect(x: 0,
                                  y: tableY,
                                  width: view.frame.size.width,
                                  height: view.frame.size.height-tableY)
@@ -120,7 +168,7 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, GMSMapVi
             LocationManager.shared.findLocations(with: text) { [weak self] locations in
                 DispatchQueue.main.async {
                     self?.locations = locations
-                    self?.tableView.reloadData()
+                    self?.searchTableView.reloadData()
                     
                 }
             }
@@ -131,7 +179,10 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, GMSMapVi
     //Search
     @objc func searchRecords(_ textField: UITextField){
         
-        tableView.isHidden = false
+        searchTableView.isHidden = false
+        recentfavTableView.isHidden = true
+        emptyImg.isHidden = true
+        emptyLbl.isHidden = true
         self.stations.removeAll()
         if textField.text?.count != 0 {
             
@@ -145,62 +196,126 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, GMSMapVi
                 
             }
         } else if textField.text?.count == 0 {
-            tableView.isHidden = true
+            searchTableView.isHidden = true
+            emptyImg.isHidden = false
+            emptyLbl.isHidden = false
+            if !recentData.isEmpty{
+                recentfavTableView.isHidden = false
+                emptyImg.isHidden = true
+                emptyLbl.isHidden = true
+            }
         } else {
-            
             for station in originalStationsList {
                 stations.append(station)
             }
-            
         }
-        
-        tableView.reloadData()
+        searchTableView.reloadData()
     }
-    
 }
 
 extension TujuanEntryViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return 70
+        return 70
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        var i: Int = 1
+        if tableView == recentfavTableView{
+            i = 2
+        }else if tableView == searchTableView{
+            i = 1
         }
+        return i
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        var sectionName: String = ""
+        if tableView == recentfavTableView{
+            switch section {
+            case 0:
+                sectionName = NSLocalizedString("Favorite", comment: "Favorite")
+            case 1:
+                sectionName = NSLocalizedString("Recent", comment: "Recent")
+                // ...
+            default:
+                sectionName = "Recent"
+            }
+        } else if tableView == searchTableView{
+            sectionName = ""
+        }
+        return sectionName
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return stations.count
+        var i: Int = 1
+        if tableView == recentfavTableView{
+            switch section {
+            case 0:
+                i = favoriteData.count
+            case 1:
+                i = recentData.count
+            default:
+                i = recentData.count
+            }
+        } else if tableView == searchTableView{
+            i = stations.count
+        }
+        return i
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-//        var cell = tableView.dequeueReusableCell(withIdentifier: "station")
-//
-//        if cell == nil {
-//            cell = UITableViewCell(style: .default, reuseIdentifier: "station")
-//        }
-//        cell?.textLabel?.text = stations[indexPath.row].namaStasiun
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! RecommendationTableViewCell
-
-        cell.namaStasiun.text = stations[indexPath.row].namaStasiun
-        cell.jarakStasiun.text = "12km"
+        
+        if tableView == recentfavTableView {
+            cell.namaStasiun.text = recentData[indexPath.row].namaStasiun
+            cell.jarakStasiun.text = "15km"
+        } else if tableView == searchTableView {
+            cell.namaStasiun.text = stations[indexPath.row].namaStasiun
+            cell.jarakStasiun.text = "12km"
+        }
+        
         cell.contentView.backgroundColor = .white
+        //        return cell
+        
+        //        var cell = tableView.dequeueReusableCell(withIdentifier: "station")
+        //
+        //        if cell == nil {
+        //            cell = UITableViewCell(style: .default, reuseIdentifier: "station")
+        //        }
         
         return cell
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         // Notify  map controller to show pin at selected place
-//        let coordinate = locations[indexPath.row].coordinates
+//        guard let lat = stations[indexPath.row].latitude  else { return "" }
+//        guard let long = stations[indexPath.row].longitude else { return "" }
+//        let coordonates = CLLocationCoordinate2D.init(latitude: lat, longitude: long)
+//        delegate?.AsalEntryViewController(self, didSelectLocationWith: coordonates)
 //
-//        delegate?.TujuanEntryViewController(self, didSelectLocationWith: coordinate)
-//
-//        print("YOUR COORDINATE: \(coordinate.latitude), \(coordinate.longitude)")
+//        print("YOUR COORDINATE ASAL: \(coordinate.latitude), \(coordinate.longitude)")
+        if tableView == recentfavTableView {
+            tujuanField.text = recentData[indexPath.row].namaStasiun
+            completion?(recentData[indexPath.row])
+        }else if tableView == searchTableView {
+            tujuanField.text = stations[indexPath.row].namaStasiun
+            completion?(stations[indexPath.row])
+        }
         
-        tujuanField.text = stations[indexPath.row].namaStasiun
-        completion?(stations[indexPath.row])
+        
+        
         
         dismiss(animated: true, completion: nil)
+        
+//        let PanelVC = self.storyboard?.instantiateViewController(withIdentifier: "PanelViewController") as! PanelViewController
+//
+//        PanelVC.asalField.text = stations[indexPath.row]
+//
+//           self.navigationController?.pushViewController(PanelVC, animated: true)
         
     }
 }
