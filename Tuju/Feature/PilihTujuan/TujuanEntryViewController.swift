@@ -8,17 +8,14 @@
 import UIKit
 import GoogleMaps
 
-<<<<<<< HEAD
-
 protocol TujuanEntryViewControllerDelegate: AnyObject {
     func TujuanEntryViewController(_ vc: TujuanEntryViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?)
 }
 
 
 class TujuanEntryViewController: UIViewController, UITextFieldDelegate, GMSMapViewDelegate {
-=======
-class TujuanEntryViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, GMSMapViewDelegate {
->>>>>>> main
+
+
     
     public var completion: ((Station?) -> Void)?
     
@@ -161,24 +158,6 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, UITableV
                                  height: view.frame.size.height-tableY)
     }
     
-<<<<<<< HEAD
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        tujuanField.resignFirstResponder()
-        
-        if let text = tujuanField.text, !text.isEmpty {
-            LocationManager.shared.findLocations(with: text) { [weak self] locations in
-                DispatchQueue.main.async {
-                    self?.locations = locations
-                    self?.searchTableView.reloadData()
-                    
-                }
-            }
-        }
-        return true
-    }
-    
-=======
->>>>>>> main
     //Search
     @objc func searchRecords(_ textField: UITextField){
         
@@ -279,14 +258,7 @@ extension TujuanEntryViewController: UITableViewDelegate, UITableViewDataSource{
         }
         
         cell.contentView.backgroundColor = .white
-        //        return cell
-        
-        //        var cell = tableView.dequeueReusableCell(withIdentifier: "station")
-        //
-        //        if cell == nil {
-        //            cell = UITableViewCell(style: .default, reuseIdentifier: "station")
-        //        }
-        
+     
         return cell
         
     }
@@ -294,14 +266,7 @@ extension TujuanEntryViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-<<<<<<< HEAD
-        // Notify  map controller to show pin at selected place
-//        guard let lat = stations[indexPath.row].latitude  else { return "" }
-//        guard let long = stations[indexPath.row].longitude else { return "" }
-//        let coordonates = CLLocationCoordinate2D.init(latitude: lat, longitude: long)
-//        delegate?.AsalEntryViewController(self, didSelectLocationWith: coordonates)
-//
-//        print("YOUR COORDINATE ASAL: \(coordinate.latitude), \(coordinate.longitude)")
+
         if tableView == recentfavTableView {
             tujuanField.text = recentData[indexPath.row].namaStasiun
             completion?(recentData[indexPath.row])
@@ -310,20 +275,6 @@ extension TujuanEntryViewController: UITableViewDelegate, UITableViewDataSource{
             completion?(stations[indexPath.row])
         }
         
-        
-        
-=======
-        tujuanField.text = stations[indexPath.row].namaStasiun
-        completion?(stations[indexPath.row])
->>>>>>> main
-        
         dismiss(animated: true, completion: nil)
-        
-//        let PanelVC = self.storyboard?.instantiateViewController(withIdentifier: "PanelViewController") as! PanelViewController
-//
-//        PanelVC.asalField.text = stations[indexPath.row]
-//
-//           self.navigationController?.pushViewController(PanelVC, animated: true)
-        
     }
 }

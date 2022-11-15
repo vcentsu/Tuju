@@ -328,18 +328,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
 
 extension MapViewController: CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.first else {
-            return
-        }
-
-        let coordinateLive = location.coordinate
-    
-        mapView.isMyLocationEnabled = true
-        mapView.settings.myLocationButton = true
-
-        marker.position = coordinateLive
-        marker.icon = UIImage(systemName: "train.side.rear.car")
-        marker.map = mapView
 
 // From Eldwin - current location
         guard let currentlocValue: CLLocationCoordinate2D = manager.location?.coordinate else {return}
@@ -350,6 +338,8 @@ extension MapViewController: CLLocationManagerDelegate{
         let long = (newLocation?.coordinate.longitude)! //get current location longitude
 
         marker.position = CLLocationCoordinate2DMake(lat, long)
+        mapView.isMyLocationEnabled = true
+        mapView.settings.myLocationButton = true
         marker.icon = UIImage(systemName: "train.side.rear.car")
 
         DispatchQueue.main.async {
@@ -360,7 +350,6 @@ extension MapViewController: CLLocationManagerDelegate{
             print("\(index): \(locations)")
             "0: [locations]"
         }
-        
     }
 }
 
