@@ -17,9 +17,12 @@ class LocationManager: NSObject {
     static let shared = LocationManager()
     
      let manager = CLLocationManager()
+    let mapView = GMSMapView(frame: .zero)
     
     public func findLocations(with query: String, completion: @escaping (([Location]) -> Void)) {
         let geoCoder = CLGeocoder()
+        
+        
         
         geoCoder.geocodeAddressString(query) { places, error in
             guard let places = places, error == nil else {
@@ -29,11 +32,9 @@ class LocationManager: NSObject {
                     
             let models: [Location] = places.compactMap({ place in
                 var name = ""
-                
                 if let locationName = place.name {
                     name += locationName
                 }
-                
                 if let adminRegion = place.administrativeArea {
                     name += ", \(adminRegion)"
                 }

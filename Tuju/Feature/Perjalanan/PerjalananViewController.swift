@@ -9,6 +9,9 @@ import UIKit
 
 class PerjalananViewController: UIViewController {
     
+    var delegate: PerjalananViewControllerDelegate?
+    
+    
     private var titleView: UIView = {
         let view = UIView()
         view.backgroundColor = .red
@@ -17,7 +20,7 @@ class PerjalananViewController: UIViewController {
     
     private var tujuan: UILabel = {
         let label = UILabel()
-        label.text = "Menuju Stasiun \(Destination)"
+//        label.text = "Menuju Stasiun \(Destination)"
         label.font = .systemFont(ofSize: 18, weight: .semibold)
         label.textColor = .white
         label.textAlignment = .center
@@ -26,9 +29,9 @@ class PerjalananViewController: UIViewController {
     }()
     
     
-    private var infoWaktu: UILabel = {
+    lazy var infoWaktu: UILabel = {
         let label = UILabel()
-        label.text = "\(RoutesData.count-1) stasiun lagi - 25 menit"
+//        label.text = "\(RoutesData.count-1) stasiun lagi - 25 menit"
         label.font = .systemFont(ofSize: 14, weight: .medium)
         label.textColor = .white
         label.textAlignment = .center
@@ -71,6 +74,7 @@ class PerjalananViewController: UIViewController {
         button.setTitleColor(UIColor(red: 250/255, green: 107/255, blue: 17/255, alpha: 1), for: .normal) //orangeBtn
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor(red: 250/255, green: 107/255, blue: 17/255, alpha: 1).cgColor
+        button.addTarget(self, action: #selector(didTapBerhenti), for: .touchUpInside)
         return button
     }()
     
@@ -174,7 +178,7 @@ class PerjalananViewController: UIViewController {
         return label
     }()
     
-    private var myCollectionView: UICollectionView!
+    var myCollectionView: UICollectionView!
     
     var currStation = ""
     var neStation = ""
@@ -183,8 +187,7 @@ class PerjalananViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = backgroundColor
-        //navigationItem.hidesBackButton = true
-        
+        navigationItem.hidesBackButton = true // Hides back button, Berhenti is now working to go back.
         //TOP
         view.addSubview(titleView)
         titleView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.size.width, height: 80, enableInsets: false)
@@ -264,6 +267,21 @@ class PerjalananViewController: UIViewController {
         view.addSubview(emptyLbl)
         emptyImg.anchor(top: myCollectionView.topAnchor , left: myCollectionView.leftAnchor, bottom: nil, right: myCollectionView.rightAnchor, paddingTop: 90, paddingLeft: 80, paddingBottom: 0, paddingRight: 80, width: 70, height: 70, enableInsets: false)
         emptyLbl.anchor(top: emptyImg.bottomAnchor, left: myCollectionView.leftAnchor, bottom: nil, right: myCollectionView.rightAnchor, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 270, height: 60, enableInsets: false)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        tujuan.text = "Menuju Stasiun \(Destination)"
+        infoWaktu.text = "\(RoutesData.count-1) stasiun lagi - 25 menit"
+        
+        myCollectionView.reloadData()
+    }
+    
+    @objc private func didTapBerhenti() {
+        if let navController = self.navigationController {
+            navController.popViewController(animated: true)
+        }
+        
+        // should also clear/reset the collection view
     }
 
 }
@@ -361,7 +379,6 @@ extension PerjalananViewController: UICollectionViewDelegate, UICollectionViewDa
             currentStation.text = RoutesData[indexPath.row].namaStasiun
             nextStation.text =  RoutesData[indexPath.row+1].namaStasiun
         }
-        //collectionView.reloadData()
         
         cell?.backgroundColor = .white
         return cell!

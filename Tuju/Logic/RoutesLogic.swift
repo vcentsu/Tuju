@@ -846,9 +846,9 @@ func RoutesLogic(){
     //Merah Bawah - Biru Kiri - Hijau
     else if (merahbawahData.contains(where: {$0.namaStasiun == Departure}) && hijauData.contains(where: {$0.namaStasiun == Destination})){
         
-        hijauData.reverse()
-        birukiriData.reverse()
         merahbawahData.reverse()
+        birukiriData.reverse()
+        hijauData.reverse()
         
         //cek index array
         let checkArr = merahbawahData.firstIndex(where:{ $0.namaStasiun == "\(Departure)"})

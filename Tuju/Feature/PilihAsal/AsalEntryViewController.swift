@@ -8,20 +8,18 @@
 import UIKit
 import GoogleMaps
 
+<<<<<<< HEAD
 
 protocol AsalEntryViewControllerDelegate: AnyObject {
     func AsalEntryViewController(_ vc: AsalEntryViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?)
 }
 
 class AsalEntryViewController: UIViewController, UITextFieldDelegate, GMSMapViewDelegate {
+=======
+class AsalEntryViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, GMSMapViewDelegate {
+>>>>>>> main
     
-    weak var delegate: AsalEntryViewControllerDelegate?
-
     public var completion: ((Station?) -> Void)?
-    
-    var locations = [Location]()
-
-//    let stations: [Station] = []
     
     var stations = [Station]()
     var originalStationsList = [Station]()
@@ -166,6 +164,7 @@ class AsalEntryViewController: UIViewController, UITextFieldDelegate, GMSMapView
                                  width: view.frame.size.width,
                                  height: view.frame.size.height-tableY)
         
+<<<<<<< HEAD
         
     }
     
@@ -181,6 +180,8 @@ class AsalEntryViewController: UIViewController, UITextFieldDelegate, GMSMapView
             }
         }
         return true
+=======
+>>>>>>> main
     }
     
     //Search
@@ -233,6 +234,7 @@ extension AsalEntryViewController: UITableViewDelegate, UITableViewDataSource {
         return i
     }
     
+<<<<<<< HEAD
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         var sectionName: String = ""
         if tableView == recentfavTableView{
@@ -251,6 +253,9 @@ extension AsalEntryViewController: UITableViewDelegate, UITableViewDataSource {
         return sectionName
     }
     
+=======
+    // UITableViewDataSource
+>>>>>>> main
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var i: Int = 1
         if tableView == recentfavTableView{
@@ -269,6 +274,7 @@ extension AsalEntryViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+<<<<<<< HEAD
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! RecommendationTableViewCell
         
@@ -278,6 +284,13 @@ extension AsalEntryViewController: UITableViewDelegate, UITableViewDataSource {
         } else if tableView == searchTableView {
             cell.namaStasiun.text = stations[indexPath.row].namaStasiun
             cell.jarakStasiun.text = "12km"
+=======
+
+        var cell = tableView.dequeueReusableCell(withIdentifier: "station")
+        
+        if cell == nil {
+            cell = UITableViewCell(style: .default, reuseIdentifier: "station")
+>>>>>>> main
         }
         
         cell.contentView.backgroundColor = .white
@@ -296,6 +309,7 @@ extension AsalEntryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+<<<<<<< HEAD
         // Notify  map controller to show pin at selected place
 //        guard let lat = stations[indexPath.row].latitude  else { return "" }
 //        guard let long = stations[indexPath.row].longitude else { return "" }
@@ -322,5 +336,12 @@ extension AsalEntryViewController: UITableViewDelegate, UITableViewDataSource {
 //
 //           self.navigationController?.pushViewController(PanelVC, animated: true)
         
+=======
+        asalField.text = stations[indexPath.row].namaStasiun
+        completion?(stations[indexPath.row])
+        
+        dismiss(animated: true, completion: nil)
+        
+>>>>>>> main
     }
 }

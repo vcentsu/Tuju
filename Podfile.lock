@@ -1,24 +1,36 @@
 PODS:
+  - Alamofire (5.6.2)
   - FloatingPanel (2.5.4)
   - GoogleMaps (7.1.0):
     - GoogleMaps/Maps (= 7.1.0)
   - GoogleMaps/Base (7.1.0)
   - GoogleMaps/Maps (7.1.0):
     - GoogleMaps/Base
+  - GooglePlaces (7.2.0)
+  - SwiftyJSON (5.0.1)
 
 DEPENDENCIES:
+  - Alamofire
   - FloatingPanel (= 2.5.4)
   - GoogleMaps (= 7.1.0)
+  - GooglePlaces
+  - SwiftyJSON
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - FloatingPanel
     - GoogleMaps
+    - GooglePlaces
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
+  Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
   FloatingPanel: 387377aa46a9b088e5f8f5f2a8d2c00c61e67298
   GoogleMaps: bc56ffb0324e345a2d91bac1a64a920f9c8f1b20
+  GooglePlaces: 590dea495d69431454ea92217033c3184995165d
+  SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: 81d3e9bf7947b2b277fc85f63061721d992b02ea
+PODFILE CHECKSUM: c91c7de0933ab61e0611364f4fa17eff4d66b175
 
 COCOAPODS: 1.11.3

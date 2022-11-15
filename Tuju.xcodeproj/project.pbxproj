@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5C06A0D529004A530003CBEE /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = 5CB26C2528FD5AA10057CC3E /* FloatingPanel */; };
+		396448F4DF99F9508DF5301A /* Pods_Tuju_TujuUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D4DC2962A0F0D261C2E7B1 /* Pods_Tuju_TujuUITests.framework */; };
 		5C06E05C290292CE001BA971 /* StationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C06E05B290292CE001BA971 /* StationDataModel.swift */; };
 		5C06E05E290294E1001BA971 /* StationDataDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C06E05D290294E1001BA971 /* StationDataDetails.swift */; };
 		5C2C60BA29092BCD00BE6C00 /* RecentDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2C60B929092BCD00BE6C00 /* RecentDataModel.swift */; };
 		5C2C60BC29093C2300BE6C00 /* FavoriteDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2C60BB29093C2300BE6C00 /* FavoriteDataModel.swift */; };
+		5C32756B291A52C700EA6323 /* SoundNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C32756A291A52C700EA6323 /* SoundNotification.swift */; };
 		5C41AD1B29098A980077F60A /* FavAndRecentLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C41AD1A29098A980077F60A /* FavAndRecentLogic.swift */; };
 		5CA14FA02914F82D00E20FAF /* RoutesDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA14F9F2914F82D00E20FAF /* RoutesDataModel.swift */; };
 		5CB26BF528FD49EB0057CC3E /* LogicSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB26BF428FD49EB0057CC3E /* LogicSwift.swift */; };
@@ -20,13 +21,12 @@
 		5CB26BFB28FD4A750057CC3E /* TestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB26BF928FD4A750057CC3E /* TestTableViewCell.swift */; };
 		5CB26BFD28FD4A8C0057CC3E /* TestLogic.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CB26BFC28FD4A8C0057CC3E /* TestLogic.storyboard */; };
 		5CB982A62906F81F00933DCF /* RoutesLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB982A52906F81F00933DCF /* RoutesLogic.swift */; };
+		681C2A4DB7873BE9D01CBB51 /* Pods_Tuju.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9F3AA2AEA14AD74648908A1 /* Pods_Tuju.framework */; };
 		752FC90628F92F8B00FBA82F /* PanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752FC90528F92F8B00FBA82F /* PanelViewController.swift */; };
 		752FC90828F92FC200FBA82F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752FC90728F92FC200FBA82F /* LocationManager.swift */; };
 		7567F963291257D900730487 /* AsalEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7567F962291257D900730487 /* AsalEntryViewController.swift */; };
 		7567F9652912594000730487 /* TujuanEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7567F9642912593F00730487 /* TujuanEntryViewController.swift */; };
-		A412EF59F4F5DA5B49E00654 /* Pods_TujuTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223FECC17B8B22FBCB90C8F0 /* Pods_TujuTests.framework */; };
-		B1CD681DB3FB4D132B6E861C /* Pods_Tuju.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFCA11BF92C1C8C6DC756FF0 /* Pods_Tuju.framework */; };
-		D121E8789DB4A276AD36BC1A /* Pods_Tuju_TujuUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0F6ABE2B42E1310E069C631 /* Pods_Tuju_TujuUITests.framework */; };
+		BD2CB32CE4498988965553ED /* Pods_TujuTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2BA47A2C29E53AA77017B44 /* Pods_TujuTests.framework */; };
 		D36911BE28F944F100E993E1 /* RecommendationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36911BD28F944F100E993E1 /* RecommendationTableViewCell.swift */; };
 		D386070A2912BE97003D32FE /* PerjalananViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38607092912BE97003D32FE /* PerjalananViewController.swift */; };
 		D388130828F563910062C702 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388130728F563910062C702 /* AppDelegate.swift */; };
@@ -64,13 +64,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00B98B6BE9CBBA38D4F58980 /* Pods-TujuTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TujuTests.debug.xcconfig"; path = "Target Support Files/Pods-TujuTests/Pods-TujuTests.debug.xcconfig"; sourceTree = "<group>"; };
-		223FECC17B8B22FBCB90C8F0 /* Pods_TujuTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TujuTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2EB047BF14CED98F70A9BA47 /* Pods-Tuju-TujuUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tuju-TujuUITests.release.xcconfig"; path = "Target Support Files/Pods-Tuju-TujuUITests/Pods-Tuju-TujuUITests.release.xcconfig"; sourceTree = "<group>"; };
+		19BF83D4D5B76B296EB077E2 /* Pods-Tuju-TujuUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tuju-TujuUITests.debug.xcconfig"; path = "Target Support Files/Pods-Tuju-TujuUITests/Pods-Tuju-TujuUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		37D4DC2962A0F0D261C2E7B1 /* Pods_Tuju_TujuUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tuju_TujuUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C06E05B290292CE001BA971 /* StationDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDataModel.swift; sourceTree = "<group>"; };
 		5C06E05D290294E1001BA971 /* StationDataDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDataDetails.swift; sourceTree = "<group>"; };
 		5C2C60B929092BCD00BE6C00 /* RecentDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentDataModel.swift; sourceTree = "<group>"; };
 		5C2C60BB29093C2300BE6C00 /* FavoriteDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDataModel.swift; sourceTree = "<group>"; };
+		5C32756A291A52C700EA6323 /* SoundNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundNotification.swift; sourceTree = "<group>"; };
 		5C41AD1A29098A980077F60A /* FavAndRecentLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavAndRecentLogic.swift; sourceTree = "<group>"; };
 		5CA14F9F2914F82D00E20FAF /* RoutesDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesDataModel.swift; sourceTree = "<group>"; };
 		5CB26BF428FD49EB0057CC3E /* LogicSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicSwift.swift; sourceTree = "<group>"; };
@@ -88,10 +88,12 @@
 		752FC91128F9335200FBA82F /* FloatingPanel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FloatingPanel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7567F962291257D900730487 /* AsalEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsalEntryViewController.swift; sourceTree = "<group>"; };
 		7567F9642912593F00730487 /* TujuanEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TujuanEntryViewController.swift; sourceTree = "<group>"; };
-		7926298521846BBA854D8A9A /* Pods-Tuju.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tuju.debug.xcconfig"; path = "Target Support Files/Pods-Tuju/Pods-Tuju.debug.xcconfig"; sourceTree = "<group>"; };
-		82E91B2C5993A78E03587818 /* Pods-Tuju.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tuju.release.xcconfig"; path = "Target Support Files/Pods-Tuju/Pods-Tuju.release.xcconfig"; sourceTree = "<group>"; };
-		AFCA11BF92C1C8C6DC756FF0 /* Pods_Tuju.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tuju.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0F6ABE2B42E1310E069C631 /* Pods_Tuju_TujuUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tuju_TujuUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		75E935F4291E189100EAA3F5 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		75E935F8291E189600EAA3F5 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		806AEBBF20D6FF35AFEE0958 /* Pods-Tuju-TujuUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tuju-TujuUITests.release.xcconfig"; path = "Target Support Files/Pods-Tuju-TujuUITests/Pods-Tuju-TujuUITests.release.xcconfig"; sourceTree = "<group>"; };
+		8F27D5C288BDFB6A7205FEA9 /* Pods-TujuTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TujuTests.debug.xcconfig"; path = "Target Support Files/Pods-TujuTests/Pods-TujuTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B9F3AA2AEA14AD74648908A1 /* Pods_Tuju.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tuju.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0AFF78C1272E478602BD951 /* Pods-Tuju.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tuju.release.xcconfig"; path = "Target Support Files/Pods-Tuju/Pods-Tuju.release.xcconfig"; sourceTree = "<group>"; };
 		D36911BD28F944F100E993E1 /* RecommendationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationTableViewCell.swift; sourceTree = "<group>"; };
 		D38607092912BE97003D32FE /* PerjalananViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerjalananViewController.swift; sourceTree = "<group>"; };
 		D388130428F563910062C702 /* Tuju.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tuju.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,8 +115,9 @@
 		D3CCF739291ADF1A0009E0B5 /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		D3E387B72902865500AFE101 /* Stasiun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stasiun.swift; sourceTree = "<group>"; };
 		D3E387BA290653E900AFE101 /* Anchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anchor.swift; sourceTree = "<group>"; };
-		E673F6EFAFE6D7CECCB7F776 /* Pods-TujuTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TujuTests.release.xcconfig"; path = "Target Support Files/Pods-TujuTests/Pods-TujuTests.release.xcconfig"; sourceTree = "<group>"; };
-		E9BA84BE855D9660713126C9 /* Pods-Tuju-TujuUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tuju-TujuUITests.debug.xcconfig"; path = "Target Support Files/Pods-Tuju-TujuUITests/Pods-Tuju-TujuUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		DC834DAB37C140B83DDA639A /* Pods-TujuTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TujuTests.release.xcconfig"; path = "Target Support Files/Pods-TujuTests/Pods-TujuTests.release.xcconfig"; sourceTree = "<group>"; };
+		E0758FED75FFFE65F804F56F /* Pods-Tuju.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tuju.debug.xcconfig"; path = "Target Support Files/Pods-Tuju/Pods-Tuju.debug.xcconfig"; sourceTree = "<group>"; };
+		F2BA47A2C29E53AA77017B44 /* Pods_TujuTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TujuTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,8 +125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C06A0D529004A530003CBEE /* FloatingPanel in Frameworks */,
-				B1CD681DB3FB4D132B6E861C /* Pods_Tuju.framework in Frameworks */,
+				681C2A4DB7873BE9D01CBB51 /* Pods_Tuju.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,7 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A412EF59F4F5DA5B49E00654 /* Pods_TujuTests.framework in Frameworks */,
+				BD2CB32CE4498988965553ED /* Pods_TujuTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,7 +141,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D121E8789DB4A276AD36BC1A /* Pods_Tuju_TujuUITests.framework in Frameworks */,
+				396448F4DF99F9508DF5301A /* Pods_Tuju_TujuUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,12 +151,12 @@
 		2CADD08A7BBE1E91414C0904 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7926298521846BBA854D8A9A /* Pods-Tuju.debug.xcconfig */,
-				82E91B2C5993A78E03587818 /* Pods-Tuju.release.xcconfig */,
-				E9BA84BE855D9660713126C9 /* Pods-Tuju-TujuUITests.debug.xcconfig */,
-				2EB047BF14CED98F70A9BA47 /* Pods-Tuju-TujuUITests.release.xcconfig */,
-				00B98B6BE9CBBA38D4F58980 /* Pods-TujuTests.debug.xcconfig */,
-				E673F6EFAFE6D7CECCB7F776 /* Pods-TujuTests.release.xcconfig */,
+				E0758FED75FFFE65F804F56F /* Pods-Tuju.debug.xcconfig */,
+				C0AFF78C1272E478602BD951 /* Pods-Tuju.release.xcconfig */,
+				19BF83D4D5B76B296EB077E2 /* Pods-Tuju-TujuUITests.debug.xcconfig */,
+				806AEBBF20D6FF35AFEE0958 /* Pods-Tuju-TujuUITests.release.xcconfig */,
+				8F27D5C288BDFB6A7205FEA9 /* Pods-TujuTests.debug.xcconfig */,
+				DC834DAB37C140B83DDA639A /* Pods-TujuTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -185,6 +187,7 @@
 		5C06A0D829004AA30003CBEE /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				5C32756A291A52C700EA6323 /* SoundNotification.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -293,14 +296,16 @@
 		98959F0521C4B648F3EBF3E6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				75E935F8291E189600EAA3F5 /* SwiftyJSON.framework */,
+				75E935F4291E189100EAA3F5 /* Alamofire.framework */,
 				5CB26C2228FD5A2B0057CC3E /* FloatingPanel.framework */,
 				752FC91128F9335200FBA82F /* FloatingPanel.framework */,
 				752FC90D28F9333A00FBA82F /* FloatingPanel.framework */,
 				752FC90928F931B300FBA82F /* FloatingPanel.framework */,
 				752FC90128F92E8900FBA82F /* FloatingPanel.framework */,
-				AFCA11BF92C1C8C6DC756FF0 /* Pods_Tuju.framework */,
-				D0F6ABE2B42E1310E069C631 /* Pods_Tuju_TujuUITests.framework */,
-				223FECC17B8B22FBCB90C8F0 /* Pods_TujuTests.framework */,
+				B9F3AA2AEA14AD74648908A1 /* Pods_Tuju.framework */,
+				37D4DC2962A0F0D261C2E7B1 /* Pods_Tuju_TujuUITests.framework */,
+				F2BA47A2C29E53AA77017B44 /* Pods_TujuTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -394,21 +399,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D388133128F563920062C702 /* Build configuration list for PBXNativeTarget "Tuju" */;
 			buildPhases = (
-				C755349EC1F039503987D460 /* [CP] Check Pods Manifest.lock */,
+				C6F3FF8DD88CD53A3160C6C9 /* [CP] Check Pods Manifest.lock */,
 				D388130028F563910062C702 /* Sources */,
 				D388130128F563910062C702 /* Frameworks */,
 				D388130228F563910062C702 /* Resources */,
-				B38E80FABF0266FE737786ED /* [CP] Embed Pods Frameworks */,
-				FAD4574C37AF238E73CF5039 /* [CP] Copy Pods Resources */,
+				40B48480657FEB4C92C3D061 /* [CP] Embed Pods Frameworks */,
+				D63FEA569473BEEA327A4760 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Tuju;
-			packageProductDependencies = (
-				5CB26C2528FD5AA10057CC3E /* FloatingPanel */,
-			);
 			productName = Tuju;
 			productReference = D388130428F563910062C702 /* Tuju.app */;
 			productType = "com.apple.product-type.application";
@@ -417,7 +419,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D388133428F563920062C702 /* Build configuration list for PBXNativeTarget "TujuTests" */;
 			buildPhases = (
-				31DF83C412C42A81E7939983 /* [CP] Check Pods Manifest.lock */,
+				5ECEB42D04B02199228A8321 /* [CP] Check Pods Manifest.lock */,
 				D388131928F563920062C702 /* Sources */,
 				D388131A28F563920062C702 /* Frameworks */,
 				D388131B28F563920062C702 /* Resources */,
@@ -436,12 +438,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D388133728F563920062C702 /* Build configuration list for PBXNativeTarget "TujuUITests" */;
 			buildPhases = (
-				4BC8C4EDFA0221D9475F9C73 /* [CP] Check Pods Manifest.lock */,
+				37DAE38E988744EE70E4E38B /* [CP] Check Pods Manifest.lock */,
 				D388132328F563920062C702 /* Sources */,
 				D388132428F563920062C702 /* Frameworks */,
 				D388132528F563920062C702 /* Resources */,
-				F3807987AA3647AAA458D84E /* [CP] Embed Pods Frameworks */,
-				3D6A773077F01CB75F87462C /* [CP] Copy Pods Resources */,
+				5296F043DE5855F541F45136 /* [CP] Embed Pods Frameworks */,
+				0F5370EC1ED566D9E5D58340 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -486,7 +488,8 @@
 			);
 			mainGroup = D38812FB28F563910062C702;
 			packageReferences = (
-				752FC91528F9367E00FBA82F /* XCRemoteSwiftPackageReference "FloatingPanel" */,
+				752FC91528F9367E00FBA82F /* XCRemoteSwiftPackageReference "FloatingPanel.git" */,
+				7545C36D291D676900AD62FC /* XCRemoteSwiftPackageReference "GoogleMaps-SP.git" */,
 			);
 			productRefGroup = D388130528F563910062C702 /* Products */;
 			projectDirPath = "";
@@ -529,29 +532,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		31DF83C412C42A81E7939983 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TujuTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3D6A773077F01CB75F87462C /* [CP] Copy Pods Resources */ = {
+		0F5370EC1ED566D9E5D58340 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -568,7 +549,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tuju-TujuUITests/Pods-Tuju-TujuUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4BC8C4EDFA0221D9475F9C73 /* [CP] Check Pods Manifest.lock */ = {
+		37DAE38E988744EE70E4E38B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -590,7 +571,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B38E80FABF0266FE737786ED /* [CP] Embed Pods Frameworks */ = {
+		40B48480657FEB4C92C3D061 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -607,7 +588,46 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tuju/Pods-Tuju-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C755349EC1F039503987D460 /* [CP] Check Pods Manifest.lock */ = {
+		5296F043DE5855F541F45136 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tuju-TujuUITests/Pods-Tuju-TujuUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tuju-TujuUITests/Pods-Tuju-TujuUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tuju-TujuUITests/Pods-Tuju-TujuUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5ECEB42D04B02199228A8321 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TujuTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C6F3FF8DD88CD53A3160C6C9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -629,24 +649,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F3807987AA3647AAA458D84E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Tuju-TujuUITests/Pods-Tuju-TujuUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Tuju-TujuUITests/Pods-Tuju-TujuUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tuju-TujuUITests/Pods-Tuju-TujuUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FAD4574C37AF238E73CF5039 /* [CP] Copy Pods Resources */ = {
+		D63FEA569473BEEA327A4760 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -670,6 +673,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C32756B291A52C700EA6323 /* SoundNotification.swift in Sources */,
 				5CB982A62906F81F00933DCF /* RoutesLogic.swift in Sources */,
 				D388130C28F563910062C702 /* MapViewController.swift in Sources */,
 				752FC90628F92F8B00FBA82F /* PanelViewController.swift in Sources */,
@@ -869,18 +873,19 @@
 		};
 		D388133228F563920062C702 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7926298521846BBA854D8A9A /* Pods-Tuju.debug.xcconfig */;
+			baseConfigurationReference = E0758FED75FFFE65F804F56F /* Pods-Tuju.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M92PY6MRJL;
-				EXCLUDED_ARCHS = arm64;
-				"EXCLUDED_ARCHS[sdk=*]" = arm64;
+				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Tuju/Info.plist;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location is shared to the admin for efficient purposes";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Your location is shared to the admin for efficient purposes";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location is shared to the admin for efficient purposes";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -902,17 +907,19 @@
 		};
 		D388133328F563920062C702 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82E91B2C5993A78E03587818 /* Pods-Tuju.release.xcconfig */;
+			baseConfigurationReference = C0AFF78C1272E478602BD951 /* Pods-Tuju.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M92PY6MRJL;
-				EXCLUDED_ARCHS = arm64;
+				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Tuju/Info.plist;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location is shared to the admin for efficient purposes";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Your location is shared to the admin for efficient purposes";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location is shared to the admin for efficient purposes";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -934,7 +941,7 @@
 		};
 		D388133528F563920062C702 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 00B98B6BE9CBBA38D4F58980 /* Pods-TujuTests.debug.xcconfig */;
+			baseConfigurationReference = 8F27D5C288BDFB6A7205FEA9 /* Pods-TujuTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -955,7 +962,7 @@
 		};
 		D388133628F563920062C702 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E673F6EFAFE6D7CECCB7F776 /* Pods-TujuTests.release.xcconfig */;
+			baseConfigurationReference = DC834DAB37C140B83DDA639A /* Pods-TujuTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -976,7 +983,7 @@
 		};
 		D388133828F563920062C702 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E9BA84BE855D9660713126C9 /* Pods-Tuju-TujuUITests.debug.xcconfig */;
+			baseConfigurationReference = 19BF83D4D5B76B296EB077E2 /* Pods-Tuju-TujuUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -995,7 +1002,7 @@
 		};
 		D388133928F563920062C702 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2EB047BF14CED98F70A9BA47 /* Pods-Tuju-TujuUITests.release.xcconfig */;
+			baseConfigurationReference = 806AEBBF20D6FF35AFEE0958 /* Pods-Tuju-TujuUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1054,7 +1061,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		752FC91528F9367E00FBA82F /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
+		752FC91528F9367E00FBA82F /* XCRemoteSwiftPackageReference "FloatingPanel.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SCENEE/FloatingPanel.git";
 			requirement = {
@@ -1063,15 +1070,15 @@
 				minimumVersion = 2.0.0;
 			};
 		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		5CB26C2528FD5AA10057CC3E /* FloatingPanel */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 752FC91528F9367E00FBA82F /* XCRemoteSwiftPackageReference "FloatingPanel" */;
-			productName = FloatingPanel;
+		7545C36D291D676900AD62FC /* XCRemoteSwiftPackageReference "GoogleMaps-SP.git" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/YAtechnologies/GoogleMaps-SP.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
 		};
-/* End XCSwiftPackageProductDependency section */
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCVersionGroup section */
 		D388131028F563910062C702 /* Tuju.xcdatamodeld */ = {

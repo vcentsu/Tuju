@@ -8,6 +8,7 @@
 import UIKit
 import GoogleMaps
 
+<<<<<<< HEAD
 
 protocol TujuanEntryViewControllerDelegate: AnyObject {
     func TujuanEntryViewController(_ vc: TujuanEntryViewController, didSelectLocationWith coordinates: CLLocationCoordinate2D?)
@@ -15,12 +16,11 @@ protocol TujuanEntryViewControllerDelegate: AnyObject {
 
 
 class TujuanEntryViewController: UIViewController, UITextFieldDelegate, GMSMapViewDelegate {
-    
-    weak var delegate: TujuanEntryViewControllerDelegate?
+=======
+class TujuanEntryViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, GMSMapViewDelegate {
+>>>>>>> main
     
     public var completion: ((Station?) -> Void)?
-    
-    var locations = [Location]()
     
     var stations = [Station]()
     var originalStationsList = [Station]()
@@ -161,6 +161,7 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, GMSMapVi
                                  height: view.frame.size.height-tableY)
     }
     
+<<<<<<< HEAD
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         tujuanField.resignFirstResponder()
         
@@ -176,6 +177,8 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, GMSMapVi
         return true
     }
     
+=======
+>>>>>>> main
     //Search
     @objc func searchRecords(_ textField: UITextField){
         
@@ -291,6 +294,7 @@ extension TujuanEntryViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+<<<<<<< HEAD
         // Notify  map controller to show pin at selected place
 //        guard let lat = stations[indexPath.row].latitude  else { return "" }
 //        guard let long = stations[indexPath.row].longitude else { return "" }
@@ -308,6 +312,10 @@ extension TujuanEntryViewController: UITableViewDelegate, UITableViewDataSource{
         
         
         
+=======
+        tujuanField.text = stations[indexPath.row].namaStasiun
+        completion?(stations[indexPath.row])
+>>>>>>> main
         
         dismiss(animated: true, completion: nil)
         
