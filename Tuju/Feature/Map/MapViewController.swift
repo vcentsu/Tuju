@@ -384,6 +384,7 @@ func addDestinationGeofence(){
     UNUserNotificationCenter.current().add(Destinationrequest) { error in
         if let error = error {
             // handle error
+            
         }
         
         print(geoFenceDestination)
@@ -414,6 +415,7 @@ func nextStationGeofence(){
             UNUserNotificationCenter.current().add(TanahAbangrequest) { error in
                 if let error = error {
                     // handle error
+                    
                 }
             }
         }
