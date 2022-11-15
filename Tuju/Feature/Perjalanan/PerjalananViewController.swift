@@ -185,7 +185,6 @@ class PerjalananViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = backgroundColor
-        
         navigationItem.hidesBackButton = true // Hides back button, Berhenti is now working to go back.
         //TOP
         view.addSubview(titleView)
@@ -266,6 +265,10 @@ class PerjalananViewController: UIViewController {
         view.addSubview(emptyLbl)
         emptyImg.anchor(top: myCollectionView.topAnchor , left: myCollectionView.leftAnchor, bottom: nil, right: myCollectionView.rightAnchor, paddingTop: 90, paddingLeft: 80, paddingBottom: 0, paddingRight: 80, width: 70, height: 70, enableInsets: false)
         emptyLbl.anchor(top: emptyImg.bottomAnchor, left: myCollectionView.leftAnchor, bottom: nil, right: myCollectionView.rightAnchor, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 270, height: 60, enableInsets: false)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        myCollectionView.reloadData()
     }
     
     @objc private func didTapBerhenti() {
