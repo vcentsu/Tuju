@@ -15,5 +15,5 @@ struct RoutesContent{
 }
 
 //insert the dummy data
-var Routes: [RoutesContent] = [
+var Routes: [Station] = [
 ]

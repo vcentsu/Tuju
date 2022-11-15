@@ -16,5 +16,5 @@ struct RecentContent{
 }
 
 //insert the dummy data
-var Recent: [RecentContent] = [
+var Recent: [Station] = [
 ]

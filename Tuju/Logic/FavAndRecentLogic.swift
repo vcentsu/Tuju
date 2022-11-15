@@ -41,7 +41,7 @@ func FavAndRecentLogic(){
         // kalo ga maka dia append ke recentdata dari temp
         else{
             let tempisFavorite = hijauData[checkArrFavorite!].isFavorite
-            recentData.append(RecentContent(namaStasiun: tempNamaStasiun, latitude: tempLatitude, longitude: templongitude, isFavorite: tempisFavorite))
+            recentData.append(Station(namaStasiun: tempNamaStasiun, latitude: tempLatitude, longitude: templongitude, isFavorite: tempisFavorite))
         }
     }
     
@@ -74,7 +74,7 @@ func FavAndRecentLogic(){
         // kalo ga maka dia append ke recentdata dari temp
         else{
             let tempisFavorite = birukiriData[checkArrFavorite!].isFavorite
-            recentData.append(RecentContent(namaStasiun: tempNamaStasiun, latitude: tempLatitude, longitude: templongitude, isFavorite: tempisFavorite))
+            recentData.append(Station(namaStasiun: tempNamaStasiun, latitude: tempLatitude, longitude: templongitude, isFavorite: tempisFavorite))
         }
     }
     
@@ -107,7 +107,7 @@ func FavAndRecentLogic(){
         // kalo ga maka dia append ke recentdata dari temp
         else{
             let tempisFavorite = merahatasData[checkArrFavorite!].isFavorite
-            recentData.append(RecentContent(namaStasiun: tempNamaStasiun, latitude: tempLatitude, longitude: templongitude, isFavorite: tempisFavorite))
+            recentData.append(Station(namaStasiun: tempNamaStasiun, latitude: tempLatitude, longitude: templongitude, isFavorite: tempisFavorite))
         }
     }
     
@@ -140,7 +140,7 @@ func FavAndRecentLogic(){
         // kalo ga maka dia append ke recentdata dari temp
         else{
             let tempisFavorite = birukananData[checkArrFavorite!].isFavorite
-            recentData.append(RecentContent(namaStasiun: tempNamaStasiun, latitude: tempLatitude, longitude: templongitude, isFavorite: tempisFavorite))
+            recentData.append(Station(namaStasiun: tempNamaStasiun, latitude: tempLatitude, longitude: templongitude, isFavorite: tempisFavorite))
         }
     }
     
@@ -173,7 +173,7 @@ func FavAndRecentLogic(){
         // kalo ga maka dia append ke recentdata dari temp
         else{
             let tempisFavorite = merahbawahData[checkArrFavorite!].isFavorite
-            recentData.append(RecentContent(namaStasiun: tempNamaStasiun, latitude: tempLatitude, longitude: templongitude, isFavorite: tempisFavorite))
+            recentData.append(Station(namaStasiun: tempNamaStasiun, latitude: tempLatitude, longitude: templongitude, isFavorite: tempisFavorite))
         }
     }
 }
