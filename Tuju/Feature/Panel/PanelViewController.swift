@@ -193,6 +193,7 @@ extension PanelViewController {
         //perintahkan PerjalananView untuk refresh CollectionView
         print(#function)
         perjalananView.myCollectionView.reloadData()
+        perjalananView.infoWaktu.text = "\(RoutesData.count-1) stasiun lagi - 25 menit"
     }
     
 }
