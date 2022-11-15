@@ -20,7 +20,7 @@ class PerjalananViewController: UIViewController {
     
     private var tujuan: UILabel = {
         let label = UILabel()
-        label.text = "Menuju Stasiun \(Destination)"
+//        label.text = "Menuju Stasiun \(Destination)"
         label.font = .systemFont(ofSize: 18, weight: .semibold)
         label.textColor = .white
         label.textAlignment = .center
@@ -29,9 +29,9 @@ class PerjalananViewController: UIViewController {
     }()
     
     
-    private var infoWaktu: UILabel = {
+    lazy var infoWaktu: UILabel = {
         let label = UILabel()
-        label.text = "\(RoutesData.count-1) stasiun lagi - 25 menit"
+//        label.text = "\(RoutesData.count-1) stasiun lagi - 25 menit"
         label.font = .systemFont(ofSize: 14, weight: .medium)
         label.textColor = .white
         label.textAlignment = .center
@@ -268,6 +268,9 @@ class PerjalananViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        tujuan.text = "Menuju Stasiun \(Destination)"
+        infoWaktu.text = "\(RoutesData.count-1) stasiun lagi - 25 menit"
+        
         myCollectionView.reloadData()
     }
     
