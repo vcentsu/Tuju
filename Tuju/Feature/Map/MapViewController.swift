@@ -342,24 +342,24 @@ extension MapViewController: CLLocationManagerDelegate{
         marker.map = mapView
 
 // From Eldwin - current location
-//        guard let currentlocValue: CLLocationCoordinate2D = manager.location?.coordinate else {return}
-//        let newLocation = locations.last
-//        let camera = GMSCameraPosition.camera(withLatitude: (newLocation?.coordinate.latitude)!, longitude: (newLocation?.coordinate.longitude)!, zoom: 15.0)
-//        self.mapView.animate(to: camera)
-//        let lat  = (newLocation?.coordinate.latitude)! // get current location latitude
-//        let long = (newLocation?.coordinate.longitude)! //get current location longitude
-//
-//        marker.position = CLLocationCoordinate2DMake(lat, long)
-//        marker.icon = UIImage(systemName: "train.side.rear.car")
-//
-//        DispatchQueue.main.async {
-//            self.marker.map = self.mapView  // Setting marker on mapview in main thread.
-//        }
-//
-//        for currentLocation in locations{
-//            print("\(index): \(locations)")
-//            "0: [locations]"
-//        }
+        guard let currentlocValue: CLLocationCoordinate2D = manager.location?.coordinate else {return}
+        let newLocation = locations.last
+        let camera = GMSCameraPosition.camera(withLatitude: (newLocation?.coordinate.latitude)!, longitude: (newLocation?.coordinate.longitude)!, zoom: 15.0)
+        self.mapView.animate(to: camera)
+        let lat  = (newLocation?.coordinate.latitude)! // get current location latitude
+        let long = (newLocation?.coordinate.longitude)! //get current location longitude
+
+        marker.position = CLLocationCoordinate2DMake(lat, long)
+        marker.icon = UIImage(systemName: "train.side.rear.car")
+
+        DispatchQueue.main.async {
+            self.marker.map = self.mapView  // Setting marker on mapview in main thread.
+        }
+
+        for currentLocation in locations{
+            print("\(index): \(locations)")
+            "0: [locations]"
+        }
         
     }
 }
