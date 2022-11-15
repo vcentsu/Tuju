@@ -429,12 +429,12 @@ func nextStationGeofence(){
             }
         }
         
-        else if(RoutesData[1].namaStasiun == "Manggarai"){
+        if(RoutesData[1].namaStasiun == "Manggarai"){
             let manggaraiTrigger = UNLocationNotificationTrigger(region: geoFencenNextStation, repeats: true)
             
             let contentManggarai = UNMutableNotificationContent()
             contentManggarai.title = "You Will Arrive At \(geoFencenNextStation.identifier)"
-            contentManggarai.body = "Prepare yourself! Y    ou will arrive at \(geoFencenNextStation.identifier)"
+            contentManggarai.body = "Prepare yourself! You will arrive at \(geoFencenNextStation.identifier)"
             contentManggarai.sound = UNNotificationSound.default
             
             let Manggaraiid = UUID().uuidString
