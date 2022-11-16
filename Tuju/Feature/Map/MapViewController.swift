@@ -221,7 +221,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
             markerTitikA = GMSMarker()
             markerTitikA.position = CLLocationCoordinate2DMake(origin.latitude, origin.longitude)
             // Point A icon
-            //marker.icon = UIImage(systemName: "train.side.rear.car")
+            markerTitikA.icon = UIImage(named: "Pinpoint_A")
             markerTitikA.title = "Asal Anda"
             markerTitikA.snippet = "Asal"
             markerTitikA.map = mapView
@@ -229,7 +229,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
             markerTitikB = GMSMarker()
             markerTitikB.position = CLLocationCoordinate2DMake(destination.latitude, destination.longitude)
             // Point B icon
-            //marker.icon = UIImage(systemName: "train.side.rear.car")
+            markerTitikB.icon = UIImage(named: "Pinpoint_B")
             markerTitikB.title = "Tujuan Anda"
             markerTitikB.snippet = "Tujuan"
             markerTitikB.map = mapView
