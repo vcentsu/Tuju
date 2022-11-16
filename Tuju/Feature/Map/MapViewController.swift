@@ -60,6 +60,9 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.overrideUserInterfaceStyle = .light
+        
         city = ""
         address = ""
         geocoder = GMSGeocoder()

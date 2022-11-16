@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         GMSServices.provideAPIKey("AIzaSyC-gr-6ddyZ_XMEtf7plw4Rlpk61Syo30o")
         GMSPlacesClient.provideAPIKey("AIzaSyC-gr-6ddyZ_XMEtf7plw4Rlpk61Syo30o")
         UNUserNotificationCenter.current().delegate = self
+        
         return true
     }
     

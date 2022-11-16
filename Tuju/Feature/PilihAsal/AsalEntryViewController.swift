@@ -84,6 +84,7 @@ class AsalEntryViewController: UIViewController, UITextFieldDelegate, GMSMapView
 //        navigationItem.largeTitleDisplayMode = .always
         
         view.backgroundColor = backgroundColor
+        view.overrideUserInterfaceStyle = .light
         
         view.addSubview(asalTitle)
         view.addSubview(asalField)

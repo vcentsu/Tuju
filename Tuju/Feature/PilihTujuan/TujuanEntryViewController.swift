@@ -85,6 +85,7 @@ class TujuanEntryViewController: UIViewController, UITextFieldDelegate, GMSMapVi
         super.viewDidLoad()
         
         view.backgroundColor = backgroundColor
+        view.overrideUserInterfaceStyle = .light
         
         view.addSubview(tujuanTitle)
         view.addSubview(tujuanField)

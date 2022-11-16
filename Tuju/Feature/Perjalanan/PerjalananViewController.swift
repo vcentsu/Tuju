@@ -187,6 +187,8 @@ class PerjalananViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = backgroundColor
+        view.overrideUserInterfaceStyle = .light
+        
         navigationItem.hidesBackButton = true // Hides back button, Berhenti is now working to go back.
         //TOP
         view.addSubview(titleView)
