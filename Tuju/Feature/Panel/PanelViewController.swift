@@ -119,13 +119,7 @@ class PanelViewController: UIViewController, UITextFieldDelegate{
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-<<<<<<< HEAD
 //        mapView.frame = view.bounds
-=======
-
-        
-        
->>>>>>> main
     }
     
     @objc private func didTapMulai() {
@@ -152,25 +146,17 @@ class PanelViewController: UIViewController, UITextFieldDelegate{
     
     @objc private func didTapAsal() {
         
-<<<<<<< HEAD
-        let vc = UINavigationController(rootViewController: asalEntry)
-        present(vc, animated: true)
-=======
+
         let asalEntry = Tuju.AsalEntryViewController()
         present(asalEntry, animated: true)
->>>>>>> main
+
         
         asalEntry.completion = { [weak self] station in
             guard let station = station else {return}
 
-<<<<<<< HEAD
-            let coordinates = CLLocationCoordinate2D(latitude: station.latitude ?? 0.0, longitude: station.longitude ?? 0.0)
-            self!.delegate?.PanelViewController(didSelectLocationWith: coordinates)
-            
-=======
+
             let asalCoordinates = CLLocationCoordinate2D(latitude: station.latitude ?? 0.0, longitude: station.longitude ?? 0.0)
  
->>>>>>> main
             self?.asalField.text = "Asal: \(station.namaStasiun ?? "Pilih stasiun asal")" //Departure
             if let dep = station.namaStasiun {
                 self?.tempdep = dep
@@ -183,14 +169,7 @@ class PanelViewController: UIViewController, UITextFieldDelegate{
     
     @objc private func didTapTujuan() {
         
-<<<<<<< HEAD
-        let vc = UINavigationController(rootViewController: tujuanEntry)
-        present(vc, animated: true)
-        
-        tujuanEntry.completion = { [weak self] station in
-            guard let station = station else {return}
 
-=======
         let tujuanEntry = Tuju.TujuanEntryViewController()
         present(tujuanEntry, animated: true)
         
@@ -199,7 +178,6 @@ class PanelViewController: UIViewController, UITextFieldDelegate{
                         
             let tujuanCoordinates = CLLocationCoordinate2D(latitude: station.latitude ?? 0.0, longitude: station.longitude ?? 0.0)
             
->>>>>>> main
             self?.tujuanField.text = "Tujuan: \(station.namaStasiun ?? "Pilih stasiun tujuan")" //Destination
             if let des = station.namaStasiun {
                 self?.tempdes = des
