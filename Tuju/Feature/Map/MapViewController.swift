@@ -148,7 +148,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         panelVC.refreshCollectionView()
         
         print(RoutesData)
-        AudioServicesPlaySystemSound(systemSoundID)
         AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
     }
     
