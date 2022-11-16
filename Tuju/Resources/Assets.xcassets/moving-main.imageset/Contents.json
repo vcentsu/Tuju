@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Moving.png",
+      "filename" : "Moving_Main.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Moving@2x.png",
+      "filename" : "Moving_Main@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Moving@3x.png",
+      "filename" : "Moving_Main@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
