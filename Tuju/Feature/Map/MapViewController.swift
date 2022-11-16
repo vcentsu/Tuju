@@ -332,8 +332,8 @@ extension MapViewController: CLLocationManagerDelegate{
 // From Eldwin - current location
         guard let currentlocValue: CLLocationCoordinate2D = manager.location?.coordinate else {return}
         let newLocation = locations.last
-        let camera = GMSCameraPosition.camera(withLatitude: (newLocation?.coordinate.latitude)!, longitude: (newLocation?.coordinate.longitude)!, zoom: 15.0)
-        self.mapView.animate(to: camera)
+//        let camera = GMSCameraPosition.camera(withLatitude: (newLocation?.coordinate.latitude)!, longitude: (newLocation?.coordinate.longitude)!, zoom: 15.0)
+//        self.mapView.animate(to: camera)
         let lat  = (newLocation?.coordinate.latitude)! // get current location latitude
         let long = (newLocation?.coordinate.longitude)! //get current location longitude
 
@@ -366,16 +366,17 @@ func addDestinationGeofence(){
         }
     let manager = CLLocationManager()
     //GEOFENCE AND ALERT DESTINATION
-    var destinationGeo = RoutesData.last
-    let geoFenceDestination: CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(destinationGeo?.latitude ?? 0, destinationGeo?.longitude ?? 0), radius: 100, identifier: "\(destinationGeo?.namaStasiun ?? "")")
+    var destinationGeo = RoutesData[RoutesData.count-2]
+    var tujuan = RoutesData.last
+    let geoFenceDestination: CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(destinationGeo.latitude ?? 0, destinationGeo.longitude ?? 0), radius: 100, identifier: "\(destinationGeo.namaStasiun ?? "")")
     manager.startMonitoring(for: geoFenceDestination)
     geoFenceDestination.notifyOnEntry = true
     geoFenceDestination.notifyOnExit = false
     let destinationTrigger = UNLocationNotificationTrigger(region: geoFenceDestination, repeats: true)
     
     let contentDestination = UNMutableNotificationContent()
-    contentDestination.title = "Kamu akan tiba di Stasiun \(geoFenceDestination.identifier)"
-    contentDestination.body = "Bersiap menuju ke pintu keluar, tujuanmu di stasiun berikutnya, \(geoFenceDestination.identifier)"
+    contentDestination.title = "Bersiap-siap! Stasiun Berikutnya Adalah Tujuan Kamu"
+    contentDestination.body = "Bersiap menuju ke pintu keluar, tujuanmu di stasiun berikutnya, \(tujuan!)"
     contentDestination.sound = UNNotificationSound.default
     
     let Destinationid = UUID().uuidString

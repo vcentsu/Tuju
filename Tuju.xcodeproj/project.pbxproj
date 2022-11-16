@@ -488,8 +488,8 @@
 			);
 			mainGroup = D38812FB28F563910062C702;
 			packageReferences = (
-				752FC91528F9367E00FBA82F /* XCRemoteSwiftPackageReference "FloatingPanel.git" */,
-				7545C36D291D676900AD62FC /* XCRemoteSwiftPackageReference "GoogleMaps-SP.git" */,
+				752FC91528F9367E00FBA82F /* XCRemoteSwiftPackageReference "FloatingPanel" */,
+				7545C36D291D676900AD62FC /* XCRemoteSwiftPackageReference "GoogleMaps-SP" */,
 			);
 			productRefGroup = D388130528F563910062C702 /* Products */;
 			projectDirPath = "";
@@ -879,7 +879,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = M92PY6MRJL;
+				DEVELOPMENT_TEAM = JJ9DN4FZJC;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Tuju/Info.plist;
@@ -913,7 +913,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = M92PY6MRJL;
+				DEVELOPMENT_TEAM = JJ9DN4FZJC;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Tuju/Info.plist;
@@ -1061,7 +1061,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		752FC91528F9367E00FBA82F /* XCRemoteSwiftPackageReference "FloatingPanel.git" */ = {
+		752FC91528F9367E00FBA82F /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SCENEE/FloatingPanel.git";
 			requirement = {
@@ -1070,7 +1070,7 @@
 				minimumVersion = 2.0.0;
 			};
 		};
-		7545C36D291D676900AD62FC /* XCRemoteSwiftPackageReference "GoogleMaps-SP.git" */ = {
+		7545C36D291D676900AD62FC /* XCRemoteSwiftPackageReference "GoogleMaps-SP" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/YAtechnologies/GoogleMaps-SP.git";
 			requirement = {
