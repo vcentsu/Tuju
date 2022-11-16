@@ -424,7 +424,7 @@ func nextStationGeofence(){
     let manager = CLLocationManager()
     //GEOFENCE AND ALERT DESTINATION
     if(RoutesData.count>2){
-        let geoFencenNextStation: CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(RoutesData[1].latitude ?? 0, RoutesData[1].longitude ?? 0), radius: 300, identifier: "\(RoutesData[1].namaStasiun ?? "")")
+        let geoFencenNextStation: CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(RoutesData[1].latitude ?? 0, RoutesData[1].longitude ?? 0), radius: 200, identifier: "\(RoutesData[1].namaStasiun ?? "")")
         manager.startMonitoring(for: geoFencenNextStation)
         geoFencenNextStation.notifyOnEntry = true
         geoFencenNextStation.notifyOnExit = false
