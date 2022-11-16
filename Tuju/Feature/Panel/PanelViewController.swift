@@ -80,7 +80,7 @@ class PanelViewController: UIViewController, UITextFieldDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = backgroundColor
-        
+        view.overrideUserInterfaceStyle = .light
         //Showing Asal
         view.addSubview(asalField)
         asalField.addTarget(self, action: #selector(didTapAsal), for: .touchUpInside)
