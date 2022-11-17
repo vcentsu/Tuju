@@ -279,11 +279,30 @@ class PerjalananViewController: UIViewController {
     }
     
     @objc private func didTapBerhenti() {
-        if let navController = self.navigationController {
-            navController.popViewController(animated: true)
-        }
+        alertBerhenti()
+//        if let navController = self.navigationController {
+//            navController.popViewController(animated: true)
+//        }
         
         // should also clear/reset the collection view
+    }
+    
+    func alertBerhenti() {
+        let showAlert = UIAlertController(title: "Berhenti", message: nil, preferredStyle: .alert)
+        let imageView = UIImageView(frame: CGRect(x: 10, y: 50, width: 250, height: 230))
+        imageView.image = UIImage(named: "berhenti_illus") // Your image here...
+        showAlert.view.addSubview(imageView)
+        imageView.anchor(top: showAlert.view.topAnchor, left: showAlert.view.leftAnchor, bottom: nil, right: showAlert.view.rightAnchor, paddingTop: 10, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: showAlert.view.frame.size.width-20, height: 0, enableInsets: false)
+        showAlert.addAction(UIAlertAction(title: "Tidak", style: .default, handler: { action in
+            // your actions here...
+        }))
+        showAlert.addAction(UIAlertAction(title: "Ya", style: .destructive, handler: { action in
+            // your actions here...
+            if let navController = self.navigationController {
+                navController.popViewController(animated: true)
+            }
+        }))
+        self.present(showAlert, animated: true, completion: nil)
     }
 
 }

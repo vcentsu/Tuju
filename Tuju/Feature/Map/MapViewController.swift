@@ -327,6 +327,22 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
             self.present(alertController, animated: true, completion: nil)
         }
     }
+    
+    func alertWhenArrivedToDestination() {
+        let showAlert = UIAlertController(title: "Arrived", message: nil, preferredStyle: .alert)
+        let imageView = UIImageView(frame: CGRect(x: 10, y: 50, width: 250, height: 230))
+        imageView.image = UIImage(named: "selesai_illus") // Your image here...
+        showAlert.view.addSubview(imageView)
+        
+        showAlert.addAction(UIAlertAction(title: "Siap!", style: .default, handler: { action in
+            // your actions here...
+        }))
+        self.present(showAlert, animated: true, completion: nil)
+    }
+    
+    func alertWhenArrivedToTransit() {
+        
+    }
 }
 
 extension MapViewController: CLLocationManagerDelegate{

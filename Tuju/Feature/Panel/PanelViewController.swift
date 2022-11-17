@@ -136,8 +136,6 @@ class PanelViewController: UIViewController, UITextFieldDelegate{
         print(RoutesData)
         print(numberOfTransit)
         
-
-        
 //        perjalananView.delegate = self
         self.navigationController?.pushViewController(perjalananView, animated: true)
         
