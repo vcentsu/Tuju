@@ -72,19 +72,14 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
-        //Set default map
+        
         recenterMaps()
         
         // From Eldwin
         UNUserNotificationCenter.current().requestAuthorization(
             options: [.alert, .badge, .sound]) { success, error in
         }
-        // mapView.delegate = self
-        //let marker = GMSMarker()
-        //marker.map = mapView
-        //mapView.delegate = self
-        // self.view = mapView        
-
+      
         let nav1 = UINavigationController(rootViewController: Tuju.PanelViewController())
         nav1.viewControllers = [panelVC]
         panel.set(contentViewController: nav1)
@@ -92,14 +87,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         panelVC.delegate = self // important to update panel -> drawing route on map
        
         print("License: \n\n\(GMSServices.openSourceLicenseInfo())")
-
-        let circleCenter = CLLocationCoordinate2D(latitude: -6.209675277806892, longitude: 106.85025771231817)
-        let circle = GMSCircle(position: circleCenter, radius: 500)
-        circle.map = mapView
-
-        circle.fillColor = UIColor(red: 0.7, green: 0, blue: 0, alpha: 0.2)
-        circle.strokeColor = .red
-        circle.strokeWidth = 3
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -113,15 +101,15 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         self.currentLocation = locationManager.location
         
         // Set Initial Camera Position
-        self.pickupCoordinate = CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
+        self.pickupCoordinate = CLLocationCoordinate2D(latitude: currentLocation?.coordinate.latitude ?? -6.209675277806892, longitude: currentLocation?.coordinate.longitude ?? 106.85025771231817)
         
         if pickupCoordinate != nil{
             
             //Set Camera Position
-            let camera = GMSCameraPosition.camera(withLatitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude, zoom: 14.0)
+            let camera = GMSCameraPosition.camera(withLatitude: currentLocation?.coordinate.latitude ?? -6.209675277806892, longitude: currentLocation?.coordinate.longitude ?? 106.85025771231817, zoom: 14.0)
             mapView.camera = camera
             mapView.mapType = .normal
-            geocoder.reverseGeocodeCoordinate(CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude), completionHandler: {
+            geocoder.reverseGeocodeCoordinate(CLLocationCoordinate2D(latitude: currentLocation?.coordinate.latitude ?? -6.209675277806892, longitude: currentLocation?.coordinate.longitude ?? 106.85025771231817), completionHandler: {
                 response, error in
                 if error == nil{
                     if let resultAdd = response?.firstResult(){
@@ -129,7 +117,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
                         let lines = resultAdd.lines! as [String]
                         self.city = resultAdd.locality
                         print("ADDRESS RECENTER MAP => \(lines.joined(separator: "\n"))")
-
                     }else{
                         print("ERROR_PLEASE_TRY_AGAIN_LATER")
                     }
@@ -154,10 +141,81 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
     }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-
-        
         print("Exited: \(region.identifier)")
     }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("EROOR \(error)")
+        // updated with non deprecated
+        let authorizationStatus: CLAuthorizationStatus
+
+        if #available(iOS 14, *) {
+            authorizationStatus = manager.authorizationStatus
+        } else {
+            authorizationStatus = CLLocationManager.authorizationStatus()
+        }
+        
+        switch authorizationStatus {
+        case .restricted, .denied:
+            redirectToSettings()
+        default:
+            print("passed")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        
+        switch status{
+            
+        case .authorizedAlways:
+            if manager.location != nil{
+                self.permissionFlag = true
+                self.currentLocation = manager.location
+            }else{
+
+                self.dismiss(animated: true, completion: nil)
+                
+            }
+            break
+            
+        case .authorizedWhenInUse:
+            if manager.location != nil{
+                
+                self.permissionFlag = true
+                self.currentLocation = manager.location
+                
+            }else{
+                
+                self.dismiss(animated: true, completion: nil)
+                
+            }
+            break
+            
+        case .notDetermined:
+            self.permissionFlag = false
+            redirectToSettings()
+            break
+            
+        case .denied:
+            self.permissionFlag = false
+            redirectToSettings()
+            break
+            
+        case .restricted:
+            self.permissionFlag = false
+            redirectToSettings()
+            break
+            
+        default:
+            print("ERROR_TRY_AGAIN_LATER")
+            
+        }
+        
+    }
+    
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        self.currentLocation = locations.last
+//    }
     
 
 // Anything else to pass from panelVC? else remove this func and its delegation above.
@@ -284,8 +342,23 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
                     }
                 })
             }else {
-                if CLLocationManager.authorizationStatus() == .denied || CLLocationManager.authorizationStatus() == .restricted{
+//                if CLLocationManager.authorizationStatus() == .denied || CLLocationManager.authorizationStatus() == .restricted{
+//                    redirectToSettings()
+//                }
+                
+                let authorizationStatus: CLAuthorizationStatus
+
+                if #available(iOS 14, *) {
+                    authorizationStatus = locationManager.authorizationStatus
+                } else {
+                    authorizationStatus = CLLocationManager.authorizationStatus()
+                }
+                
+                switch authorizationStatus {
+                case .restricted, .denied:
                     redirectToSettings()
+                default:
+                    print("passed")
                 }
                 
             }
@@ -293,43 +366,56 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
     }
     
     func redirectToSettings(){
-        if CLLocationManager.authorizationStatus() == .denied || CLLocationManager.authorizationStatus() == .restricted{
-            self.permissionFlag = false
-            let alertController = UIAlertController(title: "Location Access Denied or Restricted",
-                                                    message: "Please enable location and try again",
-                                                    preferredStyle: .alert)
-            
-            let settingsAction = UIAlertAction(title: "Settings", style: .default) { (alertAction) in
-                if let appSettings = NSURL(string: UIApplication.openSettingsURLString) {
-                    if #available(iOS 10.0, *) {
-                        UIApplication.shared.open(appSettings as URL, options: [:], completionHandler: { _ in
-                        })
-                        self.dismiss(animated: true, completion: nil)
-                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                        appDelegate.clear()
-                    } else {
-                        UIApplication.shared.openURL(appSettings as URL)
-                        self.dismiss(animated: true, completion: nil)
-                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                        appDelegate.clear()
+        let authorizationStatus: CLAuthorizationStatus
+
+        if #available(iOS 14, *) {
+            authorizationStatus = locationManager.authorizationStatus
+        } else {
+            authorizationStatus = CLLocationManager.authorizationStatus()
+        }
+        
+        switch authorizationStatus {
+        case .restricted, .denied:
+                self.permissionFlag = false
+                let alertController = UIAlertController(title: "Location Access Denied or Restricted",
+                                                        message: "To use Tuju please enable location and try again",
+                                                        preferredStyle: .alert)
+                
+                let settingsAction = UIAlertAction(title: "Settings", style: .default) { (alertAction) in
+                    if let appSettings = NSURL(string: UIApplication.openSettingsURLString) {
+                        if #available(iOS 10.0, *) {
+                            UIApplication.shared.open(appSettings as URL, options: [:], completionHandler: { _ in
+                            })
+                            self.dismiss(animated: true, completion: nil)
+                            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                            appDelegate.clear()
+                        } else {
+                            UIApplication.shared.openURL(appSettings as URL)
+                            self.dismiss(animated: true, completion: nil)
+                            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                            appDelegate.clear()
+                        }
                     }
                 }
-            }
-            alertController.addAction(settingsAction)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
-                _ in
-                self.dismiss(animated: true, completion: {
-                    print("DISMISSING_VIEWCONTROLLER")
+                alertController.addAction(settingsAction)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+                    _ in
+                    self.dismiss(animated: true, completion: {
+                        print("DISMISSING_VIEWCONTROLLER")
+                    })
                 })
-            })
-            alertController.addAction(cancelAction)
+                alertController.addAction(cancelAction)
+                
+                self.present(alertController, animated: true, completion: nil)
             
-            self.present(alertController, animated: true, completion: nil)
+            default:
+                print("passed")
         }
     }
 }
 
 extension MapViewController: CLLocationManagerDelegate{
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 
 // From Eldwin - current location
@@ -353,6 +439,16 @@ extension MapViewController: CLLocationManagerDelegate{
             print("\(index): \(locations)")
             "0: [locations]"
         }
+
+//        let circleCenter = currentlocValue
+//        let circle = GMSCircle(position: circleCenter, radius: 250)
+//        circle.map = mapView
+//        // clear circle setiap kali update
+//
+//        circle.fillColor = UIColor(red: 0.7, green: 0, blue: 0, alpha: 0.05)
+//        circle.strokeColor = .red
+//        circle.strokeWidth = 1
+
     }
 }
 
