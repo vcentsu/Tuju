@@ -90,14 +90,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         panelVC.delegate = self // important to update panel -> drawing route on map
        
         print("License: \n\n\(GMSServices.openSourceLicenseInfo())")
-
-        let circleCenter = CLLocationCoordinate2D(latitude: -6.209675277806892, longitude: 106.85025771231817)
-        let circle = GMSCircle(position: circleCenter, radius: 500)
-        circle.map = mapView
-
-        circle.fillColor = UIColor(red: 0.7, green: 0, blue: 0, alpha: 0.2)
-        circle.strokeColor = .red
-        circle.strokeWidth = 3
     }
     
     override func viewDidLayoutSubviews() {
