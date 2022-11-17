@@ -883,9 +883,9 @@
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Tuju/Info.plist;
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location is shared to the admin for efficient purposes";
-				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Your location is shared to the admin for efficient purposes";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location is shared to the admin for efficient purposes";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location is needed for the Tuju App to function normally.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Your location is needed for the Tuju App to function normally.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location is needed for the Tuju App to function normally.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -917,9 +917,9 @@
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Tuju/Info.plist;
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location is shared to the admin for efficient purposes";
-				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Your location is shared to the admin for efficient purposes";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location is shared to the admin for efficient purposes";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location is needed for the Tuju App to function normally.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Your location is needed for the Tuju App to function normally.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location is needed for the Tuju App to function normally.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
