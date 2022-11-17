@@ -364,7 +364,7 @@ func addDestinationGeofence(){
     //GEOFENCE AND ALERT DESTINATION 1 STASIUN SEBELUM
     if (RoutesData.count < 2){
         var tujuan = RoutesData.last
-        let geoFenceDestination: CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(tujuan?.latitude ?? 0, tujuan?.longitude ?? 0), radius: 100, identifier: "\(tujuan?.namaStasiun ?? "")")
+        let geoFenceDestination: CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(tujuan?.latitude ?? 0, tujuan?.longitude ?? 0), radius: 200, identifier: "\(tujuan?.namaStasiun ?? "")")
         manager.startMonitoring(for: geoFenceDestination)
         geoFenceDestination.notifyOnEntry = true
         geoFenceDestination.notifyOnExit = false
@@ -424,7 +424,7 @@ func addDestinationGeofence(){
     
     let contentDestination = UNMutableNotificationContent()
     contentDestination.title = "Bersiap-siap! Stasiun Berikutnya Adalah Tujuan Kamu"
-    contentDestination.body = "Bersiap menuju ke pintu keluar, tujuanmu di stasiun berikutnya, \(tujuan!.namaStasiun!)"
+    contentDestination.body = "Bersiap menuju ke pintu keluar, kamu akan tiba di Stasiun \(tujuan!.namaStasiun!)"
     contentDestination.sound = UNNotificationSound.default
     
     let Destinationid = UUID().uuidString
@@ -454,8 +454,8 @@ func nextStationGeofence(){
             let TanahAbangTrigger = UNLocationNotificationTrigger(region: geoFencenNextStation, repeats: true)
             
             let contentTanahAbang = UNMutableNotificationContent()
-            contentTanahAbang.title = "You Will Arrive At \(geoFencenNextStation.identifier)"
-            contentTanahAbang.body = "Prepare yourself! You will arrive at \(geoFencenNextStation.identifier)"
+            contentTanahAbang.title = "Kamu Akan Tiba Di Stasiun Transit \(geoFencenNextStation.identifier)"
+            contentTanahAbang.body = "Bersiap menuju ke pintu keluar, kamu akan tiba di Stasiun \(geoFencenNextStation.identifier)"
             contentTanahAbang.sound = UNNotificationSound.default
             
             let TanahAbangid = UUID().uuidString
@@ -477,8 +477,8 @@ func nextStationGeofence(){
             let manggaraiTrigger = UNLocationNotificationTrigger(region: geoFencenNextStation, repeats: true)
             
             let contentManggarai = UNMutableNotificationContent()
-            contentManggarai.title = "You Will Arrive At \(geoFencenNextStation.identifier)"
-            contentManggarai.body = "Prepare yourself! You will arrive at \(geoFencenNextStation.identifier)"
+            contentManggarai.title = "Kamu Akan Tiba Di Stasiun Transit \(geoFencenNextStation.identifier)"
+            contentManggarai.body = "Bersiap menuju ke pintu keluar, kamu akan tiba di Stasiun \(geoFencenNextStation.identifier)"
             contentManggarai.sound = UNNotificationSound.default
             
             let Manggaraiid = UUID().uuidString
