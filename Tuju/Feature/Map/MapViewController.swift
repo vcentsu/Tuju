@@ -88,7 +88,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         panelVC.delegate = self // important to update panel -> drawing route on map
        
         print("License: \n\n\(GMSServices.openSourceLicenseInfo())")
-
     }
     
     override func viewDidLayoutSubviews() {
@@ -155,6 +154,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         } else {
             authorizationStatus = CLLocationManager.authorizationStatus()
         }
+
         
         switch authorizationStatus {
         case .restricted, .denied:
