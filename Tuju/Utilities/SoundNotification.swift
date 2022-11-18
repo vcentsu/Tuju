@@ -7,7 +7,21 @@
 
 import Foundation
 import AVFoundation
+import AudioToolbox
 
 let systemSoundID: SystemSoundID = 1016
+
+
+func vibrateTwice(){
+    AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate) {
+               AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+           }
+}
+
+func vibrateThreeTimes(){
+    AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate) {
+        vibrateTwice()
+    }
+}
 
 

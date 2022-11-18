@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bucket
-   uuid = "CDBA9B9D-58ED-4DBD-90D6-4C8041975CD1"
+   uuid = "C23C4671-BA30-40E3-9645-4B404166331B"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D6BA50C1-2DB0-4EFF-B7B6-F80B57B13274"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Tuju/Feature/Perjalanan/PerjalananViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "PerjalananViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

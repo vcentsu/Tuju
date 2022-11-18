@@ -14,6 +14,7 @@ import Alamofire
 import SwiftyJSON
 import AVFoundation
 import UserNotifications
+import AudioToolbox.AudioServices
 
 protocol PanelViewControllerDelegate: AnyObject {
     func PanelViewController(didSelectLocationWith coordinates: CLLocationCoordinate2D?)
@@ -87,7 +88,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         panelVC.delegate = self // important to update panel -> drawing route on map
        
         print("License: \n\n\(GMSServices.openSourceLicenseInfo())")
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -137,7 +137,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         panelVC.refreshCollectionView()
         
         print(RoutesData)
-        AudioServicesPlaySystemSound(systemSoundID)
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
     }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
@@ -154,6 +154,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         } else {
             authorizationStatus = CLLocationManager.authorizationStatus()
         }
+
         
         switch authorizationStatus {
         case .restricted, .denied:
@@ -464,10 +465,62 @@ func addDestinationGeofence(){
         options: [.alert, .badge, .sound]) { success, error in
         }
     let manager = CLLocationManager()
-    //GEOFENCE AND ALERT DESTINATION
-    var destinationGeo = RoutesData[RoutesData.count-2]
+    //GEOFENCE AND ALERT DESTINATION 1 STASIUN SEBELUM
+    if (RoutesData.count < 2){
+        var tujuan = RoutesData.last
+        let geoFenceDestination: CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(tujuan?.latitude ?? 0, tujuan?.longitude ?? 0), radius: 200, identifier: "\(tujuan?.namaStasiun ?? "")")
+        manager.startMonitoring(for: geoFenceDestination)
+        geoFenceDestination.notifyOnEntry = true
+        geoFenceDestination.notifyOnExit = false
+        let destinationTrigger = UNLocationNotificationTrigger(region: geoFenceDestination, repeats: true)
+        
+        let contentDestination = UNMutableNotificationContent()
+        contentDestination.title = "Bersiap-siap! Stasiun Berikutnya Adalah Tujuan Kamu"
+        contentDestination.body = "Bersiap menuju ke pintu keluar, tujuanmu di stasiun berikutnya, \(tujuan!.namaStasiun)"
+        contentDestination.sound = UNNotificationSound.default
+        
+        let Destinationid = UUID().uuidString
+        let Destinationrequest = UNNotificationRequest(identifier: Destinationid, content: contentDestination, trigger: destinationTrigger)
+        
+        vibrateThreeTimes()
+        
+        UNUserNotificationCenter.current().add(Destinationrequest) { error in
+            if let error = error {
+                // handle error
+                
+            }
+        }
+    }
+    else if (RoutesData.count > 2){
+        var destinationGeo = RoutesData[RoutesData.count-2]
+        var tujuan = RoutesData.last
+        let geoFenceDestination: CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(destinationGeo.latitude ?? 0, destinationGeo.longitude ?? 0), radius: 100, identifier: "\(destinationGeo.namaStasiun ?? "")")
+        manager.startMonitoring(for: geoFenceDestination)
+        geoFenceDestination.notifyOnEntry = true
+        geoFenceDestination.notifyOnExit = false
+        let destinationTrigger = UNLocationNotificationTrigger(region: geoFenceDestination, repeats: true)
+        
+        let contentDestination = UNMutableNotificationContent()
+        contentDestination.title = "Bersiap-siap! Stasiun Berikutnya Adalah Tujuan Kamu"
+        contentDestination.body = "Bersiap menuju ke pintu keluar, tujuanmu di stasiun berikutnya, \(tujuan!.namaStasiun!)"
+        contentDestination.sound = UNNotificationSound.default
+        
+        let Destinationid = UUID().uuidString
+        let Destinationrequest = UNNotificationRequest(identifier: Destinationid, content: contentDestination, trigger: destinationTrigger)
+        
+        vibrateTwice()
+        
+        UNUserNotificationCenter.current().add(Destinationrequest) { error in
+            if let error = error {
+                // handle error
+                
+            }
+        }
+    }
+    
+    //GEOFENCE AND ALERT DESTINATION 200 METER SEBELUM
     var tujuan = RoutesData.last
-    let geoFenceDestination: CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(destinationGeo.latitude ?? 0, destinationGeo.longitude ?? 0), radius: 100, identifier: "\(destinationGeo.namaStasiun ?? "")")
+    let geoFenceDestination: CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(tujuan?.latitude ?? 0, tujuan?.longitude ?? 0), radius: 200, identifier: "\(tujuan?.namaStasiun ?? "")")
     manager.startMonitoring(for: geoFenceDestination)
     geoFenceDestination.notifyOnEntry = true
     geoFenceDestination.notifyOnExit = false
@@ -475,19 +528,19 @@ func addDestinationGeofence(){
     
     let contentDestination = UNMutableNotificationContent()
     contentDestination.title = "Bersiap-siap! Stasiun Berikutnya Adalah Tujuan Kamu"
-    contentDestination.body = "Bersiap menuju ke pintu keluar, tujuanmu di stasiun berikutnya, \(tujuan!)"
+    contentDestination.body = "Bersiap menuju ke pintu keluar, kamu akan tiba di Stasiun \(tujuan!.namaStasiun!)"
     contentDestination.sound = UNNotificationSound.default
     
     let Destinationid = UUID().uuidString
     let Destinationrequest = UNNotificationRequest(identifier: Destinationid, content: contentDestination, trigger: destinationTrigger)
+    
+    vibrateThreeTimes()
     
     UNUserNotificationCenter.current().add(Destinationrequest) { error in
         if let error = error {
             // handle error
             
         }
-        
-        print(geoFenceDestination)
     }
 }
 
@@ -495,22 +548,25 @@ func nextStationGeofence(){
     let manager = CLLocationManager()
     //GEOFENCE AND ALERT DESTINATION
     if(RoutesData.count>2){
-        let geoFencenNextStation: CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(RoutesData[1].latitude ?? 0, RoutesData[1].longitude ?? 0), radius: 100, identifier: "\(RoutesData[1].namaStasiun ?? "")")
+        let geoFencenNextStation: CLCircularRegion = CLCircularRegion(center: CLLocationCoordinate2DMake(RoutesData[1].latitude ?? 0, RoutesData[1].longitude ?? 0), radius: 200, identifier: "\(RoutesData[1].namaStasiun ?? "")")
         manager.startMonitoring(for: geoFencenNextStation)
         geoFencenNextStation.notifyOnEntry = true
         geoFencenNextStation.notifyOnExit = false
         
+        //200 M SEBELUM TANAH ABANG
         if(RoutesData[1].namaStasiun == "Tanah Abang"){
             let TanahAbangTrigger = UNLocationNotificationTrigger(region: geoFencenNextStation, repeats: true)
             
             let contentTanahAbang = UNMutableNotificationContent()
-            contentTanahAbang.title = "You Will Arrive At \(geoFencenNextStation.identifier)"
-            contentTanahAbang.body = "Prepare yourself! You will arrive at \(geoFencenNextStation.identifier)"
+            contentTanahAbang.title = "Kamu Akan Tiba Di Stasiun Transit \(geoFencenNextStation.identifier)"
+            contentTanahAbang.body = "Bersiap menuju ke pintu keluar, kamu akan tiba di Stasiun \(geoFencenNextStation.identifier)"
             contentTanahAbang.sound = UNNotificationSound.default
             
             let TanahAbangid = UUID().uuidString
             let TanahAbangrequest = UNNotificationRequest(
                 identifier: TanahAbangid, content: contentTanahAbang, trigger: TanahAbangTrigger)
+            
+            vibrateThreeTimes()
             
             UNUserNotificationCenter.current().add(TanahAbangrequest) { error in
                 if let error = error {
@@ -520,17 +576,20 @@ func nextStationGeofence(){
             }
         }
         
-        if(RoutesData[1].namaStasiun == "Manggarai"){
+        //200 M SEBELUM MANGGARAI
+        else if(RoutesData[1].namaStasiun == "Manggarai"){
             let manggaraiTrigger = UNLocationNotificationTrigger(region: geoFencenNextStation, repeats: true)
             
             let contentManggarai = UNMutableNotificationContent()
-            contentManggarai.title = "You Will Arrive At \(geoFencenNextStation.identifier)"
-            contentManggarai.body = "Prepare yourself! You will arrive at \(geoFencenNextStation.identifier)"
+            contentManggarai.title = "Kamu Akan Tiba Di Stasiun Transit \(geoFencenNextStation.identifier)"
+            contentManggarai.body = "Bersiap menuju ke pintu keluar, kamu akan tiba di Stasiun \(geoFencenNextStation.identifier)"
             contentManggarai.sound = UNNotificationSound.default
             
             let Manggaraiid = UUID().uuidString
             let Manggarairequest = UNNotificationRequest(
                 identifier: Manggaraiid, content: contentManggarai, trigger: manggaraiTrigger)
+            
+            vibrateThreeTimes()
             
             UNUserNotificationCenter.current().add(Manggarairequest) { error in
                 if let error = error {

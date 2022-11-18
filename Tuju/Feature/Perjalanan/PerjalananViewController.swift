@@ -123,7 +123,7 @@ class PerjalananViewController: UIViewController {
     }()
     
     private var goto: UIImageView = {
-        let imgView = UIImageView(image: UIImage(named: "moving"))
+        let imgView = UIImageView(image: UIImage(named: "moving-main"))
         imgView.contentMode = .scaleAspectFit
         imgView.clipsToBounds = true
 
