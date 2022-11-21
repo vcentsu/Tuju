@@ -7,17 +7,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D6BA50C1-2DB0-4EFF-B7B6-F80B57B13274"
+            uuid = "50DE1441-C8BC-4240-8B12-7AD6EA814372"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tuju/Feature/Perjalanan/PerjalananViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "185"
-            endingLineNumber = "185"
-            landmarkName = "PerjalananViewController"
-            landmarkType = "3">
+            startingLineNumber = "282"
+            endingLineNumber = "282"
+            landmarkName = "didTapBerhenti()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "50DE1441-C8BC-4240-8B12-7AD6EA814372 - f1af3d5d35c4c21b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tuju.PerjalananViewController.didTapBerhenti() -&gt; ()"
+                  moduleName = "Tuju"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vcentsu/project/C5-Apple%20Academy/Tuju/Tuju/Feature/Perjalanan/PerjalananViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "282"
+                  endingLineNumber = "282"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "50DE1441-C8BC-4240-8B12-7AD6EA814372 - f1af3d5d35c4c21b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tuju.PerjalananViewController.didTapBerhenti() -&gt; ()"
+                  moduleName = "Tuju"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vcentsu/project/C5-Apple%20Academy/Tuju/Tuju/Feature/Perjalanan/PerjalananViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "282"
+                  endingLineNumber = "282"
+                  offsetFromSymbolStart = "110">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
