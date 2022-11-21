@@ -279,6 +279,8 @@ class PerjalananViewController: UIViewController {
     }
     
     @objc private func didTapBerhenti() {
+//        let customAlert = MyAlert()
+//        customAlert.showAlert(with: "Berhenti?", message: "Kamu yakin ingin menghentikan perjalanan?", on: MapViewController())
         alertBerhenti()
 //        if let navController = self.navigationController {
 //            navController.popViewController(animated: true)
@@ -288,11 +290,11 @@ class PerjalananViewController: UIViewController {
     }
     
     func alertBerhenti() {
-        let showAlert = UIAlertController(title: "Berhenti", message: nil, preferredStyle: .alert)
-        let imageView = UIImageView(frame: CGRect(x: 10, y: 50, width: 250, height: 230))
-        imageView.image = UIImage(named: "berhenti_illus") // Your image here...
-        showAlert.view.addSubview(imageView)
-        imageView.anchor(top: showAlert.view.topAnchor, left: showAlert.view.leftAnchor, bottom: nil, right: showAlert.view.rightAnchor, paddingTop: 10, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: showAlert.view.frame.size.width-20, height: 0, enableInsets: false)
+        let showAlert = UIAlertController(title: "Berhenti?", message: "Kamu yakin ingin menghentikan perjalanan?", preferredStyle: .alert)
+//        let imageView = UIImageView(frame: CGRect(x: 10, y: 50, width: 250, height: 230))
+//        imageView.image = UIImage(named: "berhenti_illus") // Your image here...
+//        showAlert.view.addSubview(imageView)
+//        imageView.anchor(top: showAlert.view.topAnchor, left: showAlert.view.leftAnchor, bottom: nil, right: showAlert.view.rightAnchor, paddingTop: 10, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: showAlert.view.frame.size.width-20, height: 0, enableInsets: false)
         showAlert.addAction(UIAlertAction(title: "Tidak", style: .default, handler: { action in
             // your actions here...
         }))

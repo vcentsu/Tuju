@@ -39,6 +39,7 @@
 		D388132228F563920062C702 /* TujuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388132128F563920062C702 /* TujuTests.swift */; };
 		D388132C28F563920062C702 /* TujuUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388132B28F563920062C702 /* TujuUITests.swift */; };
 		D388132E28F563920062C702 /* TujuUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388132D28F563920062C702 /* TujuUITestsLaunchTests.swift */; };
+		D39525EA292BC67F00EB0F3E /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39525E9292BC67F00EB0F3E /* Alert.swift */; };
 		D3CCF72E2913C4170009E0B5 /* JourneyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CCF72D2913C4170009E0B5 /* JourneyViewCell.swift */; };
 		D3CCF736291A5CC00009E0B5 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CCF735291A5CC00009E0B5 /* SectionHeader.swift */; };
 		D3CCF73A291ADF1A0009E0B5 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CCF739291ADF1A0009E0B5 /* Gradient.swift */; };
@@ -110,6 +111,7 @@
 		D388132728F563920062C702 /* TujuUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TujuUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D388132B28F563920062C702 /* TujuUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TujuUITests.swift; sourceTree = "<group>"; };
 		D388132D28F563920062C702 /* TujuUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TujuUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D39525E9292BC67F00EB0F3E /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		D3CCF72D2913C4170009E0B5 /* JourneyViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyViewCell.swift; sourceTree = "<group>"; };
 		D3CCF735291A5CC00009E0B5 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		D3CCF739291ADF1A0009E0B5 /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 			children = (
 				D3E387BA290653E900AFE101 /* Anchor.swift */,
 				D3CCF739291ADF1A0009E0B5 /* Gradient.swift */,
+				D39525E9292BC67F00EB0F3E /* Alert.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -682,6 +685,7 @@
 				D3CCF736291A5CC00009E0B5 /* SectionHeader.swift in Sources */,
 				7567F9652912594000730487 /* TujuanEntryViewController.swift in Sources */,
 				D386070A2912BE97003D32FE /* PerjalananViewController.swift in Sources */,
+				D39525EA292BC67F00EB0F3E /* Alert.swift in Sources */,
 				5C41AD1B29098A980077F60A /* FavAndRecentLogic.swift in Sources */,
 				D388131228F563910062C702 /* Tuju.xcdatamodeld in Sources */,
 				752FC90828F92FC200FBA82F /* LocationManager.swift in Sources */,
