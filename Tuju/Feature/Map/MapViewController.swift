@@ -476,7 +476,7 @@ func addDestinationGeofence(){
         
         let contentDestination = UNMutableNotificationContent()
         contentDestination.title = "Bersiap-siap! Stasiun Berikutnya Adalah Tujuan Kamu"
-        contentDestination.body = "Bersiap menuju ke pintu keluar, tujuanmu di stasiun berikutnya, \(tujuan!.namaStasiun)"
+        contentDestination.body = "Bersiap menuju ke pintu keluar, tujuanmu di stasiun berikutnya, \(tujuan!.namaStasiun!)"
         contentDestination.sound = UNNotificationSound.default
         
         let Destinationid = UUID().uuidString
