@@ -130,16 +130,8 @@ class PanelViewController: UIViewController, UITextFieldDelegate{
         FavAndRecentLogic()
         nextStationGeofence()
         addDestinationGeofence()
-        print(recentData)
-        print(favoriteData)
-        print(TransitStation)
-        print(RoutesData)
-        print(numberOfTransit)
         
-//        perjalananView.delegate = self
         self.navigationController?.pushViewController(perjalananView, animated: true)
-        
-
     }
     
     @objc private func didTapAsal() {

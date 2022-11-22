@@ -151,6 +151,16 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         
         print(RoutesData)
         AudioServicesPlaySystemSound(systemSoundID)
+        if RoutesData[0].namaStasiun == Destination {
+            //alert sampai
+            alertWhenArrivedToDestination()
+        }else if RoutesData[0].namaStasiun == "Tanah Abang" {
+            //alert ta
+            alertWhenArrivedToTransit(with: "Tanah Abang")
+        }else if RoutesData[0].namaStasiun == "Manggarai" {
+            //alert manggaraI
+            alertWhenArrivedToTransit(with: "Manggarai")
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
@@ -329,10 +339,22 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
     }
     
     func alertWhenArrivedToDestination() {
-        let showAlert = UIAlertController(title: "Arrived", message: nil, preferredStyle: .alert)
-        let imageView = UIImageView(frame: CGRect(x: 10, y: 50, width: 250, height: 230))
-        imageView.image = UIImage(named: "selesai_illus") // Your image here...
-        showAlert.view.addSubview(imageView)
+        let showAlert = UIAlertController(title: "Selamat!", message: "Kamu sudah sampai tujuan di stasiun \(Destination)!", preferredStyle: .alert)
+    //    let imageView = UIImageView(frame: CGRect(x: 10, y: 50, width: 250, height: 230))
+    //    imageView.image = UIImage(named: "selesai_illus") // Your image here...
+    //    showAlert.view.addSubview(imageView)
+        
+        showAlert.addAction(UIAlertAction(title: "Siap!", style: .default, handler: { action in
+            // your actions here...
+        }))
+        self.present(showAlert, animated: true, completion: nil)
+    }
+
+    func alertWhenArrivedToTransit(with stasiun: String) {
+        let showAlert = UIAlertController(title: "Waktunya transit!", message: "Ayo keluar dari kereta dan pindah ke jalur lain!\(stasiun)", preferredStyle: .alert)
+    //    let imageView = UIImageView(frame: CGRect(x: 10, y: 50, width: 250, height: 230))
+    //    imageView.image = UIImage(named: "selesai_illus") // Your image here...
+    //    showAlert.view.addSubview(imageView)
         
         showAlert.addAction(UIAlertAction(title: "Siap!", style: .default, handler: { action in
             // your actions here...
@@ -340,9 +362,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         self.present(showAlert, animated: true, completion: nil)
     }
     
-    func alertWhenArrivedToTransit() {
-        
-    }
 }
 
 extension MapViewController: CLLocationManagerDelegate{
@@ -437,6 +456,7 @@ func nextStationGeofence(){
                     // handle error
                     
                 }
+                
             }
         }
         
@@ -462,3 +482,5 @@ func nextStationGeofence(){
         print(geoFencenNextStation)
     }
 }
+
+
