@@ -151,7 +151,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, PanelViewControll
         
         print(RoutesData)
         AudioServicesPlaySystemSound(systemSoundID)
-        if RoutesData[0].namaStasiun == Destination {
+        if RoutesData[1].namaStasiun == Destination {
             //alert sampai
             alertWhenArrivedToDestination()
         }else if RoutesData[0].namaStasiun == "Tanah Abang" {
@@ -414,7 +414,7 @@ func addDestinationGeofence(){
     
     let contentDestination = UNMutableNotificationContent()
     contentDestination.title = "Bersiap-siap! Stasiun Berikutnya Adalah Tujuan Kamu"
-    contentDestination.body = "Bersiap menuju ke pintu keluar, tujuanmu di stasiun berikutnya, \(tujuan!)"
+    contentDestination.body = "Bersiap menuju ke pintu keluar, tujuanmu di stasiun berikutnya, \(tujuan!.namaStasiun!)"
     contentDestination.sound = UNNotificationSound.default
     
     let Destinationid = UUID().uuidString
